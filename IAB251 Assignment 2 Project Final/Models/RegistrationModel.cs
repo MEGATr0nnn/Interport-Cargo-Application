@@ -23,6 +23,32 @@ namespace IAB251_Assignment_2_Project_Final.Models
 		{
 
 		}
-	}
+
+        public void checkAllInformation()
+        {
+            Console.WriteLine(inputAddress);
+
+            Console.WriteLine(inputFirst);
+
+            Console.WriteLine(inputLast);
+
+            Console.WriteLine(inputEmail);
+
+        }
+
+        private bool checkAccountValid()
+        {
+            string email = inputEmail;
+
+            string password = inputPassword;
+
+            foreach (string s : )
+
+
+
+
+            return false;
+        }
+    }
 }
 
