@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1706.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAB251 - Assignment 2", "IAB251 - Assignment 2\IAB251 - Assignment 2.csproj", "{F3008FC3-5B4B-40F8-BAD6-AE8E5CE0C953}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAB251 Assignment 2 Project Final", "..\..\IAB251 Assignment 2 Project Final\IAB251 Assignment 2 Project Final\IAB251 Assignment 2 Project Final.csproj", "{7AEDD34E-4EEB-4B38-8959-E7ADACF350EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F3008FC3-5B4B-40F8-BAD6-AE8E5CE0C953}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3008FC3-5B4B-40F8-BAD6-AE8E5CE0C953}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3008FC3-5B4B-40F8-BAD6-AE8E5CE0C953}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AEDD34E-4EEB-4B38-8959-E7ADACF350EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AEDD34E-4EEB-4B38-8959-E7ADACF350EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AEDD34E-4EEB-4B38-8959-E7ADACF350EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AEDD34E-4EEB-4B38-8959-E7ADACF350EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

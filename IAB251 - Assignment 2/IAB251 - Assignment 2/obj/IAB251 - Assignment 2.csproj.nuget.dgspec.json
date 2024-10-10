@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/shanthu/Projects/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj": {}
+    "/Users/shanthu/Projects/Team-10/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj": {}
   },
   "projects": {
-    "/Users/shanthu/Projects/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj": {
+    "/Users/shanthu/Projects/Team-10/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/shanthu/Projects/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj",
+        "projectUniqueName": "/Users/shanthu/Projects/Team-10/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj",
         "projectName": "IAB251 - Assignment 2",
-        "projectPath": "/Users/shanthu/Projects/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj",
+        "projectPath": "/Users/shanthu/Projects/Team-10/IAB251 - Assignment 2/IAB251 - Assignment 2/IAB251 - Assignment 2.csproj",
         "packagesPath": "/Users/shanthu/.nuget/packages/",
-        "outputPath": "/Users/shanthu/Projects/IAB251 - Assignment 2/IAB251 - Assignment 2/obj/",
+        "outputPath": "/Users/shanthu/Projects/Team-10/IAB251 - Assignment 2/IAB251 - Assignment 2/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/shanthu/.nuget/NuGet/NuGet.Config"
