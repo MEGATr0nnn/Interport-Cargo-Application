@@ -1,0 +1,52 @@
+﻿@page
+@{
+    ViewData["Title"] = "Quotation Request";
+}
+
+<h1 style="text-align: center">
+    Quotation Request
+</h1>
+
+
+<form method="post">
+    <div>
+        <label for="inputID">Enter Request ID:</label>
+        <input type="text" id="inputID" name="inputID" />
+    </div>
+
+    <div>
+        <label for="inputCustomerInfo">Enter Customer Information:</label>
+        <input type="text" id="inputCustomerInfo" name="inputCustomerInfo" />
+    </div>
+
+    <div>
+        <label for="inputSource">Enter Source Address:</label>
+        <input type="text" id="inputSource" name="inputSource" />
+    </div>
+
+    <div>
+        <label for="inputDestination">Enter Destination Address:</label>
+        <input type="tel" id="inputDestination" name="inputDestination" />
+    </div>
+
+    <div>
+        <label for="inputNumContainers">Enter Number of Containers:</label>
+        <input type="text" id="inputNumContainers" name="inputNumContainers" />
+    </div>
+
+    <div>
+        <label for="inputPackageNature">Enter Package Nature:</label>
+        <input type="text" id="inputPackageNature" name="inputPackageNature" />
+    </div>
+
+    <div>
+        <label for="inputJobNature">Enter The Nature of the Job:</label>
+        <input type="password" id="inputJobNature" name="inputJobNature" />
+    </div>
+
+
+    <button type="submit">Submit</button>
+
+</form>
+
+

@@ -42,10 +42,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
             string password = inputPassword;
 
-            foreach (string s : )
-
-
-
 
             return false;
         }
