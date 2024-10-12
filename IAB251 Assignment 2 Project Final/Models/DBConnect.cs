@@ -7,7 +7,7 @@ using System.Data.SQLite;
 
 namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
 {
-    public class DBConnect
+    public class DBConnect 
     {
         private string connectionString = "Data Source=database.db;";
 
