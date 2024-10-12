@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Scrum Notes\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
