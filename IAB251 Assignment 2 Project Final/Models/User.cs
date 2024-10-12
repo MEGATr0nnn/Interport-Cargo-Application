@@ -1,6 +1,6 @@
 ﻿namespace IAB251_Assignment_2_Project_Final.Models
 {
-    public abstract class User
+    public abstract class User //switch to interface
     {
         private int id;
 

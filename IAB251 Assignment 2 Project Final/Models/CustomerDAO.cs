@@ -2,13 +2,14 @@
 using System.Data.SQLite;
 namespace IAB251_Assignment_2_Project_Final.Models
 {
-    public class CustomerDAO : DBConnect, UserDAO
+    public class CustomerDAO : UserDAO
     {
         private SQLiteConnection connection;
         private DBConnect connect;
 
         public CustomerDAO()
         {
+            connect = new DBConnect();
             connection = connect.establishConnection();
             createTable();
         }
