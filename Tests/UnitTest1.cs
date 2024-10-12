@@ -1,19 +1,20 @@
+using IAB251_Assignment_2_Project_Final.Models;
+
 namespace Tests
 {
     [TestClass]
-    public class CustomerTests
+    public class UnitTest1
     {
-        private Customer customer;
-
         [TestInitialize]
         public void Setup()
         {
-            customer = new Customer("tom", "ford", "tom.ford@gmail.com", 123345679);
+            Customer customer; 
         }
 
         [TestMethod]
         public void TestMethod1()
         {
+            
         }
     }
 }
