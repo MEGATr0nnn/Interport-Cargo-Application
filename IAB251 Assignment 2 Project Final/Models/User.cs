@@ -1,6 +1,6 @@
 ﻿namespace IAB251_Assignment_2_Project_Final.Models
 {
-    internal class User
+    public abstract class User
     {
         private int id;
 
