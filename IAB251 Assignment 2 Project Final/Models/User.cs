@@ -12,12 +12,15 @@
 
         private int phoneNumber;
 
-        public User(string first_Name, string last_Name, string email, int phoneNumber)
+        private string password;
+
+        public User(string first_Name, string last_Name, string email, int phoneNumber, string password)
         {
             this.first_Name = first_Name;
             this.last_Name = last_Name;
             this.email = email;
             this.phoneNumber = phoneNumber;
+            this.password = password;
         }
 
 
@@ -38,6 +41,9 @@
 
         public int getPhoneNumber() { return phoneNumber; }
         public void setPhoneNumber(int phoneNumber) { this.phoneNumber = phoneNumber; }
+
+        public string getPassword() { return password; }
+        public void setPassword(string password) {  this.password = password; }
 
     }
 }

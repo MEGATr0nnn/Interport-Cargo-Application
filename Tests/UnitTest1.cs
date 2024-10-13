@@ -36,19 +36,19 @@ namespace Tests
     public class UnitTest2
     {
         private Customer customer;
-        private UserDAO userDAO;
+        private CustomerDAO customerDAO;
 
         [TestInitialize]
         public void Setup()
         {
             customer = new Customer("harry", "mega", "harry.mega@mega.com", 0491006868);
-            userDAO = new UserDAO();
-            userDAO.createTableUser();
+            customerDAO = new CustomerDAO();
+            customerDAO.createTable();
         }
         [TestMethod]
         public void TestDBInsert()
         {
-            userDAO.insertNewUser(customer);
+            customerDAO.insertNew(customer);
             Assert.AreEqual("harry", );
             Assert.AreEqual("mega", );
             Assert.AreEqual("harry.mega@mega.com", );
