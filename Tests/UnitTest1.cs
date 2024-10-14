@@ -1,3 +1,4 @@
+using EFB225_Assignment_2___Enterprise_Solution.Database_Model;
 using IAB251_Assignment_2_Project_Final.Models;
 
 namespace Tests
@@ -10,7 +11,16 @@ namespace Tests
         [TestInitialize]
         public void Setup()
         {
-            customer = new Customer("tom", "ford", "tom.ford@gmail.com", 123456789);
+            customer = new Customer("tom", "ford", "tom.ford@gmail.com", 123456789, "password");
+        }
+        [TestMethod]
+        public void TestInital()
+        {
+            Assert.AreEqual("tom", customer.getFirstName());
+            Assert.AreEqual("ford", customer.getLastName());
+            Assert.AreEqual("tom.ford@gmail.com", customer.getEmail());
+            Assert.AreEqual(123456789, customer.getPhoneNumber());
+            Assert.AreEqual("password", customer.getPassword());
         }
         [TestMethod]
         public void TestFirstName()
@@ -37,22 +47,32 @@ namespace Tests
     {
         private Customer customer;
         private CustomerDAO customerDAO;
+        private DBConnect<Customer> db;
 
         [TestInitialize]
         public void Setup()
         {
-            customer = new Customer("harry", "mega", "harry.mega@mega.com", 0491006868);
+            customer = new Customer("harry", "mega", "harry.mega@mega.com", 0491006868, "password");
+            db = new DBConnect<Customer>();
+            db.setConnectionString("Data Source=test.db;");
             customerDAO = new CustomerDAO();
+            customerDAO.createTable();
+            Assert.IsNotNull(customerDAO);
+        }
+        [TestMethod]
+        public void TestCreateTable()
+        {
             customerDAO.createTable();
         }
         [TestMethod]
         public void TestDBInsert()
         {
+            Assert.IsNotNull(customer);
             customerDAO.insertNew(customer);
-            Assert.AreEqual("harry", );
-            Assert.AreEqual("mega", );
-            Assert.AreEqual("harry.mega@mega.com", );
-            Assert.AreEqual(0491006868, );
+
+            List<Customer> list = customerDAO.get(customer);
+            Assert.IsNotNull(list);
+            Assert.AreEqual(1, list.Count);
         }
     }
 }

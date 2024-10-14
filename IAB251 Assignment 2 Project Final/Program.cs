@@ -1,4 +1,6 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using IAB251_Assignment_2_Project_Final.Models;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -23,4 +25,3 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
-

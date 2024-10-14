@@ -4,12 +4,11 @@ namespace IAB251_Assignment_2_Project_Final.Models
 {
     public class CustomerDAO : IUserDAO<Customer>
     {
-        private SQLiteConnection connection;
-        private DBConnect connect;
+        private DBConnect<Customer> connect;
 
         public CustomerDAO()
         {
-            connect = new DBConnect();
+            connect = new DBConnect<Customer>();
             createTable();
         }
 
@@ -17,69 +16,70 @@ namespace IAB251_Assignment_2_Project_Final.Models
         {
             string createTableQuery = @"
                         CREATE TABLE IF NOT EXISTS customer (
-                            customer_Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            customer_First_Name VARCHAR NOT NULL,
-                            customer_Last_Name VARCHAR NOT NULL,
-                            customer_Email VARCHAR NOT NULL,
-                            customer_PhoneNumber INTEGER NOT NULL,
-                            customer_Password VARCHAR NOT NULL
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            first_Name VARCHAR NOT NULL,
+                            last_Name VARCHAR NOT NULL,
+                            email VARCHAR NOT NULL,
+                            phoneNumber INTEGER NOT NULL,
+                            password VARCHAR NOT NULL
                         )";
-            connection = connect.establishConnection();
-            connect.executeQuery(createTableQuery, connection);
+            connect.executeQuery(createTableQuery);
         }
 
         public void delete(Customer customer)
         {
-            string deleteQuery = "DELETE * FROM customer where customer_Id = @customer_Id";
+            string deleteQuery = "DELETE * FROM customer where id = @id";
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             { 
-                new SQLiteParameter("@customer_Id", customer.getId())
+                new SQLiteParameter("@id", customer.getId())
             };
-            connection = connect.establishConnection();
-            connect.executeQuery(deleteQuery, connection, parameters);
+            connect.executeQuery(deleteQuery, parameters);
         }
 
         //currently basic, if the DB gets too large this will crash out, need a quicker way to get customers instead of getting ALL users which is insane (ie two more arguments, email and password, that corrolate to relevent email and pword)
         public List<Customer> get(Customer customer)
         {
-            try
+
+            string getQuery = "SELECT * FROM customer WHERE id = @id";
+            SQLiteParameter[] parameters = new SQLiteParameter[]
             {
-                string getQuery = "SELECT * FROM customer WHERE customer_Id = @customer_Id";
-                
-                using(var command = new SQLitequer)
-            }
+                new SQLiteParameter("@id", customer.getId())
+            };
+            List<Customer> customers = connect.executeFetchAll<Customer>(getQuery, parameters); 
+            return customers;
         }
 
         public void insertNew(Customer customer)
         {
             string insertUserQuery = @"
-                    INSERT INTO customer (customer_First_Name, customer_Last_Name, customer_Email, customer_PhoneNumber) 
-                    VALUES (@customer_First_Name, @customer_Last_Name, @customer_Email, @customer_PhoneNumber)
-                    RETURNING customer_Id";
+                    INSERT INTO customer (first_Name, last_Name, email, phoneNumber, password)
+                    VALUES (@first_Name, @last_Name, @email, @phoneNumber, @password)
+                    RETURNING id";
+
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             { 
-                new SQLiteParameter("@customer_First_Name", customer.getFirstName()),
-                new SQLiteParameter("@customer_Last_Name", customer.getLastName()),
-                new SQLiteParameter("@customer_Email", customer.getEmail()), 
-                new SQLiteParameter("@customer_PhoneNumber", customer.getPhoneNumber())
+                new SQLiteParameter("@first_Name", customer.getFirstName()),
+                new SQLiteParameter("@last_Name", customer.getLastName()),
+                new SQLiteParameter("@email", customer.getEmail()), 
+                new SQLiteParameter("@phoneNumber", customer.getPhoneNumber()),
+                new SQLiteParameter("@password", customer.getPassword())
             };
-            connection = connect.establishConnection();
-            customer.setId((int)connect.executeScalarQuery(insertUserQuery, connection, parameters));
+            customer.setId(connect.executeScalarQuery(insertUserQuery, parameters));
+            
         }
 
         public void update(Customer customer)
         {
-            string updateQuery = @"UPDATE customer SET customer_First_Name = @customer_First_Name, customer_Last_Name = @customer_Last_Name, customer_Email = @customer_Email WHERE customer_Id = @customer_Id";
+            string updateQuery = @"UPDATE customer SET first_Name = @first_Name, last_Name = @last_Name, email = @email WHERE id = @id";
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             {
-                new SQLiteParameter("@customer_First_Name", customer.getFirstName()),
-                new SQLiteParameter("@customer_Last_Name", customer.getLastName()),
-                new SQLiteParameter("@customer_Email", customer.getEmail()),
-                new SQLiteParameter("@customer_PhoneNumber", customer.getPhoneNumber()),
+                new SQLiteParameter("@first_Name", customer.getFirstName()),
+                new SQLiteParameter("@last_Name", customer.getLastName()),
+                new SQLiteParameter("@email", customer.getEmail()),
+                new SQLiteParameter("@phoneNumber", customer.getPhoneNumber()),
                 new SQLiteParameter("@customer_Id", customer.getId())
             };
-            connection = connect.establishConnection();
-            connect.executeQuery(updateQuery, connection, parameters);
+            connect.executeQuery(updateQuery, parameters);
         }
     }
 }

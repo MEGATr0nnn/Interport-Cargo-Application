@@ -14,73 +14,113 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
 
         public string getConnectionString () { return connectionString; }
 
-        public SQLiteConnection establishConnection()
+        public void setConnectionString(string conn) { connectionString = conn; }
+
+        public void executeQuery(string query)
         {
+            var connection = new SQLiteConnection(connectionString);
             try
             {
-                var connection = new SQLiteConnection(connectionString);
                 connection.Open();
-                return connection;
-            }
-            catch (Exception e)
-            {
-                string err = "We've had a problem connecting";
-            }
-            return null;
-        }
 
-        public void executeQuery(string query, SQLiteConnection connection)
-        {
-            try
-            {
-                SQLiteCommand command = new SQLiteCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally { connection.Close (); }
-        }
-
-        public void executeQuery(string query, SQLiteConnection connection, SQLiteParameter[] parameters)
-        {
-            try
-            {
-                using(var command = new SQLiteCommand(query, connection))
+                using (var transaction = connection.BeginTransaction())
                 {
-                    if (parameters != null)
+                    try
                     {
-                        command.Parameters.AddRange(parameters);
+                        using (var command = new SQLiteCommand(query, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                        Console.WriteLine("Transaction executed correctly"); //for testing
                     }
-                    command.ExecuteNonQuery();
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine($"Error executing transaction{ex.Message}");
+                    }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine($"We've had a problem connecting{ex.Message}");
             }
             finally { connection.Close(); }
         }
 
-        public int ?executeScalarQuery(string query, SQLiteConnection connection, SQLiteParameter[] parameters)
+        public void executeQuery(string query, SQLiteParameter[] parameters)
         {
+            var connection = new SQLiteConnection(connectionString);
             try
             {
-                using (var command = new SQLiteCommand(query, connection))
+                connection.Open();
+
+                using (var transaction = connection.BeginTransaction())
                 {
-                    if (parameters != null)
+                    try
                     {
-                        command.Parameters.AddRange(parameters);
+                        using (var command = new SQLiteCommand(query, connection))
+                        {
+                            if (parameters != null)
+                            {
+                                command.Parameters.AddRange(parameters);
+                            }
+                            command.ExecuteNonQuery();
+                        }
+                        transaction.Commit();
+                        Console.WriteLine("Transaction executed correctly"); //for testing
                     }
-                    return Convert.ToInt32(command.ExecuteScalar());
+                    catch( Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine($"Error executing transaction{ex.Message}");
+                    }
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"We've had a problem connecting{ex.Message}");
+            }
+            finally { connection.Close(); }
+        }
+
+        public int executeScalarQuery(string query, SQLiteParameter[] parameters)
+        {
+            var connection = new SQLiteConnection(connectionString);
+            try
+            {
+                connection.Open();
+
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var command = new SQLiteCommand(query, connection))
+                        {
+                            if (parameters != null)
+                            {
+                                command.Parameters.AddRange(parameters);
+                            }
+                            var result = command.ExecuteScalar();
+
+                            transaction.Commit();
+
+                            return result != null ? Convert.ToInt32(result) : -1;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine($"Error executing transaction{ex.Message}");
+                        return -1;
+                    }
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                string errMsg = "There was a problem";
-                Console.WriteLine(errMsg);
-                return null;
+                Console.WriteLine($"We've had a problem connecting{ex.Message}");
+                return -1;
             }
             finally { connection.Close(); }
         }
@@ -93,8 +133,9 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         /// <param name="connection">SQL connection</param>
         /// <param name="parameters">SQL parameters</param>
         /// <returns></returns>
-        public List<T> executeFetchAll<T>(string query, SQLiteConnection connection, SQLiteParameter[] parameters) where T : new()
+        public List<T> executeFetchAll<T>(string query, SQLiteParameter[] parameters) where T : new()
         {
+            var connection = new SQLiteConnection(connectionString);
             try
             {
                 List<T> list = new List<T>();
@@ -109,6 +150,13 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                         while (reader.Read())
                         {
                             T entity = new T();
+
+                            foreach(var property in typeof(T).GetProperties())
+                            {
+                                property.SetValue(entity, reader[property.Name]);
+                            }
+
+                            list.Add(entity);
                         }
                     }
                 }
@@ -120,11 +168,6 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                 return null;
             }
             finally { connection.Close(); }
-        }
-
-        public void severConnection(SQLiteConnection connection)
-        {
-            connection.Close();
         }
     }
 }
