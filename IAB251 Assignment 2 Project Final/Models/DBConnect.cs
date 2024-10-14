@@ -10,7 +10,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
 {
     public class DBConnect<T>
     {
-        private string connectionString = "Data Source=Team-10\\IAB251 Assignment 2 Project Final\\Models\\database.db;";
+        private string connectionString = "Data Source=Team-10\\IAB251 Assignment 2 Project Final\\Models\\database.db;"; //fix
 
         public string getConnectionString () { return connectionString; }
 
