@@ -10,7 +10,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
 {
     public class DBConnect<T>
     {
-        private string connectionString = "Data Source=database.db;";
+        private string connectionString = "Data Source=Team-10\\IAB251 Assignment 2 Project Final\\Models\\database.db;";
 
         public string getConnectionString () { return connectionString; }
 
@@ -37,13 +37,13 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error executing transaction{ex.Message}");
+                        Console.WriteLine($"Error executing transaction {ex.Message}");
                     }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"We've had a problem connecting{ex.Message}");
+                Console.WriteLine($"We've had a problem connecting {ex.Message}");
             }
             finally { connection.Close(); }
         }
@@ -73,14 +73,14 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                     catch( Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error executing transaction{ex.Message}");
+                        Console.WriteLine($"Error executing transaction {ex.Message}");
                     }
                 }
                 
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"We've had a problem connecting{ex.Message}");
+                Console.WriteLine($"We've had a problem connecting {ex.Message}");
             }
             finally { connection.Close(); }
         }
@@ -93,7 +93,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                 connection.Open();
 
                 using (var transaction = connection.BeginTransaction())
-                {
+                { 
                     try
                     {
                         using (var command = new SQLiteCommand(query, connection))
@@ -112,14 +112,14 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error executing transaction{ex.Message}");
+                        Console.WriteLine($"Error executing transaction {ex.Message}");
                         return -1;
                     }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"We've had a problem connecting{ex.Message}");
+                Console.WriteLine($"We've had a problem connecting {ex.Message}");
                 return -1;
             }
             finally { connection.Close(); }
@@ -130,12 +130,12 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         /// </summary>
         /// <typeparam name="T">The class type</typeparam>
         /// <param name="query">SQL query</param>
-        /// <param name="connection">SQL connection</param>
         /// <param name="parameters">SQL parameters</param>
         /// <returns></returns>
         public List<T> executeFetchAll<T>(string query, SQLiteParameter[] parameters) where T : new()
         {
             var connection = new SQLiteConnection(connectionString);
+            connection.Open();
             try
             {
                 List<T> list = new List<T>();

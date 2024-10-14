@@ -45,7 +45,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
             {
                 new SQLiteParameter("@id", customer.getId())
             };
-            List<Customer> customers = connect.executeFetchAll<Customer>(getQuery, parameters); 
+            List<Customer> customers = connect.executeFetchAll<Customer>(getQuery, parameters); //why?
             return customers;
         }
 

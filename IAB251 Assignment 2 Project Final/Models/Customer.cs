@@ -15,6 +15,7 @@
         private string password;
 
         public Customer() { }
+
         public Customer(string first_Name, string last_Name, string email, int phoneNumber, string password)
         {
             this.first_Name = first_Name;

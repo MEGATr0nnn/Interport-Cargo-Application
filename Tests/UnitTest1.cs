@@ -54,10 +54,8 @@ namespace Tests
         {
             customer = new Customer("harry", "mega", "harry.mega@mega.com", 0491006868, "password");
             db = new DBConnect<Customer>();
-            db.setConnectionString("Data Source=test.db;");
             customerDAO = new CustomerDAO();
             customerDAO.createTable();
-            Assert.IsNotNull(customerDAO);
         }
         [TestMethod]
         public void TestCreateTable()
@@ -68,6 +66,7 @@ namespace Tests
         public void TestDBInsert()
         {
             Assert.IsNotNull(customer);
+            Assert.IsNotNull(customerDAO);
             customerDAO.insertNew(customer);
 
             List<Customer> list = customerDAO.get(customer);
