@@ -47,13 +47,11 @@ namespace Tests
     {
         private Customer customer;
         private CustomerDAO customerDAO;
-        private DBConnect<Customer> db;
 
         [TestInitialize]
         public void Setup()
         {
             customer = new Customer("harry", "mega", "harry.mega@mega.com", 0491006868, "password");
-            db = new DBConnect<Customer>();
             customerDAO = new CustomerDAO();
             customerDAO.createTable();
         }
