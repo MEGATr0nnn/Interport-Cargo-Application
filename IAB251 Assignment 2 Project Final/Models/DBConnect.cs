@@ -10,7 +10,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
 {
     public class DBConnect<T>
     {
-        private string connectionString = "Data Source=Team-10\\IAB251 Assignment 2 Project Final\\Models\\database.db;"; //fix
+        private string connectionString = $"Data Source={AppDomain.CurrentDomain.BaseDirectory}Models\\database.db;"; //replace this with your direct path to DB
 
         public string getConnectionString () { return connectionString; }
 
