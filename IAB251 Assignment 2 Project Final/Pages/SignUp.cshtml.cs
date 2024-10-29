@@ -64,8 +64,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 password
             );
 
-            
-
             customerDAO.insertNew(currentUser);
 
             ModelState.Clear();

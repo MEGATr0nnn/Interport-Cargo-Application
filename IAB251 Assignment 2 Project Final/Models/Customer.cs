@@ -1,18 +1,20 @@
-﻿namespace IAB251_Assignment_2_Project_Final.Models
+﻿using System.IO.Pipes;
+
+namespace IAB251_Assignment_2_Project_Final.Models
 {
     public class Customer : IUser
     {
-        public int id { get; set; }
+        private int id { get; set; }
 
-        public string first_Name { get; set; }
+        private string first_Name { get; set; }
 
-        public string last_Name { get; set; }
+        private string last_Name { get; set; }
 
-        public string email { get; set; }
+        private string email { get; set; }
 
-        public int phoneNumber { get; set; }
+        private int phoneNumber { get; set; }
 
-        public string password { get; set; }
+        private string password { get; set; }
 
         public Customer() { }
 
