@@ -16,6 +16,15 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public string lastName { get; set; }
 
+        [BindProperty]
+        public string email { get; set; }
+
+        [BindProperty]
+        public int phoneNumber { get; set; }
+
+        [BindProperty]
+        public string password { get; set; }
+
         //ok i did some reading, you need to bind these first, from your main file to your code behind file, this is what i was saying
         //to you earlier on tuesday by 'pulling from html to the code behind', then once youve done all this you can create a new customer from
         //the inputs ie customer = new customer(first_Name) etc.. and then insert it to the DAO, which should be instantised on view start or whatever
@@ -26,16 +35,14 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         //also heres another, a bit more comples but was helpful for me https://learn.microsoft.com/en-us/answers/questions/1823580/asp-net-core-razor-pages-bindproperty-collections
 
 
-        /*
-        public Customer Customer { get; set; } = new Customer("", "", "", 0, "");
 
         public CustomerDAO customerDAO;
 
         public string accountExists;
 
-        public SignUp(CustomerDAO customerDAO)
+        public SignUp()
         {
-            this.customerDAO = customerDAO;
+           customerDAO = new CustomerDAO();
         }
 
 
@@ -47,24 +54,25 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         public IActionResult OnPost()
         {
+            Console.WriteLine("Testing ");
 
-            Customer newCustomer = new Customer(
-                Customer.first_Name,
-                Customer.last_Name,
-                Customer.email,
-                Customer.phoneNumber, 
-                Customer.password
+            Customer currentUser = new Customer(
+                firstName,
+                lastName,
+                email,
+                phoneNumber,
+                password
             );
 
-            customerDAO.insertNew(newCustomer);
+            
 
-            Customer = new Customer();
+            customerDAO.insertNew(currentUser);
 
             ModelState.Clear();
 
             return RedirectToPage("/Dashboard");
 
         }
-        */
+        
     }
 }
