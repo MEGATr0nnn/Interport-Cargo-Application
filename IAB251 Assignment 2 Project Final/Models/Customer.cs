@@ -2,17 +2,17 @@
 {
     public class Customer : IUser
     {
-        private int id;
+        public int id { get; set; }
 
-        private string first_Name;
+        public string first_Name { get; set; }
 
-        private string last_Name;
+        public string last_Name { get; set; }
 
-        private string email;
+        public string email { get; set; }
 
-        private int phoneNumber;
+        public int phoneNumber { get; set; }
 
-        private string password;
+        public string password { get; set; }
 
         public Customer() { }
 

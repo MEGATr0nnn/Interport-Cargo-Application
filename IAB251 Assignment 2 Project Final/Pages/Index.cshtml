@@ -8,21 +8,28 @@
     Welcome to Interport Cargo Services
 </h1>
 
-<form style="align-content: center" asp-page="/Dashboard">
-    <label for="usernameInput"> Username </label>
-    <input type="text" id="usernameInput" name="usernameInput" placeholder="Enter Username" required>
-    <label for="passwordInput"> Username </label>
-    <input type="text" id="passwordInput" name="passwordInput" placeholder="Enter Password" required>
-    <button type="submit"> Login </button>
+<form method="post">
+    <div>
+        <label for="inputFirst">Enter Email:</label>
+        <input type="text" asp-for="Input.Email" class="form-control" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+    </div>
+
+    <div>
+        <label for="inputFirst">Enter Password:</label>
+        <input type="text" asp-for="Input.Password" class="form-control" />
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+    </div>
+
+    <button type="submit" name="action" value="signin" class="btn btn-primary">Sign In</button>
+    <button type="submit" name="action" value="signup" class="btn btn-secondary">Sign Up</button>
 
 </form>
 
-<br />
 
-
-<form style="align-content: center" asp-page="/RegisterDetails">
-    <button type="submit"> Sign Up </button>
-</form>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
 

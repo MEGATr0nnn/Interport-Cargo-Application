@@ -10,10 +10,15 @@
 <h1 style=" text-align: center "> Interport Cargo Dashboard </h1>
 
 
-<div class="pill-box">
-    Hello test
-</div>
-
+@if (Request.Query.ContainsKey("first_Name"))
+{
+    string firstName = Request.Query["first_Name"];
+    <h2>Hello, @firstName!</h2>
+}
+else
+{
+    <h2>Hello, Guest!</h2>
+}
 
 <form style="align-content: center" asp-page="/QuotationRequest">
     <button type="submit"> Go to Quotation Request </button>
