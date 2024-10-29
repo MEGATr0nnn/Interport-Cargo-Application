@@ -1,24 +1,16 @@
 ﻿@page
+@model IAB251_Assignment_2_Project_Final.Pages.DashboardModel
 @{
-    ViewData["Title"] = "Interport Cargo Dashboard";
 }
 
-
-
-
-
-<h1 style=" text-align: center "> Interport Cargo Dashboard </h1>
-
-
 <div class="pill-box">
-    Hello test
+    <h3>Customer List</h3>
+    <ul>
+        @if (Model.Customers.Count == 0){
+        <li>No Customers Active</li>
+        }
+
+        <li>Hello @Model.cus.first_Name..</li>
+        
+    </ul>
 </div>
-
-
-<form style="align-content: center" asp-page="/QuotationRequest">
-    <button type="submit"> Go to Quotation Request </button>
-</form>
-
-
-
-

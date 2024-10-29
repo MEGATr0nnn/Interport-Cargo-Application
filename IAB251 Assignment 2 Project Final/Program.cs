@@ -2,8 +2,13 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<CustomerModel>();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddScoped<CustomerDAO>();
+
 
 var app = builder.Build();
 
@@ -25,3 +30,5 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+

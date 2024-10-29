@@ -2,17 +2,22 @@
 {
     public class Customer : IUser
     {
-        private int id;
+        public int id;
 
-        private string first_Name;
+        public string first_Name { get; set; }
 
-        private string last_Name;
+        public string last_Name { get; set; }
 
-        private string email;
+        public string email { get; set; }
 
-        private int phoneNumber;
+        public int phoneNumber { get; set; }
 
-        private string password;
+        public string companyName { get; set; }
+
+        public string address { get; set; }
+
+        public string password { get; set; }
+
 
         public Customer() { }
 
@@ -39,6 +44,12 @@
 
         public int getPhoneNumber() {  return phoneNumber;}
         public void setPhoneNumber(int phoneNumber) {  this.phoneNumber = phoneNumber;}
+
+        public string getCompanyName() { return companyName; }
+        public void setCompanyName(string companyName) { this.companyName = companyName; }
+
+        public string getAddress() { return address; }
+        public void setAddress(string address) { this.address = address; }
 
         public string getPassword() { return password; }
         public void setPassword(string password) {  this.password = password;}
