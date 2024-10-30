@@ -19,7 +19,7 @@ public class IndexModel : PageModel
         public string Password { get; set; }
 
 
-    public Customer Customer;
+    public Customer customer;
 
     public CustomerDAO customerDAO = new CustomerDAO();
 
@@ -30,7 +30,7 @@ public class IndexModel : PageModel
 
         if (action == "signin")
         {
-            List<Customer> customers = customerDAO.get(Customer);
+            // needs to be fixed List<Customer> customers = customerDAO.get(Customer);
 
             foreach (Customer c in customers)
             {
