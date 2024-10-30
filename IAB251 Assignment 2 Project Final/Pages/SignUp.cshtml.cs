@@ -34,6 +34,11 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         //im going to bed but heres the web page i quickly browsed https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-8.0&tabs=visual-studio
         //also heres another, a bit more comples but was helpful for me https://learn.microsoft.com/en-us/answers/questions/1823580/asp-net-core-razor-pages-bindproperty-collections
 
+
+        //session control
+        IUserSessionControl userSessionControl;
+
+        //pulling vars
         public CustomerDAO customerDAO;
 
         public string accountExists;
@@ -61,6 +66,8 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             );
 
             customerDAO.insertNew(currentUser);
+
+            userSessionControl.currentUser = currentUser;
 
             ModelState.Clear();
 

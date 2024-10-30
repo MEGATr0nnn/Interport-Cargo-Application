@@ -2,30 +2,40 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 
 namespace IAB251_Assignment_2_Project_Final.Pages;
 
 public class IndexModel : PageModel
 {
 
-        [BindProperty]
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+    [BindProperty]
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
 
-        [BindProperty]
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+    [BindProperty]
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
 
 
-    public Customer customer;
+    //initalising session
+    IUserSessionControl userSessionControl;
 
-    public CustomerDAO customerDAO = new CustomerDAO();
+    //pulling vars
+    public CustomerDAO customerDAO;
+
+    public IndexModel()
+    {
+        customerDAO = new CustomerDAO();
+    }
 
 
     public IActionResult OnPost(string action)
     {
+        Customer customer;
+
         Console.WriteLine("Action: " + action);
 
         if (action == "signin")
