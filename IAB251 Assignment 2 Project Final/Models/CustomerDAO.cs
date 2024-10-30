@@ -37,7 +37,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         }
 
         //currently basic, if the DB gets too large this will crash out, need a quicker way to get customers instead of getting ALL users which is insane (ie two more arguments, email and password, that corrolate to relevent email and pword)
-        public List<Customer> get(Customer customer)
+        public List<Customer> getFromId(Customer customer)
         {
 
             string getQuery = "SELECT * FROM customer WHERE id = @id";
@@ -47,6 +47,18 @@ namespace IAB251_Assignment_2_Project_Final.Models
             };
             List<Customer> customers = connect.executeFetchAll<Customer>(getQuery, parameters); //why?
             return customers;
+        }
+
+        public Customer getFromEmailPword(string email, string password)
+        {
+            string getQuery = "SELECT * FROM customer WHERE email = @email AND password = @password";
+            SQLiteParameter[] parameters = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@email", email),
+                new SQLiteParameter("@password", password)
+            };
+            //customer logic here
+            return null;
         }
 
         public void insertNew(Customer customer)
