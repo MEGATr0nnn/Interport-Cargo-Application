@@ -169,5 +169,26 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
             }
             finally { connection.Close(); }
         }
+
+        public T executeScalarQuery<T>(string query, SQLiteParameter[] parameters)
+        {
+            var connection = new SQLiteConnection(connectionString);
+            connection.Open();
+            try
+            {
+                new SQLiteCommand(query,connection).ExecuteScalar();
+                try 
+                { 
+
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message)}
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally { connection.Close(); }
+        }
     }
 }
