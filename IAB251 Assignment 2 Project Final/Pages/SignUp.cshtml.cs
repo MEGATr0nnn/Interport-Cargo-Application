@@ -34,8 +34,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         //im going to bed but heres the web page i quickly browsed https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-8.0&tabs=visual-studio
         //also heres another, a bit more comples but was helpful for me https://learn.microsoft.com/en-us/answers/questions/1823580/asp-net-core-razor-pages-bindproperty-collections
 
-
-
         public CustomerDAO customerDAO;
 
         public string accountExists;
@@ -54,8 +52,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         public IActionResult OnPost()
         {
-            Console.WriteLine("Testing ");
-
             Customer currentUser = new Customer(
                 firstName,
                 lastName,
