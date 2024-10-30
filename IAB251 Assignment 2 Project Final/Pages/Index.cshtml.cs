@@ -7,31 +7,40 @@ namespace IAB251_Assignment_2_Project_Final.Pages;
 
 public class IndexModel : PageModel
 {
-    public class InputModel
-    {
+
+        [BindProperty]
         [Required]
         [EmailAddress]
         public string Email { get; set; }
 
+        [BindProperty]
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-    }
 
-    [BindProperty]
-    public InputModel Input { get; set; }
 
-    public Customer Customer = new Customer();
+    public Customer Customer;
+
+    public CustomerDAO customerDAO = new CustomerDAO();
+
 
     public IActionResult OnPost(string action)
     {
+        Console.WriteLine("Action: " + action);
 
         if (action == "signin")
         {
-            if (Customer != null)
+            List<Customer> customers = customerDAO.get(Customer);
+
+            foreach (Customer c in customers)
             {
-                // Successful sign-in
-                return RedirectToPage("/Dashboard");
+                if (c.getEmail().Equals(Email))
+                {
+                    if (c.getPassword().Equals(Password))
+                    {
+                        return RedirectToPage("/QuotationRequest");
+                    }
+                }
             }
 
             // If login fails
@@ -39,7 +48,12 @@ public class IndexModel : PageModel
             return Page();
         }
 
-        else if (action == "signup")
+        else if (action == "customer")
+        {
+            return RedirectToPage("/SignUp");
+        }
+
+        else if (action == "employee")
         {
             return RedirectToPage("/SignUp");
         }

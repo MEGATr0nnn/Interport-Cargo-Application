@@ -64,7 +64,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
             ModelState.Clear();
 
-            return RedirectToPage("/Dashboard");
+            return RedirectToPage("/QuotationRequest");
 
         }
         
