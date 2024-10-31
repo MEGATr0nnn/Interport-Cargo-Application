@@ -10,44 +10,26 @@ namespace IAB251_Assignment_2_Project_Final.Pages
     public class SignUpEmployeeModel : PageModel
     {
         /// <summary>
-        /// Employees first name from input
+        /// Relevent fields for employee
         /// </summary>
         [BindProperty]
         public string firstNameEmployee { get; set; }
 
-        /// <summary>
-        /// Employees last name from input
-        /// </summary>
         [BindProperty]
         public string lastNameEmployee { get; set; }
 
-        /// <summary>
-        /// Employees email address from input
-        /// </summary>
         [BindProperty]
         public string emailEmployee { get; set; }
 
-        /// <summary>
-        /// Employees phone number from input
-        /// </summary>
         [BindProperty]
         public string phoneNumberEmployee { get; set; }
 
-        /// <summary>
-        /// Employees type of role from input
-        /// </summary>
         [BindProperty]
         public string employeeType { get; set; }
 
-        /// <summary>
-        /// Employees address from input
-        /// </summary>
         [BindProperty]
         public string addressEmployee { get; set; }
 
-        /// <summary>
-        /// Employees password from input
-        /// </summary>
         [BindProperty]
         public string passwordEmployee { get; set; }
 
@@ -56,12 +38,8 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         private EmployeeDAO _employeeDAO;
 
-
-
-
-
         /// <summary>
-        /// 
+        /// Constructor for Model, cretes new instance
         /// </summary>
         public SignUpEmployeeModel()
         {
