@@ -1,14 +1,13 @@
-﻿using EFB225_Assignment_2___Enterprise_Solution.Database_Model;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 namespace IAB251_Assignment_2_Project_Final.Models
 {
     public class CustomerDAO : IUserDAO<Customer>
     {
-        private DBConnect<Customer> _connect;
+        private DBConnect _connect;
 
         public CustomerDAO()
         {
-            _connect = new DBConnect<Customer>();
+            _connect = new DBConnect();
             createTable();
         }
 
@@ -28,28 +27,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
         public void delete(Customer customer)
         {
-            string deleteQuery = "DELETE * FROM customer where id = @id";
+            string deleteQuery = "DELETE * FROM customer WHERE id = @id";
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             { 
                 new SQLiteParameter("@id", customer.getId())
             };
             _connect.executeQuery(deleteQuery, parameters);
         }
-
-        //fix when needed if needed
-        /*
-        public bool getFromId(Customer customer)
-        {
-
-            string getQuery = "SELECT * FROM customer WHERE id = @id";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
-            {
-                new SQLiteParameter("@id", customer.getId())
-            };
-            List<Customer> customers = connect.executeFetchAll<Customer>(getQuery, parameters);
-            return customers;
-        }
-        */
 
         public Customer getFromEmailPword(string email, string password)
         {
@@ -94,8 +78,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
         public void update(Customer customer)
         {
-            string updateQuery = @"UPDATE customer SET first_Name = @first_Name, last_Name = @last_Name, email = @email WHERE id = @id";
-
+            string updateQuery = @"UPDATE customer SET firstName = @firstName, lastName = @lastName, email = @email WHERE id = @id";
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             {
                 new SQLiteParameter("@firstName", customer.getFirstName()),

@@ -14,7 +14,7 @@ public class IndexModel : PageModel
     [BindProperty]
     [Required]
     [EmailAddress]
-    public string Email { get; set; }
+    public string email { get; set; }
 
     /// <summary>
     /// Gets the Password from the user input from the frontend of the Homepage
@@ -22,7 +22,7 @@ public class IndexModel : PageModel
     [BindProperty]
     [Required]
     [DataType(DataType.Password)]
-    public string Password { get; set; }
+    public string password { get; set; }
 
     /// <summary>
     /// Session initialiser

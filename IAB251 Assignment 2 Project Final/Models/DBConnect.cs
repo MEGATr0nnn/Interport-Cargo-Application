@@ -6,32 +6,23 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using IAB251_Assignment_2_Project_Final.Models;
 
-namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
+namespace IAB251_Assignment_2_Project_Final.Models
 {
     /// <summary>
     /// This is the DB connect class, which is used to abstract and protect DB methods, executing the whole argument or if the execution fails, rolling back to the last stable version of the DB.
     /// This is where the majority of DB code goes and provides a stable link between the backend and the DB.
+    /// 
+    /// THIS PARTIAL CLASS IS FOR GENERIC REUSEABLE CODE SEGEMENTS FOR ALL QUERY EXECUTION
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class DBConnect<T>
+    public partial class DBConnect : ConnectionControler
     {
-        private string _connectionString = $"Data Source=database.db";
-        //DO NOT CHANGE UNLESS USING TESTDB
-        //private string _connectionString = $"Data Source=D:\\Team-10\\IAB251 Assignment 2 Project Final\\Models\\testDB.db";
-        public string getConnectionString () { return _connectionString; }
-
-        public void setConnectionString(string conn) { _connectionString = conn; }
-
-        //=================================================================================
-        //Generics Bloc
-        //=================================================================================
         /// <summary>
         /// This is the original executeQuery method, which executes an SQL query to the DB, this is usually the first command called when instantising the DB.
         /// </summary>
         /// <param name="query">This is the SQL query you want executed</param>
         public void executeQuery(string query)
         {
-            var connection = new SQLiteConnection(_connectionString);
+            var connection = new SQLiteConnection(getConnectionString());
             try
             {
                 connection.Open();
@@ -68,7 +59,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         /// <param name="parameters">This is the list of parameters you want executed</param>
         public void executeQuery(string query, SQLiteParameter[] parameters)
         {
-            var connection = new SQLiteConnection(_connectionString);
+            var connection = new SQLiteConnection(getConnectionString());
             try
             {
                 connection.Open();
@@ -112,7 +103,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         /// <returns>This command returns an integer value</returns>
         public int executeScalarQuery(string query, SQLiteParameter[] parameters)
         {
-            var connection = new SQLiteConnection(_connectionString);
+            var connection = new SQLiteConnection(getConnectionString());
             try
             {
                 connection.Open();
@@ -219,27 +210,6 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                 return null;
             }
             finally { connection.Close(); }
-            return customer;
         }
-
-        //finish when needed if needed
-        /*
-        public Customer customerExecuteIdFetch(string query, SQLiteParameter[] parameters)
-        {
-            Customer customer;
-
-            var connection = new SQLiteConnection(connectionString);
-            connection.Open();
-            try
-            {
-
-            }
-        }
-        */
-
-        //=================================================================================
-        //Employee Bloc
-        //=================================================================================
-
     }
 }
