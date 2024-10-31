@@ -32,7 +32,7 @@ public class IndexModel : PageModel
     /// <summary>
     /// Pulling stored data for customer object
     /// </summary>
-    public CustomerDAO customerDAO;
+    private CustomerDAO customerDAO;
 
     /// <summary>
     /// Constructor initialising a new Customer Data Access Object
@@ -52,14 +52,14 @@ public class IndexModel : PageModel
     public IActionResult OnPost(string action)
     {
         Console.WriteLine("Action: " + action); 
-        Console.WriteLine(Email + " " + Password);
+        Console.WriteLine(email + " " + password);
 
         //Procedure for when user signs in
         if (action == "signin")
         {
-            if (customerDAO.isExist(Email, Password))
+            if (customerDAO.isExist(email, password))
             {
-                Customer customer = customerDAO.getFromEmailPword(Email, Password);
+                Customer customer = customerDAO.getFromEmailPword(email, password);
 
                 //userSessionControl.currentCustomerUser = customer;
 
