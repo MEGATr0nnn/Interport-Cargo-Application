@@ -69,7 +69,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
             _customerDAO.insertNew(currentUser);
 
-            _userSessionControl.currentCustomerUser = currentUser;
+            //_userSessionControl.currentCustomerUser = currentUser;
 
             ModelState.Clear();
 

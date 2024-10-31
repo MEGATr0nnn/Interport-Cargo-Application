@@ -34,20 +34,14 @@ public class IndexModel : PageModel
 
     public IActionResult OnPost(string action)
     {
-        Customer customer;
-
         Console.WriteLine("Action: " + action);
 
         if (action == "signin")
         {
+            if ()
+            Customer customer = customerDAO.getFromEmailPword(Email, Password);
 
-            /*
-             * you need to get the email and password inputted, and then pass it to the argument
-             * customerDAO.getFromEmailPword(email, password)
-             * 
-             * ie customer = customerDAO.getFromEmailPword(email, password)
-             * then userSessionControl.currentUser = customer;
-            */
+            userSessionControl.currentCustomerUser = customer;
 
             // If login fails
             ModelState.AddModelError(string.Empty, "Invalid email or password.");

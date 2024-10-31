@@ -15,9 +15,9 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
     /// <typeparam name="T"></typeparam>
     public class DBConnect<T>
     {
-        //private string _connectionString = $"Data Source=database.db";
+        private string _connectionString = $"Data Source=database.db";
         //DO NOT CHANGE UNLESS USING TESTDB
-        private string _connectionString = $"Data Source=D:\\Team-10\\IAB251 Assignment 2 Project Final\\Models\\testDB.db";
+        //private string _connectionString = $"Data Source=D:\\Team-10\\IAB251 Assignment 2 Project Final\\Models\\testDB.db";
         public string getConnectionString () { return _connectionString; }
 
         public void setConnectionString(string conn) { _connectionString = conn; }
