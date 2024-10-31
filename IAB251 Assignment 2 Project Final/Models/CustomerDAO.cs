@@ -95,6 +95,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void update(Customer customer)
         {
             string updateQuery = @"UPDATE customer SET first_Name = @first_Name, last_Name = @last_Name, email = @email WHERE id = @id";
+
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             {
                 new SQLiteParameter("@firstName", customer.getFirstName()),

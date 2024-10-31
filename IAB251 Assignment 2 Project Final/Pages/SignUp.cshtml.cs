@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using IAB251_Assignment_2_Project_Final.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,19 +9,28 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 {
     public class SignUp : PageModel
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [BindProperty]
+        [Required(ErrorMessage = "First Name is Required")]
         public string firstName { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Last Name is Required")]
         public string lastName { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Email Address is Required")]
         public string email { get; set; }
 
         [BindProperty]
-        public int phoneNumber { get; set; }
+        [Required(ErrorMessage = "Phone Number is Required")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number is not a valid number")]
+        public string phoneNumber { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Password is Required")]
         public string password { get; set; }
 
         //ok i did some reading, you need to bind these first, from your main file to your code behind file, this is what i was saying
@@ -45,27 +53,30 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         public string accountExists;
 
+        /// <summary>
+        /// Creating a new instance of the CustomerDAO to store users
+        /// </summary>
         public SignUp()
         {
            _customerDAO = new CustomerDAO();
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnGet()
         {
 
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPost()
         {
-            Customer currentUser = new Customer(
-                firstName,
-                lastName,
-                email,
-                phoneNumber,
-                password
-            );
+            Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, password);
 
             _customerDAO.insertNew(currentUser);
 

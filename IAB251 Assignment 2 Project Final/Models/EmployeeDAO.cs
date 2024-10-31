@@ -40,6 +40,11 @@ namespace IAB251_Assignment_2_Project_Final.Models
             throw new NotImplementedException();
         }
 
+        public bool isExist(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public void update(Employee entity)
         {
             throw new NotImplementedException();

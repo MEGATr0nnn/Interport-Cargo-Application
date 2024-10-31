@@ -11,7 +11,7 @@ namespace Tests
         [TestInitialize]
         public void Setup()
         {
-            customer = new Customer("tom", "ford", "tom.ford@gmail.com", 123456789, "password");
+            customer = new Customer("tom", "ford", "tom.ford@gmail.com", "123456789", "password");
         }
         [TestMethod]
         public void TestInital()
@@ -52,10 +52,10 @@ namespace Tests
         [TestInitialize]
         public void Setup()
         {
-            customer = new Customer("harry", "mega", "harry.mega@mega.com", 0491006868, "password");
+            customer = new Customer("harry", "mega", "harry.mega@mega.com", "0491006868", "password");
             customerDAO = new CustomerDAO();
             customerDAO.createTable();
-            customer2 = new Customer("vuyo", "manyepe", "v.Manyepe@gmail.com", 0419226868, "vuyosPword");
+            customer2 = new Customer("vuyo", "manyepe", "v.Manyepe@gmail.com", "0419226868", "vuyosPword");
             customerDAO.insertNew(customer2);
         }
         [TestMethod]

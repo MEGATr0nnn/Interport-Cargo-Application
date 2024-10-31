@@ -14,8 +14,8 @@
         public string getEmail();
         public void setEmail(string email);
 
-        public int getPhoneNumber();
-        public void setPhoneNumber(int phoneNumber);
+        public string getPhoneNumber();
+        public void setPhoneNumber(string phoneNumber);
 
         public string getPassword();
         public void setPassword(string password);

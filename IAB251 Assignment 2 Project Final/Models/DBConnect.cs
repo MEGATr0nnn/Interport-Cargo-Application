@@ -198,11 +198,12 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                     {
                         if (reader.Read())
                         {
-                            int id = reader.GetInt32(reader.GetOrdinal("id")),
-                                phoneNumber = reader.GetInt32(reader.GetOrdinal("phoneNumber"));
+                            int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                
 
                             string firstName = reader.GetString(reader.GetOrdinal("firstName")),
                                 lastName = reader.GetString(reader.GetOrdinal("lastName")),
+                                phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber")),
                                 email = reader.GetString(reader.GetOrdinal("email")),
                                 password = reader.GetString(reader.GetOrdinal("password"));
 
