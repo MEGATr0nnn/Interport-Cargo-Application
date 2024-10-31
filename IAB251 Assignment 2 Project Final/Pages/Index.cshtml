@@ -4,25 +4,59 @@
     ViewData["Title"] = "Home page";
 }
 
+<div class="pill-box">
+
 <h1 style="text-align: center">
     Welcome to Interport Cargo Services
 </h1>
 
-<form style="align-content: center" asp-page="/Dashboard">
-    <label for="usernameInput"> Username </label>
-    <input type="text" id="usernameInput" name="usernameInput" placeholder="Enter Username" required>
-    <label for="passwordInput"> Username </label>
-    <input type="text" id="passwordInput" name="passwordInput" placeholder="Enter Password" required>
-    <button type="submit"> Login </button>
+<br />
 
-</form>
+<h4 style="text-align: center">
+    Registration
+</h4>
 
 <br />
 
-
-<form style="align-content: center" asp-page="/RegisterDetails">
-    <button type="submit"> Sign Up </button>
+<form method="post">
+<div style="text-align: center">
+        <button type="submit" name="action" value="customer" class="btn btn-primary">Customer</button>
+        <button type="submit" name="action" value="employee" class="btn btn-secondary">Employee</button>
+</div>
 </form>
+
+
+</div>
+
+<br />
+
+<div class="pill-box">
+    <h4 style="text-align:center">
+        Existing Customer
+    </h4>
+<form method="post">
+    <div>
+        <label for="inputFirst" style="text-align: center">Enter Username:</label>
+        <input type="text" asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+    </div>
+
+    <div>
+        <label for="inputFirst" style="text-align: center">Enter Password:</label>
+        <input type="text" asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+    </div>
+    <br />
+        <div style="text-align: center">
+            <button type="submit" name="action" value="signin" class="btn btn-primary">Sign In</button>
+        </div>
+</form>
+</div>
+
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
 
