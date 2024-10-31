@@ -2,46 +2,57 @@
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
+    /// <summary>
+    /// This class creates an instance of Customer
+    /// </summary>
     public class Customer : IUser
     {
-        private int id { get; set; }
+        private int _id { get; set; }
 
-        private string first_Name { get; set; }
+        private string _firstName { get; set; }
 
-        private string last_Name { get; set; }
+        private string _lastName { get; set; }
 
-        private string email { get; set; }
+        private string _email { get; set; }
 
-        private int phoneNumber { get; set; }
+        private int _phoneNumber { get; set; }
 
-        private string password { get; set; }
+        private string _password { get; set; }
 
-        public Customer(string first_Name, string last_Name, string email, int phoneNumber, string password)
+        /// <summary>
+        /// This is the constructor for customer, that instantises a new customer
+        /// </summary>
+        /// <param name="firstName">The Customers firstName</param>
+        /// <param name="lastName">The Customers lastName</param>
+        /// <param name="email">The Customers email</param>
+        /// <param name="phoneNumber">The Customers phoneNumber</param>
+        /// <param name="password">The Customers password</param>
+        public Customer(string firstName, string lastName, string email, int phoneNumber, string password)
         {
-            this.first_Name = first_Name;
-            this.last_Name = last_Name;
-            this.email = email;
-            this.phoneNumber = phoneNumber;
-            this.password = password;
+            this._firstName = firstName;
+            this._lastName = lastName;
+            this._email = email;
+            this._phoneNumber = phoneNumber;
+            this._password = password;
         }
 
-        public int getId() { return id; }
-        public void setId(int id) { this.id = id;}
+        public int getId() { return _id; }
+        public void setId(int id) { this._id = id;}
 
-        public string getFirstName() { return first_Name;}
-        public void setFirstName(string firstName) { this.first_Name = firstName;}
+        public string getFirstName() { return _firstName;}
+        public void setFirstName(string firstName) { this._firstName = firstName;}
 
-        public string getLastName() { return last_Name;}
-        public void setLastName(string lastName) {  this.last_Name = lastName;}
+        public string getLastName() { return _lastName;}
+        public void setLastName(string lastName) {  this._lastName = lastName;}
 
-        public string getEmail() { return email; }
-        public void setEmail(string email) {  this.email = email;}
+        public string getEmail() { return _email; }
+        public void setEmail(string email) {  this._email = email;}
 
-        public int getPhoneNumber() {  return phoneNumber;}
-        public void setPhoneNumber(int phoneNumber) {  this.phoneNumber = phoneNumber;}
+        public int getPhoneNumber() {  return _phoneNumber;}
+        public void setPhoneNumber(int phoneNumber) {  this._phoneNumber = phoneNumber;}
 
-        public string getPassword() { return password; }
-        public void setPassword(string password) {  this.password = password;}
+        public string getPassword() { return _password; }
+        public void setPassword(string password) {  this._password = password;}
 
     }
 }

@@ -15,12 +15,12 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
     /// <typeparam name="T"></typeparam>
     public class DBConnect<T>
     {
-        private string connectionString = $"Data Source=database.db";
+        //private string _connectionString = $"Data Source=database.db";
         //DO NOT CHANGE UNLESS USING TESTDB
-        //private string connectionString = $"Data Source=D:\\Team-10\\IAB251 Assignment 2 Project Final\\Models\\testDB.db";
-        public string getConnectionString () { return connectionString; }
+        private string _connectionString = $"Data Source=D:\\Team-10\\IAB251 Assignment 2 Project Final\\Models\\testDB.db";
+        public string getConnectionString () { return _connectionString; }
 
-        public void setConnectionString(string conn) { connectionString = conn; }
+        public void setConnectionString(string conn) { _connectionString = conn; }
 
         //=================================================================================
         //Generics Bloc
@@ -31,7 +31,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         /// <param name="query">This is the SQL query you want executed</param>
         public void executeQuery(string query)
         {
-            var connection = new SQLiteConnection(connectionString);
+            var connection = new SQLiteConnection(_connectionString);
             try
             {
                 connection.Open();
@@ -68,7 +68,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         /// <param name="parameters">This is the list of parameters you want executed</param>
         public void executeQuery(string query, SQLiteParameter[] parameters)
         {
-            var connection = new SQLiteConnection(connectionString);
+            var connection = new SQLiteConnection(_connectionString);
             try
             {
                 connection.Open();
@@ -112,7 +112,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         /// <returns>This command returns an integer value</returns>
         public int executeScalarQuery(string query, SQLiteParameter[] parameters)
         {
-            var connection = new SQLiteConnection(connectionString);
+            var connection = new SQLiteConnection(_connectionString);
             try
             {
                 connection.Open();
@@ -156,7 +156,7 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
         public Customer customerExecuteFetch(string query, SQLiteParameter[] parameters)
         {
             Customer customer = null;
-            var connection = new SQLiteConnection(connectionString);
+            var connection = new SQLiteConnection(_connectionString);
             connection.Open();
             try
             {
@@ -168,16 +168,16 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
                     {
                         if (reader.Read())
                         {
-                            int Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            int id = reader.GetInt32(reader.GetOrdinal("id")),
                                 phoneNumber = reader.GetInt32(reader.GetOrdinal("phoneNumber"));
 
-                            string firstName = reader.GetString(reader.GetOrdinal("first_Name")),
-                                lastName = reader.GetString(reader.GetOrdinal("last_Name")),
+                            string firstName = reader.GetString(reader.GetOrdinal("firstName")),
+                                lastName = reader.GetString(reader.GetOrdinal("lastName")),
                                 email = reader.GetString(reader.GetOrdinal("email")),
                                 password = reader.GetString(reader.GetOrdinal("password"));
 
                             customer = new Customer(firstName, lastName, email, phoneNumber, password);
-                            customer.setId(Id);
+                            customer.setId(id);
                         }
                     }
                 }

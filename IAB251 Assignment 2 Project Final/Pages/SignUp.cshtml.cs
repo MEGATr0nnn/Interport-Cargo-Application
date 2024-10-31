@@ -36,16 +36,18 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
 
         //session control
-        IUserSessionControl userSessionControl;
+        private IUserSessionControl _userSessionControl;
 
         //pulling vars
-        public CustomerDAO customerDAO;
+        private CustomerDAO _customerDAO;
+
+        //!!I WATCHED A VIDEO ON C# SYNTAX, ALL PRIVATE FIELDS MUST BE DENOTED WITH AN _ ACCORDING TO C# COMMON PRACTICE
 
         public string accountExists;
 
         public SignUp()
         {
-           customerDAO = new CustomerDAO();
+           _customerDAO = new CustomerDAO();
         }
 
 
@@ -65,9 +67,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 password
             );
 
-            customerDAO.insertNew(currentUser);
+            _customerDAO.insertNew(currentUser);
 
-            userSessionControl.currentCustomerUser = currentUser;
+            _userSessionControl.currentCustomerUser = currentUser;
 
             ModelState.Clear();
 

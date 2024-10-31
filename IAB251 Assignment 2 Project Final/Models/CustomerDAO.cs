@@ -4,11 +4,11 @@ namespace IAB251_Assignment_2_Project_Final.Models
 {
     public class CustomerDAO : IUserDAO<Customer>
     {
-        private DBConnect<Customer> connect;
+        private DBConnect<Customer> _connect;
 
         public CustomerDAO()
         {
-            connect = new DBConnect<Customer>();
+            _connect = new DBConnect<Customer>();
             createTable();
         }
 
@@ -17,13 +17,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
             string createTableQuery = @"
                         CREATE TABLE IF NOT EXISTS customer (
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            first_Name VARCHAR NOT NULL,
-                            last_Name VARCHAR NOT NULL,
+                            firstName VARCHAR NOT NULL,
+                            lastName VARCHAR NOT NULL,
                             email VARCHAR NOT NULL,
                             phoneNumber INTEGER NOT NULL,
                             password VARCHAR NOT NULL
                         )";
-            connect.executeQuery(createTableQuery);
+            _connect.executeQuery(createTableQuery);
         }
 
         public void delete(Customer customer)
@@ -33,7 +33,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
             { 
                 new SQLiteParameter("@id", customer.getId())
             };
-            connect.executeQuery(deleteQuery, parameters);
+            _connect.executeQuery(deleteQuery, parameters);
         }
 
         //fix when needed if needed
@@ -59,25 +59,25 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 new SQLiteParameter("@email", email),
                 new SQLiteParameter("@password", password)
             };
-            return connect.customerExecuteFetch(getQuery, parameters); //return matched customer
+            return _connect.customerExecuteFetch(getQuery, parameters); //return matched customer
         }
 
         public void insertNew(Customer customer)
         {
             string insertUserQuery = @"
-                    INSERT INTO customer (first_Name, last_Name, email, phoneNumber, password)
-                    VALUES (@first_Name, @last_Name, @email, @phoneNumber, @password)
+                    INSERT INTO customer (firstName, lastName, email, phoneNumber, password)
+                    VALUES (@firstName, @lastName, @email, @phoneNumber, @password)
                     RETURNING id";
 
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             { 
-                new SQLiteParameter("@first_Name", customer.getFirstName()),
-                new SQLiteParameter("@last_Name", customer.getLastName()),
+                new SQLiteParameter("@firstName", customer.getFirstName()),
+                new SQLiteParameter("@lastName", customer.getLastName()),
                 new SQLiteParameter("@email", customer.getEmail()), 
                 new SQLiteParameter("@phoneNumber", customer.getPhoneNumber()),
                 new SQLiteParameter("@password", customer.getPassword())
             };
-            customer.setId(connect.executeScalarQuery(insertUserQuery, parameters));
+            customer.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
             
         }
 
@@ -86,13 +86,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
             string updateQuery = @"UPDATE customer SET first_Name = @first_Name, last_Name = @last_Name, email = @email WHERE id = @id";
             SQLiteParameter[] parameters = new SQLiteParameter[] 
             {
-                new SQLiteParameter("@first_Name", customer.getFirstName()),
-                new SQLiteParameter("@last_Name", customer.getLastName()),
+                new SQLiteParameter("@firstName", customer.getFirstName()),
+                new SQLiteParameter("@lastName", customer.getLastName()),
                 new SQLiteParameter("@email", customer.getEmail()),
                 new SQLiteParameter("@phoneNumber", customer.getPhoneNumber()),
-                new SQLiteParameter("@customer_Id", customer.getId())
+                new SQLiteParameter("@id", customer.getId())
             };
-            connect.executeQuery(updateQuery, parameters);
+            _connect.executeQuery(updateQuery, parameters);
         }
     }
 }
