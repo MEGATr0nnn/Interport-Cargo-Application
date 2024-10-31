@@ -16,8 +16,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
         private string password { get; set; }
 
-        public Customer() { }
-
         public Customer(string first_Name, string last_Name, string email, int phoneNumber, string password)
         {
             this.first_Name = first_Name;

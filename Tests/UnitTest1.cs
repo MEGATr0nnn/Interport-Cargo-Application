@@ -46,6 +46,7 @@ namespace Tests
     public class UnitTest2
     {
         private Customer customer;
+        private Customer customer2;
         private CustomerDAO customerDAO;
 
         [TestInitialize]
@@ -54,12 +55,15 @@ namespace Tests
             customer = new Customer("harry", "mega", "harry.mega@mega.com", 0491006868, "password");
             customerDAO = new CustomerDAO();
             customerDAO.createTable();
+            customer2 = new Customer("vuyo", "manyepe", "v.Manyepe@gmail.com", 0419226868, "vuyosPword");
+            customerDAO.insertNew(customer2);
         }
         [TestMethod]
         public void TestCreateTable()
         {
             customerDAO.createTable();
         }
+        /*
         [TestMethod]
         public void TestDBInsert()
         {
@@ -67,9 +71,25 @@ namespace Tests
             Assert.IsNotNull(customerDAO);
             customerDAO.insertNew(customer);
 
-            List<Customer> list = customerDAO.get(customer);
+            List<Customer> list = customerDAO.getFromId(customer);
+            foreach (var cust in list)
+            {
+                Console.WriteLine($"Customer ID: {cust.getId()}, First Name: {cust.getFirstName()}, Last Name: {cust.getFirstName()}, Email: {cust.getEmail()}, Phone: {cust.getPhoneNumber()}");
+            }
             Assert.IsNotNull(list);
             Assert.AreEqual(1, list.Count);
+        }
+        */
+        [TestMethod]
+        public void TestDBGetFromEmailPword()
+        {
+            string email = "v.Manyepe@gmail.com";
+            string password = "vuyosPword";
+
+            Customer currentUser = customerDAO.getFromEmailPword(email, password);
+
+            Assert.IsNotNull(currentUser);
+            Assert.AreEqual(customer2.getFirstName(), currentUser.getFirstName());
         }
     }
 }

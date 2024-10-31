@@ -40,18 +40,14 @@ public class IndexModel : PageModel
 
         if (action == "signin")
         {
-            // needs to be fixed List<Customer> customers = customerDAO.get(Customer);
 
-            foreach (Customer c in customers)
-            {
-                if (c.getEmail().Equals(Email))
-                {
-                    if (c.getPassword().Equals(Password))
-                    {
-                        return RedirectToPage("/QuotationRequest");
-                    }
-                }
-            }
+            /*
+             * you need to get the email and password inputted, and then pass it to the argument
+             * customerDAO.getFromEmailPword(email, password)
+             * 
+             * ie customer = customerDAO.getFromEmailPword(email, password)
+             * then userSessionControl.currentUser = customer;
+            */
 
             // If login fails
             ModelState.AddModelError(string.Empty, "Invalid email or password.");
