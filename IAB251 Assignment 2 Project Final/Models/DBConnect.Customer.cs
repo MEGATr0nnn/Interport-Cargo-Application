@@ -25,13 +25,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     {
                         if (reader.Read())
                         {
-                            int id = reader.GetInt32(reader.GetOrdinal("id")),
-                                phoneNumber = reader.GetInt32(reader.GetOrdinal("phoneNumber"));
+                            int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                
 
                             string firstName = reader.GetString(reader.GetOrdinal("firstName")),
                                 lastName = reader.GetString(reader.GetOrdinal("lastName")),
                                 email = reader.GetString(reader.GetOrdinal("email")),
-                                password = reader.GetString(reader.GetOrdinal("password"));
+                                password = reader.GetString(reader.GetOrdinal("password")),
+                                phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber"));
 
                             customer = new Customer(firstName, lastName, email, phoneNumber, password);
                             customer.setId(id);
