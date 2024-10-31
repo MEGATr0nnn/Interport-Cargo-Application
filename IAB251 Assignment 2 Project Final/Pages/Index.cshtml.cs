@@ -34,9 +34,9 @@ public class IndexModel : PageModel
     /// <summary>
     /// Constructor initialising a new Customer Data Access Object
     /// </summary>
-    public IndexModel(IUserSessionControl userSessionControl, CustomerDAO customerDAO)
+    public IndexModel(IUserSessionControl userSessionControl)
     {
-        _customerDAO = customerDAO;
+        _customerDAO = new CustomerDAO();
         _userSessionService = userSessionControl;
     }
 

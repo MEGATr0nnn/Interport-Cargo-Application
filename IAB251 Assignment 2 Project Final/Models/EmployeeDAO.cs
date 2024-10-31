@@ -20,7 +20,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             firstName VARCHAR NOT NULL,
                             lastName VARCHAR NOT NULL,
                             email VARCHAR NOT NULL,
-                            phoneNumber STRING NOT NULL,
+                            phoneNumber VARCHAR NOT NULL,
                             password VARCHAR NOT NULL
                         )";
             _connect.executeQuery(creatTableQuery);

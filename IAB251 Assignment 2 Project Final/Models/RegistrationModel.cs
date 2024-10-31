@@ -30,7 +30,6 @@
 
             string password = inputPassword;
 
-
             return false;
         }
     }

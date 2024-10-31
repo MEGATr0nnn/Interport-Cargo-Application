@@ -45,9 +45,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         private CustomerDAO _customerDAO;
 
-        public SignUp(IUserSessionControl userSessionControl, CustomerDAO customerDAO)
+        public SignUp(IUserSessionControl userSessionControl)
         {
-            _customerDAO = customerDAO;
+            _customerDAO = new CustomerDAO();
             _userSessionService = userSessionControl;
         }
 
