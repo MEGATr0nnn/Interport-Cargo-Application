@@ -52,6 +52,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         public IActionResult OnPostLogout()
         {
             // Return to the homepage
+            //set user session service to null
             return RedirectToPage("/Index");
         }
 
