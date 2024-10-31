@@ -13,7 +13,7 @@
 
         private string _email { get; set; }
 
-        private int _phoneNumber { get; set; }
+        private string _phoneNumber { get; set; }
 
         private string _password { get; set; }
 
@@ -25,7 +25,7 @@
         /// <param name="email">The Customers email</param>
         /// <param name="phoneNumber">The Customers phoneNumber</param>
         /// <param name="password">The Customers password</param>
-        public Customer(string firstName, string lastName, string email, int phoneNumber, string password)
+        public Customer(string firstName, string lastName, string email, string phoneNumber, string password)
         {
             this._firstName = firstName;
             this._lastName = lastName;
@@ -46,8 +46,8 @@
         public string getEmail() { return _email; }
         public void setEmail(string email) {  this._email = email;}
 
-        public int getPhoneNumber() {  return _phoneNumber;}
-        public void setPhoneNumber(int phoneNumber) {  this._phoneNumber = phoneNumber;}
+        public string getPhoneNumber() {  return _phoneNumber;}
+        public void setPhoneNumber(string phoneNumber) {  this._phoneNumber = phoneNumber;}
 
         public string getPassword() { return _password; }
         public void setPassword(string password) {  this._password = password;}

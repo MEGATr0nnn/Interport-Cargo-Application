@@ -37,7 +37,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
         public Customer getFromEmailPword(string email, string password)
         {
-            string getQuery = "SELECT * FROM customer WHERE email = @email AND password = @password";
+            string getQuery = @"SELECT * FROM customer WHERE email = @email AND password = @password";
             SQLiteParameter[] parameters = new SQLiteParameter[]
             {
                 new SQLiteParameter("@email", email),
@@ -63,6 +63,17 @@ namespace IAB251_Assignment_2_Project_Final.Models
             };
             customer.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
             
+        }
+
+        public bool isExist(string email, string password)
+        {
+            string existQuery = @"SELECT * FROM customer WHERE email = @email AND password = @password";
+            SQLiteParameter[] param = new SQLiteParameter[]
+            {
+                new SQLiteParameter("email", email),
+                new SQLiteParameter("password", password)
+            };
+            return _connect.isExistQuery(existQuery, param);
         }
 
         public void update(Customer customer)

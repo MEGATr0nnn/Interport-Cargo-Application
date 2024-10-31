@@ -140,5 +140,76 @@ namespace IAB251_Assignment_2_Project_Final.Models
             }
             finally { connection.Close(); }
         }
+
+        public bool isExistQuery(string query, params SQLiteParameter[] parameters)
+        {
+            var connection = new SQLiteConnection(_connectionString);
+            try
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        //returns true if has rows ie rows exist
+                        return reader.HasRows;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"We've had a problem connecting {ex.Message}");
+                return false;
+            }
+            finally { connection.Close(); }
+        }
+
+
+        //=================================================================================
+        //Customer Bloc
+        //=================================================================================
+        public Customer customerExecuteFetch(string query, SQLiteParameter[] parameters)
+        {
+            Customer customer = null;
+            var connection = new SQLiteConnection(_connectionString);
+            connection.Open();
+            try
+            {
+                using(var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddRange(parameters);
+
+                    using (var reader = command.ExecuteReader()) //use reader to check if value exists
+                    {
+                        if (reader.Read())
+                        {
+                            int id = reader.GetInt32(reader.GetOrdinal("id"));
+                                
+
+                            string firstName = reader.GetString(reader.GetOrdinal("firstName")),
+                                lastName = reader.GetString(reader.GetOrdinal("lastName")),
+                                phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber")),
+                                email = reader.GetString(reader.GetOrdinal("email")),
+                                password = reader.GetString(reader.GetOrdinal("password"));
+
+                            customer = new Customer(firstName, lastName, email, phoneNumber, password);
+                            customer.setId(id);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally { connection.Close(); }
+        }
     }
 }

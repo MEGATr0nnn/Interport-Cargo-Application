@@ -13,19 +13,19 @@
 
         private string _email { get; set; }
 
-        private int _phoneNumber { get; set; }
+        private string _phoneNumber { get; set; }
 
         private string _password { get; set; }
 
         /// <summary>
-        /// This is the constructor responsible for creating Employees.
+        /// Constructor responsible for creating Employees.
         /// </summary>
         /// <param name="firstName">The Employees firstName</param>
         /// <param name="lastName">The Employees lastName</param>
         /// <param name="email">The Employees email</param>
         /// <param name="phoneNumber">The Employees phoneNumber</param>
         /// <param name="password">The Employees password</param>
-        public Employee(string firstName, string lastName, string email, int phoneNumber, string password)
+        public Employee(string firstName, string lastName, string email, string phoneNumber, string password)
         {
             this._firstName = firstName;
             this._lastName = lastName;
@@ -60,7 +60,7 @@
             return _password;
         }
 
-        public int getPhoneNumber()
+        public string getPhoneNumber()
         {
             return _phoneNumber;
         }
@@ -90,7 +90,7 @@
             this._password = password;
         }
 
-        public void setPhoneNumber(int phoneNumber)
+        public void setPhoneNumber(string phoneNumber)
         {
             this._phoneNumber = phoneNumber;
         }

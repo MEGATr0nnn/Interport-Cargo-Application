@@ -8,6 +8,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
         void delete(T entity);
         void update(T entity);
         T getFromEmailPword(string email, string password);
-
+        bool isExist(string email, string password);
     }
 }
