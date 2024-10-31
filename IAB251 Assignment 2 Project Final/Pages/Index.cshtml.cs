@@ -24,7 +24,7 @@ public class IndexModel : PageModel
     /// <summary>
     /// Session initialiser
     /// </summary>
-    private IUserSessionControl _userSessionService;
+    private readonly IUserSessionControl _userSessionService;
 
     /// <summary>
     /// Pulling stored data for customer object
@@ -65,6 +65,8 @@ public class IndexModel : PageModel
             if (_customerDAO.isExist(email, password))
             {
                 Customer customer = _customerDAO.getFromEmailPword(email, password);
+                Console.WriteLine($"{customer.getFirstName()}");
+
                 _userSessionService.currentCustomerUser = customer;
                 Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
 
