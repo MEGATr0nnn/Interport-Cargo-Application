@@ -2,11 +2,13 @@
 {
     public interface IUserSessionControl
     {
-        Customer currentUser { get; set; }
+        Customer currentCustomerUser { get; set; }
+        Employee currentEmployeeUser { get; set; }
     }
 
     public class UserSessonService : IUserSessionControl
     {
-        public Customer currentUser { get; set; }
+        public Customer currentCustomerUser { get; set; }
+        public Employee currentEmployeeUser { get; set; }
     }
 }
