@@ -59,13 +59,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         public IActionResult OnPost()
         {
-            Customer currentUser = new Customer(
-                firstName,
-                lastName,
-                email,
-                phoneNumber,
-                password
-            );
+            Customer currentUser = new Customer(firstName,lastName,email,phoneNumber, password);
 
             _customerDAO.insertNew(currentUser);
 
