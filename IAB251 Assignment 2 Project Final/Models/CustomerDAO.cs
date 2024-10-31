@@ -35,21 +35,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
             _connect.executeQuery(deleteQuery, parameters);
         }
 
-        //fix when needed if needed
-        /*
-        public bool getFromId(Customer customer)
-        {
-
-            string getQuery = "SELECT * FROM customer WHERE id = @id";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
-            {
-                new SQLiteParameter("@id", customer.getId())
-            };
-            List<Customer> customers = connect.executeFetchAll<Customer>(getQuery, parameters);
-            return customers;
-        }
-        */
-
         public Customer getFromEmailPword(string email, string password)
         {
             string getQuery = "SELECT * FROM customer WHERE email = @email AND password = @password";
