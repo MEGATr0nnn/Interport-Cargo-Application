@@ -5,7 +5,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
     public class ConnectionControler
     {
         private static string _connectionString =  $"Data Source=database.db";
-        private static bool _conState = false;
+        private bool _conState = false;
 
         //HARRYS TEST DB PATH
         //static string _connectionString = $"Data Source=D:\\Team-10\\IAB251 Assignment 2 Project Final\\Models\\testDB.db";
@@ -51,9 +51,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
         public static void setConnectionString(string conn) { _connectionString = conn; }
 
-        private static void setConState(bool conState) { _conState =  conState; }
+        private void setConState(bool conState) { _conState =  conState; }
 
-        public static bool checkConState() { return _conState; }
+        public bool checkConState() { return _conState; }
 
     }
 }
