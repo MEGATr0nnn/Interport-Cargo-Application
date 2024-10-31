@@ -9,16 +9,13 @@ namespace IAB251_Assignment_2_Project_Final.Pages;
 public class IndexModel : PageModel
 {
     /// <summary>
-    /// Gets the Email Address from the user input from the frontend of the Homepage
+    /// Gets the email and password from the users input
     /// </summary>
     [BindProperty]
     [Required]
     [EmailAddress]
     public string email { get; set; }
 
-    /// <summary>
-    /// Gets the Password from the user input from the frontend of the Homepage
-    /// </summary>
     [BindProperty]
     [Required]
     [DataType(DataType.Password)]
@@ -27,19 +24,20 @@ public class IndexModel : PageModel
     /// <summary>
     /// Session initialiser
     /// </summary>
-    IUserSessionControl userSessionControl;
+    private IUserSessionControl _userSessionService;
 
     /// <summary>
     /// Pulling stored data for customer object
     /// </summary>
-    private CustomerDAO customerDAO;
+    private CustomerDAO _customerDAO;
 
     /// <summary>
     /// Constructor initialising a new Customer Data Access Object
     /// </summary>
-    public IndexModel()
+    public IndexModel(IUserSessionControl userSessionControl, CustomerDAO customerDAO)
     {
-        customerDAO = new CustomerDAO();
+        _customerDAO = customerDAO;
+        _userSessionService = userSessionControl;
     }
 
     /// <summary>
@@ -57,22 +55,23 @@ public class IndexModel : PageModel
         //Procedure for when user signs in
         if (action == "signin")
         {
-            if (customerDAO.isExist(email, password))
+            if (!ModelState.IsValid)
             {
-                Customer customer = customerDAO.getFromEmailPword(email, password);
+                // Failed login
+                ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
+                return Page();
+            }
 
-                //userSessionControl.currentCustomerUser = customer;
+            if (_customerDAO.isExist(email, password))
+            {
+                Customer customer = _customerDAO.getFromEmailPword(email, password);
+                _userSessionService.currentCustomerUser = customer;
+                Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
 
                 Console.WriteLine(customer.getEmail() + " " + customer.getPassword()); 
 
                 return RedirectToPage("/QuotationRequest");
-
             }
-
-
-            // Failed login
-            ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
-            return Page();
         }
 
         else if (action == "customer")
