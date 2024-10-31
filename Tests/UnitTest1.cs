@@ -1,4 +1,3 @@
-using EFB225_Assignment_2___Enterprise_Solution.Database_Model;
 using IAB251_Assignment_2_Project_Final.Models;
 
 namespace Tests

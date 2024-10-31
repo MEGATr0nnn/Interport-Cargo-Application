@@ -21,7 +21,7 @@ public class IndexModel : PageModel
 
 
     //initalising session
-    IUserSessionControl userSessionControl;
+    IUserSessionControl _userSessionControl;
 
     //pulling vars
     public CustomerDAO customerDAO;

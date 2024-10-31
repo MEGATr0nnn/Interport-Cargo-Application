@@ -1,6 +1,4 @@
-﻿using System.IO.Pipes;
-
-namespace IAB251_Assignment_2_Project_Final.Models
+﻿namespace IAB251_Assignment_2_Project_Final.Models
 {
     /// <summary>
     /// This class creates an instance of Customer
