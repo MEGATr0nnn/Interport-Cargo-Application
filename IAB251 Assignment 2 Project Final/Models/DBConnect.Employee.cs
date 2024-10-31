@@ -2,6 +2,12 @@
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
+    /// <summary>
+    /// This is the DB connect class, which is used to abstract and protect DB methods, executing the whole argument or if the execution fails, rolling back to the last stable version of the DB.
+    /// This is where the majority of DB code goes and provides a stable link between the backend and the DB.
+    /// 
+    /// THIS PARTIAL CLASS IS FOR EMPLOYEE DAO RELATED CODE ONLY
+    /// </summary>
     public partial class DBConnect : ConnectionControler
     {
         public Employee employeeExecuteFetch(string query, SQLiteParameter[] parameters)
