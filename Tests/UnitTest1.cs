@@ -57,28 +57,14 @@ namespace Tests
             customer2 = new Customer("vuyo", "manyepe", "v.Manyepe@gmail.com", 0419226868, "vuyosPword");
             customerDAO.insertNew(customer2);
         }
+
         [TestMethod]
         public void TestCreateTable()
         {
             customerDAO.createTable();
-        }
-        /*
-        [TestMethod]
-        public void TestDBInsert()
-        {
-            Assert.IsNotNull(customer);
             Assert.IsNotNull(customerDAO);
-            customerDAO.insertNew(customer);
-
-            List<Customer> list = customerDAO.getFromId(customer);
-            foreach (var cust in list)
-            {
-                Console.WriteLine($"Customer ID: {cust.getId()}, First Name: {cust.getFirstName()}, Last Name: {cust.getFirstName()}, Email: {cust.getEmail()}, Phone: {cust.getPhoneNumber()}");
-            }
-            Assert.IsNotNull(list);
-            Assert.AreEqual(1, list.Count);
         }
-        */
+
         [TestMethod]
         public void TestDBGetFromEmailPword()
         {
@@ -89,6 +75,12 @@ namespace Tests
 
             Assert.IsNotNull(currentUser);
             Assert.AreEqual(customer2.getFirstName(), currentUser.getFirstName());
+        }
+
+        [TestMethod]
+        public void TestIsExist()
+        {
+            //customerDAO.isExist()
         }
     }
 }
