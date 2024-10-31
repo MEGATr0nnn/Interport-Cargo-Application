@@ -12,39 +12,21 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public int requestID { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [BindProperty]
         public string customerInfo { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [BindProperty]
         public string source { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [BindProperty]
         public string destination { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [BindProperty]
         public int numContainers { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [BindProperty]
         public string packageNature { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [BindProperty]
         public string jobNature { get; set; }
 
