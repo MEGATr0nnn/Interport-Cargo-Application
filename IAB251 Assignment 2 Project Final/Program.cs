@@ -3,7 +3,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 //Singletons for persistance
-builder.Services.AddSingleton<CustomerDAO>();
+//builder.Services.AddSingleton<CustomerDAO>();
 builder.Services.AddSingleton<IUserSessionControl, UserSessonService>();
 
 // Add services to the container.
