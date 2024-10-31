@@ -7,7 +7,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         void insertNew(T entity);
         void delete(T entity);
         void update(T entity);
-        //T getFromId(T entity);
         T getFromEmailPword(string email, string password);
+
     }
 }
