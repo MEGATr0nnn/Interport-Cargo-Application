@@ -36,7 +36,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             command.ExecuteNonQuery();
                         }
                         transaction.Commit();
-                        Console.WriteLine("Transaction executed correctly"); //for testing
+                        Console.WriteLine("Transaction executed correctly"); //for testing FIX ERROR LOGIC
                     }
                     catch (Exception ex)
                     {

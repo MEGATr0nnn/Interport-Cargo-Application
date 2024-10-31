@@ -4,7 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 //Singletons for persistance
 //builder.Services.AddSingleton<CustomerDAO>();
-builder.Services.AddSingleton<IUserSessionControl, UserSessonService>();
+builder.Services.AddSingleton<IUserSessionControl, UserSessionService>();
+
+
+//initalise the connection controller
 
 // Add services to the container.
 builder.Services.AddRazorPages();

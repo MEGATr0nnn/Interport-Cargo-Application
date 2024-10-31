@@ -1,6 +1,7 @@
 using IAB251_Assignment_2_Project_Final.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace IAB251_Assignment_2_Project_Final.Pages
 {
@@ -13,37 +14,53 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Relevent fields for employee
         /// </summary>
         [BindProperty]
-        public string firstNameEmployee { get; set; }
+        [Required(ErrorMessage = "A First name is required.")]
+        public string firstName { get; set; }
 
         [BindProperty]
-        public string lastNameEmployee { get; set; }
+        [Required(ErrorMessage = "A Last name is required.")]
+        public string lastName { get; set; }
 
         [BindProperty]
-        public string emailEmployee { get; set; }
+        [Required(ErrorMessage = "A valid email is required.")]
+        [EmailAddress]
+        public string email { get; set; }
 
         [BindProperty]
-        public string phoneNumberEmployee { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number is not a valid number.")]
+        public string phoneNumber { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "An Employee type must be defined.")]
         public string employeeType { get; set; }
 
         [BindProperty]
-        public string addressEmployee { get; set; }
+        [Required(ErrorMessage = "An Employee address must be listed.")]
+        public string address { get; set; }
 
         [BindProperty]
-        public string passwordEmployee { get; set; }
+        [Required(ErrorMessage = "Password is required.")]
+        [DataType(DataType.Password)]
+        public string password { get; set; }
 
         /// <summary>
-        /// New instance of the EmployeeDAO
+        /// Allows access to current user funcs
         /// </summary>
-        private EmployeeDAO _employeeDAO;
+        private readonly IUserSessionControl _userSessionService;
+
+        /// <summary>
+        /// Allowing access to _employeeDAO methods
+        /// </summary>
+        private EmployeeDAO _employeeDAO; //make readonly???
 
         /// <summary>
         /// Constructor for Model, cretes new instance
         /// </summary>
-        public SignUpEmployeeModel()
+        public SignUpEmployeeModel(IUserSessionControl userSessionControl, EmployeeDAO employee)
         {
-            _employeeDAO = new EmployeeDAO();
+            _employeeDAO = employee;
+            _userSessionService = userSessionControl;
         }
 
         /// <summary>
@@ -52,20 +69,24 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <returns>Returns a redirect to the quotation page upon successful registration</returns>
         public IActionResult OnPost()
         {
-            Employee employee = new Employee(firstNameEmployee, lastNameEmployee, emailEmployee, phoneNumberEmployee, passwordEmployee);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            else
+            {
+                Employee employee = new Employee(firstName, lastName, email, phoneNumber, password);
+                _employeeDAO.insertNew(employee);
 
-            _employeeDAO.insertNew(employee);
+                _userSessionService.currentEmployeeUser = employee;
 
-            return RedirectToPage("/QuotationManagement");
+                return RedirectToPage("/QuotationManagement");
+            }
         }
-
-
 
         /// <summary>
         /// 
         /// </summary>
-        public void OnGet()
-        {
-        }
+        public void OnGet() { }
     }
 }

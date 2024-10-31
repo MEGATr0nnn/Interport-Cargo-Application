@@ -6,7 +6,7 @@
         Employee currentEmployeeUser { get; set; }
     }
 
-    public class UserSessonService : IUserSessionControl
+    public class UserSessionService : IUserSessionControl
     {
         public Customer currentCustomerUser { get; set; }
         public Employee currentEmployeeUser { get; set; }

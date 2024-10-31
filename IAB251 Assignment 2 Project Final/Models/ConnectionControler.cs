@@ -4,15 +4,18 @@ namespace IAB251_Assignment_2_Project_Final.Models
 {
     public class ConnectionControler
     {
+        private static string _dbName = "database.db";
         private static string _connectionString =  $"Data Source=database.db";
         private bool _conState = false;
+        private int _connectionAttempts = 0;
 
         //HARRYS TEST DB PATH
-        //static string _connectionString = $"Data Source=D:\\Team-10\\IAB251 Assignment 2 Project Final\\Models\\testDB.db";
+        //private static string _dbName = "testDB.db";
+        // string _connectionString = $"Data Source=testDB.db";
 
         public ConnectionControler()
         {
-            if (File.Exists(_connectionString))
+            if (File.Exists(_dbName))
             {
                 setConState(true);
             }
@@ -35,14 +38,19 @@ namespace IAB251_Assignment_2_Project_Final.Models
             using (var connection = new SQLiteConnection(_connectionString))
             {
                 connection.Open(); //creates an empty DB file
-                if (File.Exists(getConnectionString()))
+                if (File.Exists(_dbName))
                 {
                     setConState(true);
                     connection.Close();//close sequence
                 }
+                else if(_connectionAttempts < 5)
+                {
+                    _connectionAttempts++;
+                    initaliseBlankDB(); //retry
+                }
                 else
                 {
-                    throw new Exception(); //throwing exception out to catch
+                    throw new Exception();//throwing exception out to catch
                 }
             }
         }
