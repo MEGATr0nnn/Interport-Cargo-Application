@@ -150,6 +150,36 @@ namespace EFB225_Assignment_2___Enterprise_Solution.Database_Model
             finally { connection.Close(); }
         }
 
+        public bool isExistQuery(string query, params SQLiteParameter[] parameters)
+        {
+            var connection = new SQLiteConnection(_connectionString);
+            try
+            {
+                connection.Open();
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        //returns true if has rows ie rows exist
+                        return reader.HasRows;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"We've had a problem connecting {ex.Message}");
+                return false;
+            }
+            finally { connection.Close(); }
+        }
+
+
         //=================================================================================
         //Customer Bloc
         //=================================================================================
