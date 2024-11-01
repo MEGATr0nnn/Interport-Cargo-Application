@@ -1,4 +1,19 @@
 ﻿using IAB251_Assignment_2_Project_Final.Models;
+using System.Reflection;
+
+//ensuring users have installed the DB package to run this program
+try
+{
+    Assembly.Load("Microsoft.Data.Sqlite");
+}
+catch (FileNotFoundException)
+{
+    throw new InvalidOperationException("The required package 'Microsoft.Data.Sqlite' is not installed. Please install it using the following command: \n\n" +
+                                               "Install-Package Microsoft.Data.Sqlite\n\n" +
+                                               "or, using .NET CLI:\n\n" +
+                                               "dotnet add package Microsoft.Data.Sqlite");
+}
+
 
 var builder = WebApplication.CreateBuilder(args);
 
