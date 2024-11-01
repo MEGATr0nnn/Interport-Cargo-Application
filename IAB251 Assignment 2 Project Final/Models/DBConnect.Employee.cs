@@ -10,6 +10,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
     /// </summary>
     public partial class DBConnect : ConnectionControler
     {
+        /// <summary>
+        /// This method fetches a specific Employee associated with the applied query and parameters
+        /// </summary>
+        /// <param name="query">The SQL query you want executed</param>
+        /// <param name="parameters">The constraints/parameters you want to execute your query by</param>
+        /// <returns>An instance of Employee</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
+        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public Employee employeeExecuteFetch(string query, SQLiteParameter[] parameters)
         {
             Employee employee = null;
@@ -44,12 +52,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Error finding your details{ex.Message}");
+                    Console.WriteLine(ex.Message);
+                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
                 }
             }
-            catch(Exception ex)
+            catch(SQLiteException ex)
             {
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
+                Console.WriteLine(ex.Message);
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
             }
             finally { connection.Close(); }
             return employee;

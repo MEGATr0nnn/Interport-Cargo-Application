@@ -5,18 +5,13 @@
     /// </summary>
     public class Employee : IUser
     {
+        //fields
         private int _id;
-
         private string _firstName;
-
         private string _lastName;
-
         private string _email;
-
         private string _phoneNumber;
-
         private string _password;
-
         private string _type;
 
         /// <summary>

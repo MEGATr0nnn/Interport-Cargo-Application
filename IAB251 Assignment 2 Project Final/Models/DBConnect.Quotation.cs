@@ -2,8 +2,22 @@
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
+    /// <summary>
+    /// This is the DB connect class, which is used to abstract and protect DB methods, executing the whole argument or if the execution fails, rolling back to the last stable version of the DB.
+    /// This is where the majority of DB code goes and provides a stable link between the backend and the DB.
+    /// 
+    /// THIS PARTIAL CLASS IS FOR QUOTATION DAO RELATED CODE ONLY
+    /// </summary>
     public partial class DBConnect : ConnectionControler
     {
+        /// <summary>
+        /// This method fetches all records of quotations associated with the applied query and parameters
+        /// </summary>
+        /// <param name="query">The SQL query you want executed</param>
+        /// <param name="parameters">The constraints/parameters you want to execute your query by</param>
+        /// <returns>A list of type Quotation, containing quotation objects and there relevent attributes, fields and methods</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
+        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public List<Quotation> quotationExecuteFetchAll(string query, SQLiteParameter[] parameters)
         {
             List<Quotation> quotationList = new List<Quotation>();
@@ -33,7 +47,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                     natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
                                     natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
 
-                                var quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob);
+                                var quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be added, then loops
                                 quotation.setId(id);
                                 quotation.setCustomerId(customerId);
 
@@ -44,17 +58,27 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Error finding your details - your account might not have any quotations associated with it, if you dont have any quotations, please create one{ex.Message}");
+                    Console.WriteLine(ex.Message);
+                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
                 }
             }
-            catch(Exception ex)
+            catch(SQLiteException ex)
             {
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
+                Console.WriteLine(ex.Message);
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
             }
             finally { connection.Close(); }
             return quotationList;
         }
 
+        /// <summary>
+        /// This method is designed to return single instances of quotation associated with the applied query and parameters
+        /// </summary>
+        /// <param name="query">The SQL query you want executed</param>
+        /// <param name="parameters">The constraints/parameters you want to execute your query by</param>
+        /// <returns>A single instance of object Quotation</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
+        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public Quotation quotationExecuteFetch(string query, SQLiteParameter[] parameters)
         {
             Quotation quotation = null;
@@ -82,7 +106,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                     natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
                                     natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
 
-                                quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob);
+                                quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be returned to the user
                                 quotation.setId(id);
                                 quotation.setCustomerId(customerId);
                             }
@@ -91,12 +115,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 }
                 catch (Exception ex)
                 {
-                    throw new InvalidOperationException($"Error finding your details{ex.Message}");
+                    Console.WriteLine(ex.Message);
+                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
                 }
             }
-            catch(Exception ex)
+            catch(SQLiteException ex)
             {
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
+                Console.WriteLine(ex.Message);
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
             }
             finally { connection.Close(); }
             return quotation;

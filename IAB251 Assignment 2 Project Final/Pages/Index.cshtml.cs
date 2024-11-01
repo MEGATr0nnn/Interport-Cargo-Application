@@ -59,13 +59,6 @@ public class IndexModel : PageModel
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    // Failed login
-                    ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
-                    return Page();
-                }
-
                 if (_customerDAO.isExist(email, password))
                 {
                     Customer customer = _customerDAO.getFromEmailPword(email, password);
@@ -81,7 +74,7 @@ public class IndexModel : PageModel
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An error occurred while processing your request: " + ex.Message);
+                ModelState.AddModelError(string.Empty, ex.Message);
                 return Page(); // Return to the same page to show the error message
             }
         }

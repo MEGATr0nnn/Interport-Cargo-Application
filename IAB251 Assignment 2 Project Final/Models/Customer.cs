@@ -5,16 +5,12 @@
     /// </summary>
     public class Customer : IUser
     {
+        //fields
         private int _id;
-
         private string _firstName;
-
         private string _lastName;
-
         private string _email;
-
         private string _phoneNumber;
-
         private string _password;
 
         /// <summary>
@@ -34,6 +30,7 @@
             this._password = password;
         }
 
+        //getters and setters
         public int getId() { return _id; }
         public void setId(int id) { this._id = id;}
 

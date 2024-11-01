@@ -60,9 +60,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <summary>
         /// Constructor for Model, cretes new instance
         /// </summary>
-        public SignUpEmployeeModel(IUserSessionControl userSessionControl, EmployeeDAO employee)
+        public SignUpEmployeeModel(IUserSessionControl userSessionControl)
         {
-            _employeeDAO = employee;
+            _employeeDAO = new EmployeeDAO();
             _userSessionService = userSessionControl;
         }
 
@@ -72,11 +72,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <returns>Returns a redirect to the quotation page upon successful registration</returns>
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            else
+            try
             {
                 Employee employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
                 _employeeDAO.insertNew(employee);
@@ -84,6 +80,11 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 _userSessionService.currentEmployeeUser = employee;
 
                 return RedirectToPage("/QuotationManagement");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page(); // Return to the same page to show the error message
             }
         }
 

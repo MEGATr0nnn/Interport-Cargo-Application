@@ -2,6 +2,9 @@
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
+    /// <summary>
+    /// This class is used to manage the connection state of the DB, its placed in program.cs
+    /// </summary>
     public class ConnectionControler
     {
         private static string _dbName = "database.db";
@@ -28,7 +31,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 catch(Exception ex)
                 {
                     setConState(false);
-                    Console.WriteLine($"An issue occured while trying to initalise the DataBase from string '{getConnectionString()}', the following error mesage has been relayed: {ex.Message}");
+                    Console.WriteLine($"An issue occured while trying to initalise the DataBase from string '{getConnectionString()}', the following error mesage has been relayed: {ex.Message}"); //dont want to display this to user
                 }
             }
 

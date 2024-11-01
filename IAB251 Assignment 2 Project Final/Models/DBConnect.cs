@@ -21,6 +21,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// This is the original executeQuery method, which executes an SQL query to the DB, this is usually the first command called when instantising the DB.
         /// </summary>
         /// <param name="query">This is the SQL query you want executed</param>
+        /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
+        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public void executeQuery(string query)
         {
             var connection = new SQLiteConnection(getConnectionString());
@@ -42,13 +44,16 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
+                        Console.WriteLine(ex.Message); //hidden from user, this is for Admin debugging only
+                        throw new InvalidOperationException($"Error executing your request, please try again."); //displayed to user
+                        //all other catch blocks follow this structure :)
                     }
                 }
             }
-            catch(Exception ex)
+            catch(SQLiteException ex)
             {
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
+                Console.WriteLine(ex.Message);
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
             }
             finally { connection.Close(); }
         }
@@ -58,6 +63,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// </summary>
         /// <param name="query">This is the SQL query you want executed</param>
         /// <param name="parameters">This is the list of parameters you want executed</param>
+        /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
+        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public void executeQuery(string query, SQLiteParameter[] parameters)
         {
             var connection = new SQLiteConnection(getConnectionString());
@@ -83,14 +90,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     catch( Exception ex)
                     {
                         transaction.Rollback();
-                        throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
+                        Console.WriteLine(ex.Message);
+                        throw new InvalidOperationException($"Error executing your request, please try again.");
                     }
-                }
-                
+                }  
             }
-            catch(Exception ex)
+            catch(SQLiteException ex)
             {
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}"); 
+                Console.WriteLine(ex.Message);
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again."); 
             }
             finally { connection.Close(); }
         }
@@ -102,6 +110,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <param name="query">This is the SQL query you want executed</param>
         /// <param name="parameters">This is the list of parameters you want executed</param>
         /// <returns>This command returns an integer value</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
+        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public int executeScalarQuery(string query, SQLiteParameter[] parameters)
         {
             var connection = new SQLiteConnection(getConnectionString());
@@ -129,17 +139,27 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
+                        Console.WriteLine(ex.Message);
+                        throw new InvalidOperationException($"Error executing your request, please try again.");
                     }
                 }
             }
-            catch(Exception ex)
+            catch(SQLiteException ex)
             {
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
+                Console.WriteLine(ex.Message);
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
             }
             finally { connection.Close(); }
         }
 
+        /// <summary>
+        /// This method checks to see if the specified query and parameters exists within the context applied to it
+        /// </summary>
+        /// <param name="query">This is the SQL query you want executed</param>
+        /// <param name="parameters">This is the list of parameters you want executed</param>
+        /// <returns>A boolean</returns>
+        /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
+        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public bool isExistQuery(string query, params SQLiteParameter[] parameters)
         {
             var connection = new SQLiteConnection(getConnectionString());
@@ -157,20 +177,31 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
                         using (var reader = command.ExecuteReader())
                         {
-                            //returns true if has rows ie rows exist
-                            return reader.HasRows;
+                            if (reader.HasRows)
+                            {
+                                //returns true if has rows ie rows exist
+                                return reader.HasRows;
+
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException();
+                            }
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (InvalidOperationException ex)
                 {
-                    throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
+                    Console.WriteLine(ex.Message);
+                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
                 }
             }
-            catch (Exception ex)
+            catch(SQLiteException ex)
             {
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
+                Console.WriteLine(ex.Message);
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
             }
+
             finally { connection.Close(); }
         }
     }
