@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddSingleton<CustomerDAO>();
 builder.Services.AddSingleton<IUserSessionControl, UserSessionService>();
 
+builder.Services.AddTransient<EmployeeDAO>();
+
+
 
 //initalise the connection controller
 

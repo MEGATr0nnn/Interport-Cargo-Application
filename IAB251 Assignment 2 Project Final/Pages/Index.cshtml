@@ -30,33 +30,103 @@
 
 <br />
 
-<div class="pill-box">
-    <h4 style="text-align:center">
-        Existing Customer
-    </h4>
 <form method="post">
-    <div>
-        <label for="inputFirst" style="text-align: center">Enter Username:</label>
-        <input type="text" asp-for="email" class="form-control" />
-        <span asp-validation-for="email" class="text-danger"></span>
+    <label for="userType">User Type</label>
+    <select id="userType" name="userType" class="form-select">
+        @foreach (var item in Model.UserType)
+        {
+            <option value="@item">@item</option>
+        }
+    </select>
 
-    </div>
-
-    <div>
-        <label for="inputFirst" style="text-align: center">Enter Password:</label>
-        <input type="text" asp-for="password" class="form-control" />
-        <span asp-validation-for="password" class="text-danger"></span>
-
-    </div>
-    <br />
-        <div style="text-align: center">
-            <button type="submit" name="action" value="signin" class="btn btn-primary">Sign In</button>
-        </div>
+    <button type="button" style="align-content: center" value="user" onclick="showCustomer()" class="btn btn-primary">Choose User</button>
 </form>
-</div>
 
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div id="showCustomer" style="display: none">
+    <div class="pill-box">
+        <h4 style="text-align:center">
+            Existing Customer
+        </h4>
+        <form method="post">
+            <div>
+                <label for="inputFirst" style="text-align: center">Enter Username:</label>
+                <input type="text" asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+
+            </div>
+
+            <div>
+                <label for="inputFirst" style="text-align: center">Enter Password:</label>
+                <input type="text" asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+
+            </div>
+            <br />
+            <div style="text-align: center">
+                <button type="submit" name="action" value="signin" class="btn btn-primary">Sign In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="showEmployee" style="display: none">
+    <div class="pill-box">
+        <h4 style="text-align:center">
+            Existing Employee
+        </h4>
+        <form method="post">
+            <div>
+                <label for="inputFirst" style="text-align: center">Enter Username:</label>
+                <input type="text" asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+
+            </div>
+
+            <div>
+                <label for="inputFirst" style="text-align: center">Enter Password:</label>
+                <input type="text" asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+
+            </div>
+            <br />
+            <div style="text-align: center">
+                <button type="submit" name="action" value="signinEmployee" class="btn btn-primary">Sign In</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+
+    function showCustomer(){
+        var userType = document.getElementById("userType").value;
+
+        if (userType == "Customer") {
+            document.getElementById("showCustomer").style.display = "block";
+        }
+
+        else if (userType == "Employee") {
+            document.getElementById("showEmployee").style.display = "block";
+        }
+
+        else {
+            alert("Please Select a Valid User.");
+        }
+    }
+</script>
+
+@if (!string.IsNullOrEmpty(Model.accountExists))
+{
+    <p>@Model.accountExists</p>
+}
+
+
+
+
 
 
 
