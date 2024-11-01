@@ -2,120 +2,26 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    ViewData["ShowNavbar"] = false; // Set this to hide the navbar
 }
 
-<div class="pill-box">
-
-<h1 style="text-align: center">
-    Welcome to Interport Cargo Services
-</h1>
-
-<br />
-
-<h4 style="text-align: center">
-    Registration
-</h4>
-
-<br />
-
-<form method="post">
-<div style="text-align: center">
-        <button type="submit" name="action" value="customer" class="btn btn-primary">Customer</button>
-        <button type="submit" name="action" value="employee" class="btn btn-secondary">Employee</button>
-</div>
-</form>
 
 
-</div>
+<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="text-center">
+        <h1>Welcome to Interport Cargo Services</h1>
+        <br />
+        <h4>Sign In or Sign Up</h4>
+        <br />
 
-<br />
-
-<form method="post">
-    <label for="userType">User Type</label>
-    <select id="userType" name="userType" class="form-select">
-        @foreach (var item in Model.UserType)
-        {
-            <option value="@item">@item</option>
-        }
-    </select>
-
-    <button type="button" style="align-content: center" value="user" onclick="showCustomer()" class="btn btn-primary">Choose User</button>
-</form>
-
-
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-<div id="showCustomer" style="display: none">
-    <div class="pill-box">
-        <h4 style="text-align:center">
-            Existing Customer
-        </h4>
-        <form method="post">
-            <div>
-                <label for="inputFirst" style="text-align: center">Enter Username:</label>
-                <input type="text" asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
-
-            </div>
-
-            <div>
-                <label for="inputFirst" style="text-align: center">Enter Password:</label>
-                <input type="text" asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
-
-            </div>
-            <br />
-            <div style="text-align: center">
-                <button type="submit" name="action" value="signin" class="btn btn-primary">Sign In</button>
-            </div>
-        </form>
+        <div>
+            <form method="post">
+                <button type="submit" name="action" value="signinEmployee" class="btn btn-primary btn-lg mb-3" style="width: 200px;">Employee</button>
+                <br />
+                <button type="submit" name="action" value="signinCustomer" class="btn btn-secondary btn-lg mb-3" style="width: 200px;">Customer</button>
+                <br />
+                <button type="submit" name="action" value="signup" class="btn btn-success btn-lg" style="width: 200px;">Sign Up / Create Account</button>
+            </form>
+        </div>
     </div>
 </div>
-
-<div id="showEmployee" style="display: none">
-    <div class="pill-box">
-        <h4 style="text-align:center">
-            Existing Employee
-        </h4>
-        <form method="post">
-            <div>
-                <label for="inputFirst" style="text-align: center">Enter Username:</label>
-                <input type="text" asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
-
-            </div>
-
-            <div>
-                <label for="inputFirst" style="text-align: center">Enter Password:</label>
-                <input type="text" asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
-
-            </div>
-            <br />
-            <div style="text-align: center">
-                <button type="submit" name="action" value="signinEmployee" class="btn btn-primary">Sign In</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-
-<script>
-
-    function showCustomer(){
-        var userType = document.getElementById("userType").value;
-
-        if (userType == "Customer") {
-            document.getElementById("showCustomer").style.display = "block";
-        }
-
-        else if (userType == "Employee") {
-            document.getElementById("showEmployee").style.display = "block";
-        }
-
-        else {
-            alert("Please Select a Valid User.");
-        }
-    }
-</script>
-
