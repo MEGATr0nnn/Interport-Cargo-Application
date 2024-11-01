@@ -25,7 +25,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void executeQuery(string query)
         {
             var connection = new SqliteConnection(getConnectionString());
-                connection.Open();
+            connection.Open();
 
             using (var transaction = connection.BeginTransaction())
             {
@@ -37,7 +37,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                         command.ExecuteNonQuery();
                     }
                     transaction.Commit();
-                    Console.WriteLine("Transaction executed correctly"); //for testing FIX ERROR LOGIC
+                    Console.WriteLine("Transaction executed correctly: table created"); //for testing FIX ERROR LOGIC
                 }
                 catch (Exception ex)
                 {

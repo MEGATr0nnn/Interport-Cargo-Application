@@ -5,6 +5,7 @@ using System.Reflection;
 try
 {
     Assembly.Load("Microsoft.Data.Sqlite");
+    Console.WriteLine("Assembly Loaded Sucessfully");
 }
 catch (FileNotFoundException)
 {

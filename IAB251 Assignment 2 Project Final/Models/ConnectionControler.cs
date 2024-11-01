@@ -21,11 +21,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
             if (File.Exists(_dbName))
             {
                 setConState(true);
+                Console.WriteLine($"File: {_dbName} exists in your repository");
             }
             else
             {
                 try
                 {
+                    Console.WriteLine($"File: {_dbName} does not exist in your repository, attempting to generate it now.");
                     initaliseBlankDB();
                 }
                 catch(Exception ex)
@@ -45,10 +47,12 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 {
                     setConState(true);
                     connection.Close();//close sequence
+                    Console.WriteLine($"File: {_dbName} sucessfully created in your repository.");
                 }
                 else if(_connectionAttempts < 5)
                 {
                     _connectionAttempts++;
+                    Console.WriteLine($"File not created, attempting again, after 5 attempts this process will time out.");
                     initaliseBlankDB(); //retry
                 }
                 else
