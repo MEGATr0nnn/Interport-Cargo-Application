@@ -1,7 +1,7 @@
 ﻿using IAB251_Assignment_2_Project_Final.Models;
 using System.Reflection;
 
-//ensuring users have installed the DB package to run this program
+//ensuring users have installed the DB package to run this program package has been added as a dependency into the .csproj file 
 try
 {
     Assembly.Load("Microsoft.Data.Sqlite");
