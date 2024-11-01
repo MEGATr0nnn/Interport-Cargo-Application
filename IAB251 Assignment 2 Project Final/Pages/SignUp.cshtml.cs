@@ -63,13 +63,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <returns></returns>
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                //failed login checks
-                return Page();
-            }
-            else
-            {
+            try 
+            { 
+
                 Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, password);
                 _customerDAO.insertNew(currentUser);
 
@@ -78,8 +74,11 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 ModelState.Clear();
                 return RedirectToPage("/CustomerDashboard");
             }
-
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page(); // Return to the same page to show the error message
+            }
         }
-        
     }
 }

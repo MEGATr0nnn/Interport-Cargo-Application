@@ -36,6 +36,8 @@ public class IndexModel : PageModel
     /// </summary>
     private CustomerDAO _customerDAO;
 
+    public string errorMessage;
+
     /// <summary>
     /// Pulling stored data for Employee object
     /// </summary>
@@ -63,22 +65,11 @@ public class IndexModel : PageModel
         Console.WriteLine("Action: " + action); 
         Console.WriteLine(email + " " + password);
 
-        //Logic for when the customer user type is selected,
-        //will use the Customer DB for user credential verification
-        //WORK IN PROGRESS NEED TO FIX USERTYPE.EQUALS ETC
-        //if (UserType.Equals("Customer"))
-        //{
-            Console.WriteLine("USer type is: " + UserType);
-
-            if (action == "signin")
+        //Procedure for when user signs in
+        if (action == "signin")
+        {
+            try
             {
-                if (!ModelState.IsValid)
-                {
-                    // Failed login
-                    ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
-                    return Page();
-                }
-
                 if (_customerDAO.isExist(email, password))
                 {
                     Customer customer = _customerDAO.getFromEmailPword(email, password);

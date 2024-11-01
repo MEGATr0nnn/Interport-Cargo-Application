@@ -44,6 +44,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [DataType(DataType.Password)]
         public string password { get; set; }
 
+        [BindProperty]
+        public string type { get; set; }
+
         /// <summary>
         /// Allows access to current user funcs
         /// </summary>
@@ -57,9 +60,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <summary>
         /// Constructor for Model, cretes new instance
         /// </summary>
-        public SignUpEmployeeModel(IUserSessionControl userSessionControl, EmployeeDAO employee)
+        public SignUpEmployeeModel(IUserSessionControl userSessionControl)
         {
-            _employeeDAO = employee;
+            _employeeDAO = new EmployeeDAO();
             _userSessionService = userSessionControl;
         }
 
@@ -69,18 +72,19 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <returns>Returns a redirect to the quotation page upon successful registration</returns>
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return Page();
-            }
-            else
-            {
-                Employee employee = new Employee(firstName, lastName, email, phoneNumber, password);
+                Employee employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
                 _employeeDAO.insertNew(employee);
 
                 _userSessionService.currentEmployeeUser = employee;
 
                 return RedirectToPage("/QuotationManagement");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page(); // Return to the same page to show the error message
             }
         }
 

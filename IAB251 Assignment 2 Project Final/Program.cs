@@ -2,36 +2,42 @@
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Singletons for persistance
-//builder.Services.AddSingleton<CustomerDAO>();
-builder.Services.AddSingleton<IUserSessionControl, UserSessionService>();
+try
+{
+    // Check DB state before building the app
+    ConnectionControler connectionControler = new ConnectionControler();
+    if (!connectionControler.checkConState())
+    {
+        throw new Exception("Database connection failed.");
+    }
 
-builder.Services.AddTransient<EmployeeDAO>();
+    // Continue building application normally
+    builder.Services.AddSingleton<IUserSessionControl, UserSessionService>();
+    builder.Services.AddRazorPages();
+}
+catch (Exception ex)
+{
+    // Log the error (consider using a logging framework)
+    Console.WriteLine($"FATAL ERROR: {ex.Message}");
 
+    // Set up a minimal app to show the error page
+    var errorApp = WebApplication.CreateBuilder(args).Build();
+    errorApp.MapGet("/", () => Results.Redirect("/Error"));
+    errorApp.Run();
+    return; // Exit to avoid running the normal app logic
+}
 
-
-//initalise the connection controller
-
-// Add services to the container.
-builder.Services.AddRazorPages();
-
+// Build application normally if connection is successful
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapRazorPages();
-
 app.Run();

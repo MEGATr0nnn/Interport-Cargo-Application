@@ -3,6 +3,10 @@ using System.Data.SQLite;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
+    /// <summary>
+    /// This is the Data Access Object that is used to simplify and scale SQL queries and execute them using the specified functions in DBConnect, this class has no error handling as its all done in 
+    /// DB connect. This results in a streamlined and simple DAO that makes scaling easy.
+    /// </summary>
     public class EmployeeDAO : IUserDAO<Employee>
     {
         private DBConnect _connect;
@@ -21,7 +25,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             lastName VARCHAR NOT NULL,
                             email VARCHAR NOT NULL,
                             phoneNumber VARCHAR NOT NULL,
-                            password VARCHAR NOT NULL
+                            password VARCHAR NOT NULL,
+                            type VARCHAR NOT NULL
                         )";
             _connect.executeQuery(creatTableQuery);
         }
@@ -41,25 +46,56 @@ namespace IAB251_Assignment_2_Project_Final.Models
             string getQuery = @"SELECT * FROM employee WHERE email = @email AND password = @password";
             SQLiteParameter[] param = new SQLiteParameter[]
             {
-                new SQLiteParameter("email", email),
-                new SQLiteParameter("password", password)
+                new SQLiteParameter("@email", email),
+                new SQLiteParameter("@password", password)
             };
             return _connect.employeeExecuteFetch(getQuery, param);
         }
 
         public void insertNew(Employee employee)
         {
-            throw new NotImplementedException();
+            string insertUserQuery = @"
+                    INSERT INTO employee (firstName, lastName, email, phoneNumber, password, type)
+                    VALUES (@firstName, @lastName, @email, @phoneNumber, @password, @type)
+                    RETURNING id";
+
+            SQLiteParameter[] parameters = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@firstName", employee.getFirstName()),
+                new SQLiteParameter("@lastName", employee.getLastName()),
+                new SQLiteParameter("@email", employee.getEmail()),
+                new SQLiteParameter("@phoneNumber", employee.getPhoneNumber()),
+                new SQLiteParameter("@password", employee.getPassword()),
+                new SQLiteParameter("@type", employee.getType())
+            };
+            employee.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
         }
 
         public bool isExist(string email, string password)
         {
-            throw new NotImplementedException();
+            string query = @"SELECT * FROM employee WHERE email = @email AND password = @password";
+            SQLiteParameter[] parameters = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@email", email),
+                new SQLiteParameter("@password", password)
+            };
+            return _connect.isExistQuery(query, parameters);
         }
 
-        public void update(Employee entity)
+        public void update(Employee employee)
         {
-            throw new NotImplementedException();
+            string updateQuery = @"UPDATE employee SET firstName = @firstName, lastName = @lastName, email = @email, phoneNumber = @phoneNumber, password = @password, type = @type WHERE id = @id";
+            SQLiteParameter[] parameters = new SQLiteParameter[]
+            {
+                new SQLiteParameter("@firstName", employee.getFirstName()),
+                new SQLiteParameter("@lastName", employee.getLastName()),
+                new SQLiteParameter("@email", employee.getEmail()),
+                new SQLiteParameter("@phoneNumber", employee.getPhoneNumber()),
+                new SQLiteParameter("@password", employee.getPassword()),
+                new SQLiteParameter("@type", employee.getType()),
+                new SQLiteParameter("@id", employee.getId())
+            };
+            _connect.executeQuery(updateQuery, parameters);
         }
     }
 }
