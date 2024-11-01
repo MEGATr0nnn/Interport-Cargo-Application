@@ -1,4 +1,5 @@
-﻿using System.Data.SQLite;
+﻿using Microsoft.Data.Sqlite;
+
 namespace IAB251_Assignment_2_Project_Final.Models
 {
     /// <summary>
@@ -50,17 +51,17 @@ namespace IAB251_Assignment_2_Project_Final.Models
         {
             //delete all associations first as there linked
             string deleteQuotationQuery = @"DELETE * FROM quotation WHERE customerId = @customerId";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter("@customerId", customer.getId())
+                new SqliteParameter("@customerId", customer.getId())
             };
             _connect.executeQuery(deleteQuotationQuery, parameters);
 
             //once associated objs are deleted delete base object
             string deleteCustomerQuery = "DELETE * FROM customer WHERE id = @id";
-            SQLiteParameter[] parameters1 = new SQLiteParameter[]
+            SqliteParameter[] parameters1 = new SqliteParameter[]
             {
-                new SQLiteParameter("@id", customer.getId())
+                new SqliteParameter("@id", customer.getId())
             };
             _connect.executeQuery(deleteCustomerQuery, parameters1);
         }
@@ -68,10 +69,10 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public Customer getFromEmailPword(string email, string password)
         {
             string getQuery = @"SELECT * FROM customer WHERE email = @email AND password = @password";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter("@email", email),
-                new SQLiteParameter("@password", password)
+                new SqliteParameter("@email", email),
+                new SqliteParameter("@password", password)
             };
             return _connect.customerExecuteFetch(getQuery, parameters);
         }
@@ -83,13 +84,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     VALUES (@firstName, @lastName, @email, @phoneNumber, @password)
                     RETURNING id";
 
-            SQLiteParameter[] parameters = new SQLiteParameter[] 
+            SqliteParameter[] parameters = new SqliteParameter[] 
             { 
-                new SQLiteParameter("@firstName", customer.getFirstName()),
-                new SQLiteParameter("@lastName", customer.getLastName()),
-                new SQLiteParameter("@email", customer.getEmail()), 
-                new SQLiteParameter("@phoneNumber", customer.getPhoneNumber()),
-                new SQLiteParameter("@password", customer.getPassword())
+                new SqliteParameter("@firstName", customer.getFirstName()),
+                new SqliteParameter("@lastName", customer.getLastName()),
+                new SqliteParameter("@email", customer.getEmail()), 
+                new SqliteParameter("@phoneNumber", customer.getPhoneNumber()),
+                new SqliteParameter("@password", customer.getPassword())
             };
             customer.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
             
@@ -98,10 +99,10 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public bool isExist(string email, string password)
         {
             string existQuery = @"SELECT * FROM customer WHERE email = @email AND password = @password";
-            SQLiteParameter[] param = new SQLiteParameter[]
+            SqliteParameter[] param = new SqliteParameter[]
             {
-                new SQLiteParameter("@email", email),
-                new SQLiteParameter("@password", password)
+                new SqliteParameter("@email", email),
+                new SqliteParameter("@password", password)
             };
             return _connect.isExistQuery(existQuery, param);
         }
@@ -109,14 +110,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void update(Customer customer)
         {
             string updateQuery = @"UPDATE customer SET firstName = @firstName, lastName = @lastName, email = @email, phoneNumber = @phoneNumber, password = @password WHERE id = @id";
-            SQLiteParameter[] parameters = new SQLiteParameter[] 
+            SqliteParameter[] parameters = new SqliteParameter[] 
             {
-                new SQLiteParameter("@firstName", customer.getFirstName()),
-                new SQLiteParameter("@lastName", customer.getLastName()),
-                new SQLiteParameter("@email", customer.getEmail()),
-                new SQLiteParameter("@phoneNumber", customer.getPhoneNumber()),
-                new SQLiteParameter("@password", customer.getPassword()),
-                new SQLiteParameter("@id", customer.getId())
+                new SqliteParameter("@firstName", customer.getFirstName()),
+                new SqliteParameter("@lastName", customer.getLastName()),
+                new SqliteParameter("@email", customer.getEmail()),
+                new SqliteParameter("@phoneNumber", customer.getPhoneNumber()),
+                new SqliteParameter("@password", customer.getPassword()),
+                new SqliteParameter("@id", customer.getId())
             };
             _connect.executeQuery(updateQuery, parameters);
         }

@@ -1,5 +1,4 @@
-﻿using System.Data.SQLite;
-namespace IAB251_Assignment_2_Project_Final.Models
+﻿namespace IAB251_Assignment_2_Project_Final.Models
 {
     /// <summary>
     /// This is the UserDAO interface that can be implemented of all DAOs for object types of User

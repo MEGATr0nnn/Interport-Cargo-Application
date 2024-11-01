@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Data.SQLite;
+﻿using Microsoft.Data.Sqlite;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
@@ -34,9 +33,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void delete(Employee employee)
         {
             string deleteQuery = @"DELETE * FROM employee WHERE id = @id";
-            SQLiteParameter[] param = new SQLiteParameter[]
+            SqliteParameter[] param = new SqliteParameter[]
             {
-                new SQLiteParameter("@id", employee.getId())
+                new SqliteParameter("@id", employee.getId())
             };
             _connect.executeQuery(deleteQuery, param);
         }
@@ -44,10 +43,10 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public Employee getFromEmailPword(string email, string password)
         {
             string getQuery = @"SELECT * FROM employee WHERE email = @email AND password = @password";
-            SQLiteParameter[] param = new SQLiteParameter[]
+            SqliteParameter[] param = new SqliteParameter[]
             {
-                new SQLiteParameter("@email", email),
-                new SQLiteParameter("@password", password)
+                new SqliteParameter("@email", email),
+                new SqliteParameter("@password", password)
             };
             return _connect.employeeExecuteFetch(getQuery, param);
         }
@@ -59,14 +58,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     VALUES (@firstName, @lastName, @email, @phoneNumber, @password, @type)
                     RETURNING id";
 
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter("@firstName", employee.getFirstName()),
-                new SQLiteParameter("@lastName", employee.getLastName()),
-                new SQLiteParameter("@email", employee.getEmail()),
-                new SQLiteParameter("@phoneNumber", employee.getPhoneNumber()),
-                new SQLiteParameter("@password", employee.getPassword()),
-                new SQLiteParameter("@type", employee.getType())
+                new SqliteParameter("@firstName", employee.getFirstName()),
+                new SqliteParameter("@lastName", employee.getLastName()),
+                new SqliteParameter("@email", employee.getEmail()),
+                new SqliteParameter("@phoneNumber", employee.getPhoneNumber()),
+                new SqliteParameter("@password", employee.getPassword()),
+                new SqliteParameter("@type", employee.getType())
             };
             employee.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
         }
@@ -74,10 +73,10 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public bool isExist(string email, string password)
         {
             string query = @"SELECT * FROM employee WHERE email = @email AND password = @password";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter("@email", email),
-                new SQLiteParameter("@password", password)
+                new SqliteParameter("@email", email),
+                new SqliteParameter("@password", password)
             };
             return _connect.isExistQuery(query, parameters);
         }
@@ -85,15 +84,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void update(Employee employee)
         {
             string updateQuery = @"UPDATE employee SET firstName = @firstName, lastName = @lastName, email = @email, phoneNumber = @phoneNumber, password = @password, type = @type WHERE id = @id";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter("@firstName", employee.getFirstName()),
-                new SQLiteParameter("@lastName", employee.getLastName()),
-                new SQLiteParameter("@email", employee.getEmail()),
-                new SQLiteParameter("@phoneNumber", employee.getPhoneNumber()),
-                new SQLiteParameter("@password", employee.getPassword()),
-                new SQLiteParameter("@type", employee.getType()),
-                new SQLiteParameter("@id", employee.getId())
+                new SqliteParameter("@firstName", employee.getFirstName()),
+                new SqliteParameter("@lastName", employee.getLastName()),
+                new SqliteParameter("@email", employee.getEmail()),
+                new SqliteParameter("@phoneNumber", employee.getPhoneNumber()),
+                new SqliteParameter("@password", employee.getPassword()),
+                new SqliteParameter("@type", employee.getType()),
+                new SqliteParameter("@id", employee.getId())
             };
             _connect.executeQuery(updateQuery, parameters);
         }

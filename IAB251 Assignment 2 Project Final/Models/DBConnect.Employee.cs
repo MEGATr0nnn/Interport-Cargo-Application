@@ -1,4 +1,4 @@
-﻿using System.Data.SQLite;
+﻿using Microsoft.Data.Sqlite;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
@@ -18,48 +18,40 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <returns>An instance of Employee</returns>
         /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
         /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
-        public Employee employeeExecuteFetch(string query, SQLiteParameter[] parameters)
+        public Employee employeeExecuteFetch(string query, SqliteParameter[] parameters)
         {
             Employee employee = null;
-            var connection = new SQLiteConnection(getConnectionString());
+            var connection = new SqliteConnection(getConnectionString());
+            connection.Open();
             try
             {
-                connection.Open();
-                try
+                using (var command = new SqliteCommand(query, connection))
                 {
-                    using (var command = new SQLiteCommand(query, connection))
+                    command.Parameters.AddRange(parameters);
+
+                    using (var reader = command.ExecuteReader()) //use reader to check if value exists
                     {
-                        command.Parameters.AddRange(parameters);
-
-                        using (var reader = command.ExecuteReader()) //use reader to check if value exists
+                        if (reader.Read())
                         {
-                            if (reader.Read())
-                            {
-                                int id = reader.GetInt32(reader.GetOrdinal("id"));
+                            int id = reader.GetInt32(reader.GetOrdinal("id"));
 
-                                string firstName = reader.GetString(reader.GetOrdinal("firstName")),
-                                    lastName = reader.GetString(reader.GetOrdinal("lastName")),
-                                    email = reader.GetString(reader.GetOrdinal("email")),
-                                    password = reader.GetString(reader.GetOrdinal("password")),
-                                    phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber")),
-                                    type = reader.GetString(reader.GetOrdinal("type"));
+                            string firstName = reader.GetString(reader.GetOrdinal("firstName")),
+                                lastName = reader.GetString(reader.GetOrdinal("lastName")),
+                                email = reader.GetString(reader.GetOrdinal("email")),
+                                password = reader.GetString(reader.GetOrdinal("password")),
+                                phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber")),
+                                type = reader.GetString(reader.GetOrdinal("type"));
 
-                                employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
-                                employee.setId(id);
-                            }
+                            employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
+                            employee.setId(id);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
-                }
             }
-            catch(SQLiteException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
+                throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
             }
             finally { connection.Close(); }
             return employee;
