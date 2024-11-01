@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
 
 namespace IAB251_Assignment_2_Project_Final.Pages;
 
 public class IndexModel : PageModel
 {
+    public string accountExists { get; set; }
     /// <summary>
     /// Gets the email and password from the users input
     /// </summary>
@@ -21,15 +23,23 @@ public class IndexModel : PageModel
     [DataType(DataType.Password)]
     public string password { get; set; }
 
+    [BindProperty]
+    public List<string> UserType { get; set; }
+
     /// <summary>
     /// Session initialiser
     /// </summary>
     private readonly IUserSessionControl _userSessionService;
 
     /// <summary>
-    /// Pulling stored data for customer object
+    /// Pulling stored data for Customer object
     /// </summary>
     private CustomerDAO _customerDAO;
+
+    /// <summary>
+    /// Pulling stored data for Employee object
+    /// </summary>
+    private EmployeeDAO _employeeDAO;
 
     /// <summary>
     /// Constructor initialising a new Customer Data Access Object
@@ -37,6 +47,7 @@ public class IndexModel : PageModel
     public IndexModel(IUserSessionControl userSessionControl)
     {
         _customerDAO = new CustomerDAO();
+        _employeeDAO = new EmployeeDAO();
         _userSessionService = userSessionControl;
     }
 
@@ -52,38 +63,77 @@ public class IndexModel : PageModel
         Console.WriteLine("Action: " + action); 
         Console.WriteLine(email + " " + password);
 
-        //Procedure for when user signs in
-        if (action == "signin")
-        {
-            if (!ModelState.IsValid)
+        //Logic for when the customer user type is selected,
+        //will use the Customer DB for user credential verification
+        //WORK IN PROGRESS NEED TO FIX USERTYPE.EQUALS ETC
+        //if (UserType.Equals("Customer"))
+        //{
+            Console.WriteLine("USer type is: " + UserType);
+
+            if (action == "signin")
             {
-                // Failed login
-                ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
-                return Page();
-            }
+                if (!ModelState.IsValid)
+                {
+                    // Failed login
+                    ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
+                    return Page();
+                }
 
-            if (_customerDAO.isExist(email, password))
+                if (_customerDAO.isExist(email, password))
+                {
+                    Customer customer = _customerDAO.getFromEmailPword(email, password);
+                    Console.WriteLine($"{customer.getFirstName()}");
+
+                    _userSessionService.currentCustomerUser = customer;
+                    Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
+
+                    Console.WriteLine(customer.getEmail() + " " + customer.getPassword());
+
+                    return RedirectToPage("/CustomerDashboard");
+                }
+            }
+        //}
+
+        //Logic for when the employee user type is selected,
+        //will use the Employee DB for user credential verification
+        /*
+        //else if (UserType.Equals("Employee"))
+        //{
+            if (action == "signin")
             {
-                Customer customer = _customerDAO.getFromEmailPword(email, password);
-                Console.WriteLine($"{customer.getFirstName()}");
+                if (!ModelState.IsValid)
+                {
+                    // Failed login
+                    ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
+                    return Page();
+                }
 
-                _userSessionService.currentCustomerUser = customer;
-                Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
+                if (_employeeDAO.isExist(email, password))
+                {
+                    Employee employee = _employeeDAO.getFromEmailPword(email, password);
+                    Console.WriteLine($"{employee.getFirstName()}");
 
-                Console.WriteLine(customer.getEmail() + " " + customer.getPassword()); 
+                    _userSessionService.currentEmployeeUser = employee;
+                    Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
 
-                return RedirectToPage("/QuotationRequest");
+                    Console.WriteLine(employee.getEmail() + " " + employee.getPassword());
+
+                    return RedirectToPage("/EmployeeDashboard");
+                }
             }
-        }
+        //}
+        */
 
+        //Logic for new customer signup
         else if (action == "customer")
         {
             return RedirectToPage("/SignUp");
         }
 
+        //Logic for new employee signup
         else if (action == "employee")
         {
-            return RedirectToPage("/SignUp");
+            return RedirectToPage("/SignUpEmployee");
         }
 
         return Page();
@@ -91,7 +141,12 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        // Logic for handling GET requests
+        UserType = new List<string>
+        {
+        "[Choose User Type]",
+        "Customer",
+        "Employee"
+        };
     }
 }
 
