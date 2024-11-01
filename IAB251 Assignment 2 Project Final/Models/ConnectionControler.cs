@@ -7,14 +7,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
     /// </summary>
     public class ConnectionControler
     {
-        //private static string _dbName = "database.db";
-        //private static string _connectionString =  $"Data Source=database.db";
+        private static string _dbName = "database.db";
+        private static string _connectionString =  $"Data Source=database.db";
         private bool _conState = false;
         private int _connectionAttempts = 0;
 
         //HARRYS TEST DB PATH
-        private static string _dbName = "testDB.db";
-        private static string _connectionString = $"Data Source=testDB.db";
+        //private static string _dbName = "testDB.db";
+        //private static string _connectionString = $"Data Source=testDB.db";
 
         public ConnectionControler()
         {

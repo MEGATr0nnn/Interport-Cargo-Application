@@ -51,6 +51,7 @@ namespace Tests
         [TestInitialize]
         public void Setup()
         {
+            ConnectionControler controler = new ConnectionControler();
             customer = new Customer("harry", "mega", "harry.mega@mega.com", "0491006868", "password");
             customerDAO = new CustomerDAO();
             customerDAO.createTable();
