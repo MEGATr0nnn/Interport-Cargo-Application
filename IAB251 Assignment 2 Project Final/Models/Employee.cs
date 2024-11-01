@@ -5,17 +5,19 @@
     /// </summary>
     public class Employee : IUser
     {
-        private int _id { get; set; }
+        private int _id;
 
-        private string _firstName { get; set; }
+        private string _firstName;
 
-        private string _lastName { get; set; }
+        private string _lastName;
 
-        private string _email { get; set; }
+        private string _email;
 
-        private string _phoneNumber { get; set; }
+        private string _phoneNumber;
 
-        private string _password { get; set; }
+        private string _password;
+
+        private string _type;
 
         /// <summary>
         /// Constructor responsible for creating Employees.
@@ -25,13 +27,14 @@
         /// <param name="email">The Employees email</param>
         /// <param name="phoneNumber">The Employees phoneNumber</param>
         /// <param name="password">The Employees password</param>
-        public Employee(string firstName, string lastName, string email, string phoneNumber, string password)
+        public Employee(string firstName, string lastName, string email, string phoneNumber, string password, string type)
         {
             this._firstName = firstName;
             this._lastName = lastName;
             this._email = email;
             this._phoneNumber = phoneNumber;
             this._password = password;
+            this._type = type;
         }
 
         //getters and setters
@@ -65,6 +68,11 @@
             return _phoneNumber;
         }
 
+        public string getType()
+        {
+            return _type;
+        }
+
         public void setEmail(string email)
         {
             this._email = email;
@@ -93,6 +101,11 @@
         public void setPhoneNumber(string phoneNumber)
         {
             this._phoneNumber = phoneNumber;
+        }
+
+        public void setType(string type)
+        {
+            this._type=type;
         }
     }
 }

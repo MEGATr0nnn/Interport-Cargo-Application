@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using IAB251_Assignment_2_Project_Final.Models;
+using System.Data.SqlClient;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
@@ -41,13 +42,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error executing transaction {ex.Message}");
+                        throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
                     }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"We've had a problem connecting {ex.Message}");
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
             }
             finally { connection.Close(); }
         }
@@ -82,14 +83,14 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     catch( Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error executing transaction {ex.Message}");
+                        throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
                     }
                 }
                 
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"We've had a problem connecting {ex.Message}");
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}"); 
             }
             finally { connection.Close(); }
         }
@@ -128,15 +129,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine($"Error executing transaction {ex.Message}");
-                        return -1;
+                        throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
                     }
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine($"We've had a problem connecting {ex.Message}");
-                return -1;
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
             }
             finally { connection.Close(); }
         }
@@ -147,25 +146,30 @@ namespace IAB251_Assignment_2_Project_Final.Models
             try
             {
                 connection.Open();
-
-                using (var command = new SQLiteCommand(query, connection))
+                try
                 {
-                    if (parameters != null)
+                    using (var command = new SQLiteCommand(query, connection))
                     {
-                        command.Parameters.AddRange(parameters);
-                    }
+                        if (parameters != null)
+                        {
+                            command.Parameters.AddRange(parameters);
+                        }
 
-                    using (var reader = command.ExecuteReader())
-                    {
-                        //returns true if has rows ie rows exist
-                        return reader.HasRows;
+                        using (var reader = command.ExecuteReader())
+                        {
+                            //returns true if has rows ie rows exist
+                            return reader.HasRows;
+                        }
                     }
+                }
+                catch(Exception ex)
+                {
+                    throw new InvalidOperationException($"Error executing your request, please try again{ex.Message}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"We've had a problem connecting {ex.Message}");
-                return false;
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
             }
             finally { connection.Close(); }
         }

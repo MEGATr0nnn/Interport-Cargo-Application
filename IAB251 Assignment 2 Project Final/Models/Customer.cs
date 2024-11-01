@@ -5,17 +5,17 @@
     /// </summary>
     public class Customer : IUser
     {
-        private int _id { get; set; }
+        private int _id;
 
-        private string _firstName { get; set; }
+        private string _firstName;
 
-        private string _lastName { get; set; }
+        private string _lastName;
 
-        private string _email { get; set; }
+        private string _email;
 
-        private string _phoneNumber { get; set; }
+        private string _phoneNumber;
 
-        private string _password { get; set; }
+        private string _password;
 
         /// <summary>
         /// This is the constructor for customer, that instantises a new customer

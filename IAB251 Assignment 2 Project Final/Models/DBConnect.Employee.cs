@@ -14,35 +14,42 @@ namespace IAB251_Assignment_2_Project_Final.Models
         {
             Employee employee = null;
             var connection = new SQLiteConnection(getConnectionString());
-            connection.Open();
             try
             {
-                using (var command = new SQLiteCommand(query, connection))
+                connection.Open();
+                try
                 {
-                    command.Parameters.AddRange(parameters);
-
-                    using (var reader = command.ExecuteReader()) //use reader to check if value exists
+                    using (var command = new SQLiteCommand(query, connection))
                     {
-                        if (reader.Read())
+                        command.Parameters.AddRange(parameters);
+
+                        using (var reader = command.ExecuteReader()) //use reader to check if value exists
                         {
-                            int id = reader.GetInt32(reader.GetOrdinal("id"));
+                            if (reader.Read())
+                            {
+                                int id = reader.GetInt32(reader.GetOrdinal("id"));
 
-                            string firstName = reader.GetString(reader.GetOrdinal("firstName")),
-                                lastName = reader.GetString(reader.GetOrdinal("lastName")),
-                                email = reader.GetString(reader.GetOrdinal("email")),
-                                password = reader.GetString(reader.GetOrdinal("password")),
-                                phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber"));
+                                string firstName = reader.GetString(reader.GetOrdinal("firstName")),
+                                    lastName = reader.GetString(reader.GetOrdinal("lastName")),
+                                    email = reader.GetString(reader.GetOrdinal("email")),
+                                    password = reader.GetString(reader.GetOrdinal("password")),
+                                    phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber")),
+                                    type = reader.GetString(reader.GetOrdinal("type"));
 
-                            employee = new Employee(firstName, lastName, email, phoneNumber, password);
-                            employee.setId(id);
+                                employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
+                                employee.setId(id);
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException($"Error finding your details{ex.Message}");
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                throw new SQLiteException($"Error connecting to the server, please wait and then try again{ex.Message}");
             }
             finally { connection.Close(); }
             return employee;

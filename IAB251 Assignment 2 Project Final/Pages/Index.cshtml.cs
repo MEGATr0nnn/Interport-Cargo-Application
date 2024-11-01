@@ -31,6 +31,8 @@ public class IndexModel : PageModel
     /// </summary>
     private CustomerDAO _customerDAO;
 
+    public string errorMessage;
+
     /// <summary>
     /// Constructor initialising a new Customer Data Access Object
     /// </summary>
@@ -55,24 +57,32 @@ public class IndexModel : PageModel
         //Procedure for when user signs in
         if (action == "signin")
         {
-            if (!ModelState.IsValid)
+            try
             {
-                // Failed login
-                ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
-                return Page();
+                if (!ModelState.IsValid)
+                {
+                    // Failed login
+                    ModelState.AddModelError(string.Empty, "Invalid email or password, please try again.");
+                    return Page();
+                }
+
+                if (_customerDAO.isExist(email, password))
+                {
+                    Customer customer = _customerDAO.getFromEmailPword(email, password);
+                    Console.WriteLine($"{customer.getFirstName()}");
+
+                    _userSessionService.currentCustomerUser = customer;
+                    Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
+
+                    Console.WriteLine(customer.getEmail() + " " + customer.getPassword());
+
+                    return RedirectToPage("/QuotationRequest");
+                }
             }
-
-            if (_customerDAO.isExist(email, password))
+            catch (Exception ex)
             {
-                Customer customer = _customerDAO.getFromEmailPword(email, password);
-                Console.WriteLine($"{customer.getFirstName()}");
-
-                _userSessionService.currentCustomerUser = customer;
-                Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
-
-                Console.WriteLine(customer.getEmail() + " " + customer.getPassword()); 
-
-                return RedirectToPage("/QuotationRequest");
+                ModelState.AddModelError(string.Empty, "An error occurred while processing your request: " + ex.Message);
+                return Page(); // Return to the same page to show the error message
             }
         }
 

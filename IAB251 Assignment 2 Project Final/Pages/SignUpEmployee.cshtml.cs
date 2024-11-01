@@ -44,6 +44,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [DataType(DataType.Password)]
         public string password { get; set; }
 
+        [BindProperty]
+        public string type { get; set; }
+
         /// <summary>
         /// Allows access to current user funcs
         /// </summary>
@@ -75,7 +78,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             }
             else
             {
-                Employee employee = new Employee(firstName, lastName, email, phoneNumber, password);
+                Employee employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
                 _employeeDAO.insertNew(employee);
 
                 _userSessionService.currentEmployeeUser = employee;
