@@ -68,7 +68,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
             {
                 try
                 {
-                    using (var command = new SqliteCommand(query, connection))
+                    using (var command = new SqliteCommand(query, connection, transaction))
                     {
                         if (parameters != null)
                         {
@@ -101,13 +101,13 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public int executeScalarQuery(string query, SqliteParameter[] parameters)
         {
             var connection = new SqliteConnection(getConnectionString());
-                connection.Open();
+            connection.Open();
 
             using (var transaction = connection.BeginTransaction())
             {
                 try
                 {
-                    using (var command = new SqliteCommand(query, connection))
+                    using (var command = new SqliteCommand(query, connection, transaction))
                     {
                         if (parameters != null)
                         {
@@ -144,28 +144,31 @@ namespace IAB251_Assignment_2_Project_Final.Models
             connection.Open();
             try
             {
-                using (var command = new SqliteCommand(query, connection))
+                using (var transaction = connection.BeginTransaction())
                 {
-                    if (parameters != null)
+                    using (var command = new SqliteCommand(query, connection, transaction))
                     {
-                        command.Parameters.AddRange(parameters);
-                    }
 
-                    using (var reader = command.ExecuteReader())
-                    {
-                        if (reader.HasRows)
+                        if (parameters != null)
                         {
-                            //returns true if has rows ie rows exist
-                            return reader.HasRows;
-
+                            command.Parameters.AddRange(parameters);
                         }
-                        else
+                        using (var reader = command.ExecuteReader())
                         {
-                            throw new InvalidOperationException();
+                            if (reader.HasRows)
+                            {
+                                //returns true if has rows ie rows exist
+                                return reader.HasRows;
+
+                            }
+                            else
+                            {
+                                throw new InvalidOperationException();
+                            }
                         }
                     }
                 }
-            }
+            }            
             catch (InvalidOperationException ex)
             {
                 Console.WriteLine(ex.Message);
