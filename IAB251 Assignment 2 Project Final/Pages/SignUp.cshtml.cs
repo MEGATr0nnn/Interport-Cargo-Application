@@ -13,25 +13,25 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Signup Fields
         /// </summary>
         [BindProperty]
-        [Required(ErrorMessage = "A First name is required")]
+        [Required(ErrorMessage = "A First Name is Required")]
         public string firstName { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "A Last name is required")]
+        [Required(ErrorMessage = "A Last Name is Required")]
         public string lastName { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "A valid email is required.")]
+        [Required(ErrorMessage = "A Valid Email is Required.")]
         [EmailAddress]
         public string email { get; set; }
 
         [BindProperty]
-        [Required]
-        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number is not a valid number.")]
+        [Required(ErrorMessage = "A Phone Number is Required.")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone Number is Not a Valid Number.")]
         public string phoneNumber { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "A password is required.")]
+        [Required(ErrorMessage = "A Password is Required.")]
         [DataType(DataType.Password)]
         public string password { get; set; }
 
@@ -72,7 +72,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 _userSessionService.currentCustomerUser = currentUser;
                 Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
                 ModelState.Clear();
-                return RedirectToPage("/QuotationRequest");
+                return RedirectToPage("/CustomerDashboard");
             }
             catch (Exception ex)
             {

@@ -14,33 +14,33 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Relevent fields for employee
         /// </summary>
         [BindProperty]
-        [Required(ErrorMessage = "A First name is required.")]
+        [Required(ErrorMessage = "A First Name is Required.")]
         public string firstName { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "A Last name is required.")]
+        [Required(ErrorMessage = "A Last Name is Required.")]
         public string lastName { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "A valid email is required.")]
+        [Required(ErrorMessage = "A Valid Email is Required.")]
         [EmailAddress]
         public string email { get; set; }
 
         [BindProperty]
-        [Required]
-        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number is not a valid number.")]
+        [Required(ErrorMessage = "A Phone Number is Required.")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone Number is not a Valid Number.")]
         public string phoneNumber { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "An Employee type must be defined.")]
+        [Required(ErrorMessage = "An Employee Type Must be Defined.")]
         public string employeeType { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "An Employee address must be listed.")]
+        [Required(ErrorMessage = "An Employee Address Must be Listed.")]
         public string address { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessage = "A Password is Required.")]
         [DataType(DataType.Password)]
         public string password { get; set; }
 
@@ -55,7 +55,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <summary>
         /// Allowing access to _employeeDAO methods
         /// </summary>
-        private EmployeeDAO _employeeDAO; //make readonly???
+        private readonly EmployeeDAO _employeeDAO; //make readonly???
 
         /// <summary>
         /// Constructor for Model, cretes new instance
