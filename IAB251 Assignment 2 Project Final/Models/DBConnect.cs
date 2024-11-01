@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SQLite;
 using IAB251_Assignment_2_Project_Final.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
@@ -25,37 +24,32 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public void executeQuery(string query)
         {
-            var connection = new SQLiteConnection(getConnectionString());
-            try
-            {
+            var connection = new SqliteConnection(getConnectionString());
                 connection.Open();
 
-                using (var transaction = connection.BeginTransaction())
-                {
-                    try
-                    {
-                        using (var command = new SQLiteCommand(query, connection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-                        transaction.Commit();
-                        Console.WriteLine("Transaction executed correctly"); //for testing FIX ERROR LOGIC
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        Console.WriteLine(ex.Message); //hidden from user, this is for Admin debugging only
-                        throw new InvalidOperationException($"Error executing your request, please try again."); //displayed to user
-                        //all other catch blocks follow this structure :)
-                    }
-                }
-            }
-            catch(SQLiteException ex)
+            using (var transaction = connection.BeginTransaction())
             {
-                Console.WriteLine(ex.Message);
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
+                try
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    Console.WriteLine("Transaction executed correctly"); //for testing FIX ERROR LOGIC
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Console.WriteLine(ex.Message); //hidden from user, this is for Admin debugging only
+                    throw new InvalidOperationException($"Error executing your request, please try again."); //displayed to user
+                                                                                                             //all other catch blocks follow this structure :)
+                }
+
+                finally { connection.Close(); }
             }
-            finally { connection.Close(); }
+
         }
 
         /// <summary>
@@ -65,42 +59,34 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <param name="parameters">This is the list of parameters you want executed</param>
         /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
         /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
-        public void executeQuery(string query, SQLiteParameter[] parameters)
+        public void executeQuery(string query, SqliteParameter[] parameters)
         {
-            var connection = new SQLiteConnection(getConnectionString());
-            try
-            {
-                connection.Open();
+            var connection = new SqliteConnection(getConnectionString());
+            connection.Open();
 
-                using (var transaction = connection.BeginTransaction())
-                {
-                    try
-                    {
-                        using (var command = new SQLiteCommand(query, connection))
-                        {
-                            if (parameters != null)
-                            {
-                                command.Parameters.AddRange(parameters);
-                            }
-                            command.ExecuteNonQuery();
-                        }
-                        transaction.Commit();
-                        Console.WriteLine("Transaction executed correctly"); //for testing
-                    }
-                    catch( Exception ex)
-                    {
-                        transaction.Rollback();
-                        Console.WriteLine(ex.Message);
-                        throw new InvalidOperationException($"Error executing your request, please try again.");
-                    }
-                }  
-            }
-            catch(SQLiteException ex)
+            using (var transaction = connection.BeginTransaction())
             {
-                Console.WriteLine(ex.Message);
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again."); 
+                try
+                {
+                    using (var command = new SqliteCommand(query, connection))
+                    {
+                        if (parameters != null)
+                        {
+                            command.Parameters.AddRange(parameters);
+                        }
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                    Console.WriteLine("Transaction executed correctly"); //for testing
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Console.WriteLine(ex.Message);
+                    throw new InvalidOperationException($"Error executing your request, please try again.");
+                }
+                finally { connection.Close(); }
             }
-            finally { connection.Close(); }
         }
 
         /// <summary>
@@ -112,44 +98,36 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <returns>This command returns an integer value</returns>
         /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
         /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
-        public int executeScalarQuery(string query, SQLiteParameter[] parameters)
+        public int executeScalarQuery(string query, SqliteParameter[] parameters)
         {
-            var connection = new SQLiteConnection(getConnectionString());
-            try
-            {
+            var connection = new SqliteConnection(getConnectionString());
                 connection.Open();
 
-                using (var transaction = connection.BeginTransaction())
-                { 
-                    try
+            using (var transaction = connection.BeginTransaction())
+            {
+                try
+                {
+                    using (var command = new SqliteCommand(query, connection))
                     {
-                        using (var command = new SQLiteCommand(query, connection))
+                        if (parameters != null)
                         {
-                            if (parameters != null)
-                            {
-                                command.Parameters.AddRange(parameters);
-                            }
-                            var result = command.ExecuteScalar();
-
-                            transaction.Commit();
-
-                            return result != null ? Convert.ToInt32(result) : -1;
+                            command.Parameters.AddRange(parameters);
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        Console.WriteLine(ex.Message);
-                        throw new InvalidOperationException($"Error executing your request, please try again.");
+                        var result = command.ExecuteScalar();
+
+                        transaction.Commit();
+
+                        return result != null ? Convert.ToInt32(result) : -1;
                     }
                 }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Console.WriteLine(ex.Message);
+                    throw new InvalidOperationException($"Error executing your request, please try again.");
+                }
+                finally { connection.Close(); }
             }
-            catch(SQLiteException ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
-            }
-            finally { connection.Close(); }
         }
 
         /// <summary>
@@ -160,49 +138,41 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <returns>A boolean</returns>
         /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
         /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
-        public bool isExistQuery(string query, params SQLiteParameter[] parameters)
+        public bool isExistQuery(string query, params SqliteParameter[] parameters)
         {
-            var connection = new SQLiteConnection(getConnectionString());
+            var connection = new SqliteConnection(getConnectionString());
+            connection.Open();
             try
             {
-                connection.Open();
-                try
+                using (var command = new SqliteCommand(query, connection))
                 {
-                    using (var command = new SQLiteCommand(query, connection))
+                    if (parameters != null)
                     {
-                        if (parameters != null)
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
                         {
-                            command.Parameters.AddRange(parameters);
+                            //returns true if has rows ie rows exist
+                            return reader.HasRows;
+
                         }
-
-                        using (var reader = command.ExecuteReader())
+                        else
                         {
-                            if (reader.HasRows)
-                            {
-                                //returns true if has rows ie rows exist
-                                return reader.HasRows;
-
-                            }
-                            else
-                            {
-                                throw new InvalidOperationException();
-                            }
+                            throw new InvalidOperationException();
                         }
                     }
                 }
-                catch (InvalidOperationException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
-                }
             }
-            catch(SQLiteException ex)
+            catch (InvalidOperationException ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
+                throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
             }
-
             finally { connection.Close(); }
+
         }
     }
 }

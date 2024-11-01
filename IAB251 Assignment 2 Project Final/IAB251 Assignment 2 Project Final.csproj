@@ -20,6 +20,6 @@
     <Folder Include="Scrum Notes\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
   </ItemGroup>
 </Project>

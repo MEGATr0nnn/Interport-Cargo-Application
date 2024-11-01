@@ -1,4 +1,4 @@
-﻿using System.Data.SQLite;
+﻿using Microsoft.Data.Sqlite;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
@@ -18,58 +18,50 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <returns>A list of type Quotation, containing quotation objects and there relevent attributes, fields and methods</returns>
         /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
         /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
-        public List<Quotation> quotationExecuteFetchAll(string query, SQLiteParameter[] parameters)
+        public List<Quotation> quotationExecuteFetchAll(string query, SqliteParameter[] parameters)
         {
             List<Quotation> quotationList = new List<Quotation>();
-            var connection = new SQLiteConnection(getConnectionString());
-            //attempt to open the connection to the DB, this should never fail unless the DB is deleted mid transaction
+            var connection = new SqliteConnection(getConnectionString());
+            connection.Open();
+            //attempt to execute the command and fetch details, if the user has no details it will throw an exception, this should never occur as its mitigated by the isExist logic (ie if no quotes exist, prompt user to make one).
             try
             {
-                connection.Open();
-                //attempt to execute the command and fetch details, if the user has no details it will throw an exception, this should never occur as its mitigated by the isExist logic (ie if no quotes exist, prompt user to make one).
-                try
+                using (var command = new SqliteCommand(query, connection))
                 {
-                    using (var command = new SQLiteCommand(query, connection))
+                    command.Parameters.AddRange(parameters);
+
+                    using (var reader = command.ExecuteReader()) //use reader to check if value exists
                     {
-                        command.Parameters.AddRange(parameters);
-
-                        using (var reader = command.ExecuteReader()) //use reader to check if value exists
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                int id = reader.GetInt32(reader.GetOrdinal("id")),
-                                    numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
-                                    customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
+                            int id = reader.GetInt32(reader.GetOrdinal("id")),
+                                numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
+                                customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
 
-                                string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
-                                    source = reader.GetString(reader.GetOrdinal("source")),
-                                    destination = reader.GetString(reader.GetOrdinal("destination")),
-                                    natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                    natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
+                            string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
+                                source = reader.GetString(reader.GetOrdinal("source")),
+                                destination = reader.GetString(reader.GetOrdinal("destination")),
+                                natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
+                                natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
 
-                                var quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be added, then loops
-                                quotation.setId(id);
-                                quotation.setCustomerId(customerId);
+                            var quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be added, then loops
+                            quotation.setId(id);
+                            quotation.setCustomerId(customerId);
 
-                                quotationList.Add(quotation);
-                            }
+                            quotationList.Add(quotation);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
-                }
             }
-            catch(SQLiteException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
+                throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
             }
             finally { connection.Close(); }
             return quotationList;
         }
+
 
         /// <summary>
         /// This method is designed to return single instances of quotation associated with the applied query and parameters
@@ -79,50 +71,43 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <returns>A single instance of object Quotation</returns>
         /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
         /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
-        public Quotation quotationExecuteFetch(string query, SQLiteParameter[] parameters)
+        public Quotation quotationExecuteFetch(string query, SqliteParameter[] parameters)
         {
             Quotation quotation = null;
-            var connection = new SQLiteConnection(getConnectionString());
+            var connection = new SqliteConnection(getConnectionString());
+
+            connection.Open();
             try
             {
-                connection.Open();
-                try
+                using (var command = new SqliteCommand(query, connection))
                 {
-                    using (var command = new SQLiteCommand(query, connection))
+                    command.Parameters.AddRange(parameters);
+
+                    using (var reader = command.ExecuteReader()) //use reader to check if value exists
                     {
-                        command.Parameters.AddRange(parameters);
-
-                        using (var reader = command.ExecuteReader()) //use reader to check if value exists
+                        if (reader.Read())
                         {
-                            if (reader.Read())
-                            {
-                                int id = reader.GetInt32(reader.GetOrdinal("id")),
-                                    numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
-                                    customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
+                            int id = reader.GetInt32(reader.GetOrdinal("id")),
+                                numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
+                                customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
 
-                                string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
-                                    source = reader.GetString(reader.GetOrdinal("source")),
-                                    destination = reader.GetString(reader.GetOrdinal("destination")),
-                                    natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                    natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
+                            string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
+                                source = reader.GetString(reader.GetOrdinal("source")),
+                                destination = reader.GetString(reader.GetOrdinal("destination")),
+                                natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
+                                natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
 
-                                quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be returned to the user
-                                quotation.setId(id);
-                                quotation.setCustomerId(customerId);
-                            }
+                            quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be returned to the user
+                            quotation.setId(id);
+                            quotation.setCustomerId(customerId);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
-                }
             }
-            catch(SQLiteException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw new SQLiteException($"Error connecting to the server, please wait and then try again.");
+                throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
             }
             finally { connection.Close(); }
             return quotation;

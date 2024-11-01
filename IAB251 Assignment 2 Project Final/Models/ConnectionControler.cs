@@ -1,4 +1,4 @@
-﻿using System.Data.SQLite;
+﻿using Microsoft.Data.Sqlite;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
@@ -38,7 +38,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         }
         private void initaliseBlankDB()
         {
-            using (var connection = new SQLiteConnection(_connectionString))
+            using (var connection = new SqliteConnection(_connectionString))
             {
                 connection.Open(); //creates an empty DB file
                 if (File.Exists(_dbName))

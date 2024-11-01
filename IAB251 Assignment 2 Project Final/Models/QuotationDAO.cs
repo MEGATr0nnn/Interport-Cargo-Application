@@ -1,4 +1,4 @@
-﻿using System.Data.SQLite;
+﻿using Microsoft.Data.Sqlite;
 
 namespace IAB251_Assignment_2_Project_Final.Models
 {
@@ -38,9 +38,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void delete(Quotation quotation)
         {
             string query = @"DELETE * FROM quotation WHERE id = @id";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter(@"id", quotation.getId())
+                new SqliteParameter(@"id", quotation.getId())
             };
             _connect.executeQuery(query, parameters);
         }
@@ -53,9 +53,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public List<Quotation> getAllFromCustomerId(int customerId)
         {
             string query = @"SELECT * FROM quotation WHERE customerId = @customerId";
-            SQLiteParameter[] parameter = new SQLiteParameter[]
+            SqliteParameter[] parameter = new SqliteParameter[]
             {
-                new SQLiteParameter("@customerId", customerId)
+                new SqliteParameter("@customerId", customerId)
             };
 
             return _connect.quotationExecuteFetchAll(query, parameter);
@@ -69,9 +69,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public Quotation getSpecificQuotation(int quotationId)
         {
             string query = @"SELECT * FROM quotation WHERE id = @id";
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter("@id", quotationId)
+                new SqliteParameter("@id", quotationId)
             };
             return _connect.quotationExecuteFetch(query, parameters);
         }
@@ -88,15 +88,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
                     VALUES (@customerInformation, @source, @destination, @numOfContainers, @natureOfPackage, @natureOfJob, @customerId)
                     RETURNING id";
 
-            SQLiteParameter[] parameters = new SQLiteParameter[]
+            SqliteParameter[] parameters = new SqliteParameter[]
             {
-                new SQLiteParameter("@customerInformation", quotation.getCustomerInformation()),
-                new SQLiteParameter("@source", quotation.getSource()),
-                new SQLiteParameter("@destination", quotation.getDestination()),
-                new SQLiteParameter("@numOfContainers", quotation.getNumOfContainers()),
-                new SQLiteParameter("@natureOfPackage", quotation.getNatureOfPackage()),
-                new SQLiteParameter("@natureOfJob", quotation.getNatureOfJob()),
-                new SQLiteParameter("@customerId", customer.getId())
+                new SqliteParameter("@customerInformation", quotation.getCustomerInformation()),
+                new SqliteParameter("@source", quotation.getSource()),
+                new SqliteParameter("@destination", quotation.getDestination()),
+                new SqliteParameter("@numOfContainers", quotation.getNumOfContainers()),
+                new SqliteParameter("@natureOfPackage", quotation.getNatureOfPackage()),
+                new SqliteParameter("@natureOfJob", quotation.getNatureOfJob()),
+                new SqliteParameter("@customerId", customer.getId())
             };
             quotation.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
 
