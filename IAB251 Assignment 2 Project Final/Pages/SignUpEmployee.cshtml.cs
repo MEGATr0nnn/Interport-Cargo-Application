@@ -48,6 +48,11 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         public string type { get; set; }
 
         /// <summary>
+        /// Allows for SHA256 Password Hashing 
+        /// </summary>
+        private PasswordHasher PasswordHasher = new PasswordHasher();
+
+        /// <summary>
         /// Allows access to current user funcs
         /// </summary>
         private readonly IUserSessionControl _userSessionService;
@@ -74,7 +79,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         {
             try
             {
-                Employee employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
+                string hashed = PasswordHasher.hashPassword(password);
+
+                Employee employee = new Employee(firstName, lastName, email, phoneNumber, hashed, type);
                 _employeeDAO.insertNew(employee);
 
                 _userSessionService.currentEmployeeUser = employee;

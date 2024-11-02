@@ -45,6 +45,11 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         private CustomerDAO _customerDAO;
 
+        /// <summary>
+        /// Allows for SHA256 Password Hashing
+        /// </summary>
+        private PasswordHasher PasswordHasher = new PasswordHasher();
+
         public SignUp(IUserSessionControl userSessionControl)
         {
             _customerDAO = new CustomerDAO();
@@ -65,8 +70,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         {
             try 
             { 
+                string hashed = PasswordHasher.hashPassword(password);
 
-                Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, password);
+                Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, hashed);
                 _customerDAO.insertNew(currentUser);
 
                 _userSessionService.currentCustomerUser = currentUser;

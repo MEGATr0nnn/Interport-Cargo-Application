@@ -1,4 +1,6 @@
-﻿namespace IAB251_Assignment_2_Project_Final.Models
+﻿using System.Security.Cryptography;
+
+namespace IAB251_Assignment_2_Project_Final.Models
 {
     public class PasswordHasher
     {
@@ -7,11 +9,13 @@
         //IMPORT A SIMPLE HASH LIBRARY
         //hashing a password method
 
+        public string hashPassword(string password)
+        {
+            Byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(password);
 
+            Byte[] hashedBytes = SHA256.Create().ComputeHash(inputBytes);
 
-        //unhashing password method/password unhashed to hashed comparator that returns a bool???
-
-
-
+            return BitConverter.ToString(hashedBytes);
+        }
     }
 }
