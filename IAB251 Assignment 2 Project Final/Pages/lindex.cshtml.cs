@@ -1,4 +1,5 @@
-﻿using IAB251_Assignment_2_Project_Final.Models;
+﻿
+using IAB251_Assignment_2_Project_Final.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +31,11 @@ public class lIndexModel : PageModel
     /// Session initialiser
     /// </summary>
     private readonly IUserSessionControl _userSessionService;
+
+    /// <summary>
+    /// Allows for password to be hashed via SHA256
+    /// </summary>
+    private PasswordHasher _passwordHasher = new PasswordHasher(); 
 
     /// <summary>
     /// Pulling stored data for Customer object
@@ -70,15 +76,15 @@ public class lIndexModel : PageModel
         {
             try
             {
-                if (_customerDAO.isExist(email, password))
+                string hashed = _passwordHasher.hashPassword(password);
+
+                if (_customerDAO.isExist(email, hashed))
                 {
-                    Customer customer = _customerDAO.getFromEmailPword(email, password);
+                    Customer customer = _customerDAO.getFromEmailPword(email, hashed);
                     Console.WriteLine($"{customer.getFirstName()}");
 
                     _userSessionService.currentCustomerUser = customer;
                     Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()}"); //checking to see if session aligned properly
-
-                    Console.WriteLine(customer.getEmail() + " " + customer.getPassword());
 
                     return RedirectToPage("/CustomerDashboard");
                 }

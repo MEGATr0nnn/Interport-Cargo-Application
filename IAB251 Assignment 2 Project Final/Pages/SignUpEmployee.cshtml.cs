@@ -55,7 +55,12 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <summary>
         /// Allowing access to _employeeDAO methods
         /// </summary>
-        private readonly EmployeeDAO _employeeDAO; //make readonly???
+        private readonly EmployeeDAO _employeeDAO;
+
+        /// <summary>
+        /// Allows for password to be hashed via SHA256
+        /// </summary>
+        private PasswordHasher _passwordHasher = new PasswordHasher();
 
         /// <summary>
         /// Constructor for Model, cretes new instance
@@ -74,7 +79,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         {
             try
             {
-                Employee employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
+                string hashed = _passwordHasher.hashPassword(password);
+
+                Employee employee = new Employee(firstName, lastName, email, phoneNumber, hashed, type);
                 _employeeDAO.insertNew(employee);
 
                 _userSessionService.currentEmployeeUser = employee;
