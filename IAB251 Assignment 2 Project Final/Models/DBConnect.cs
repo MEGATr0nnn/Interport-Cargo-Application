@@ -49,7 +49,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
                 finally { connection.Close(); }
             }
-
         }
 
         /// <summary>
@@ -175,7 +174,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 throw new InvalidOperationException($"Error finding your details, please ensure you've created an account with us.");
             }
             finally { connection.Close(); }
-
         }
     }
 }
