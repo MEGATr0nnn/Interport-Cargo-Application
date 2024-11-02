@@ -38,4 +38,7 @@ To install the package you may use the following commands:
 
 ## Installing in Visual Studio
 Go to project, manage nuget packages, browse search for "Microsoft.Data.Sqlite" install the package and restart your application.
+
+# Legal:
+The contents of this project are protected by copyright and are owned by the repository owner and its contributors. Under Australian copyright law and GitHub’s Terms of Service, unauthorized reproduction, distribution, or misrepresentation of this work as your own without appropriate attribution or permission is strictly prohibited. Failure to comply may lead to penalties, including legal action.
                                               
