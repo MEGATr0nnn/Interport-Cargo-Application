@@ -8,9 +8,9 @@
 
 
 ## Team Outline:
-Harrison Mega(Full Stack Developer - Focus area: database architecture design)
-Shanthu Jayamaha(Full Stack Developer - Focus area: front-end integration)
-Vuyo Manyepe(Front End Developer - Focus area: front-end application development and artistry)
+1. Harrison Mega(Full Stack Developer - Focus area: database architecture design)
+2. Shanthu Jayamaha(Full Stack Developer - Focus area: front-end integration)
+3. Vuyo Manyepe(Front End Developer - Focus area: front-end application development and artistry)
    
 
 # Project Overview:
