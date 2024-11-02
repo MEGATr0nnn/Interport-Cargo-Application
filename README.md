@@ -26,3 +26,15 @@ Logistics management web-based platform.
 - Robust application framework
 - Expansive error mitigation features
 - Well-written and logical code with the correct abstractions and OOP principles
+
+# Required Dependencies:
+This project requires users to have the Microsoft.Data.Sqlite nuget package installed in the latest version, this package has been included in the .csproj file and will be included in the published build however, until that point all users wanting to execute the code will have to ensure they've downloaded the corresponding package.
+
+## Installing Via Terminal:
+To install the package you may use the following commands:
+- Using Terminal: Install-Package Microsoft.Data.Sqlite
+- Or, using .NET CLI: dotnet add package Microsoft.Data.Sqlite
+
+## Installing in Visual Studio
+Go to project, manage nuget packages, browse search for "Microsoft.Data.Sqlite" install the package and restart your application.
+                                              
