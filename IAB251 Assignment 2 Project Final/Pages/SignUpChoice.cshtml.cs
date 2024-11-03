@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IAB251_Assignment_2_Project_Final.Pages
 {
-	public class SignUpCHoice2Model : PageModel
+	public class SignUpChoiceModel : PageModel
     {
         public void OnGet()
         {
         }
     }
 }
+/* 23N me is a scam*/
