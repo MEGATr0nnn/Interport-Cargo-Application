@@ -12,7 +12,10 @@
         private string _destination;
         private int _numOfContainers;
         private string _natureOfPackage;
-        private string _natureOfJob;
+        private bool _import;
+        private bool _packing;
+        private string _quarantineReq;
+        //private string _natureOfJob;
         private int _customerId;
 
         /// <summary>
@@ -24,14 +27,20 @@
         /// <param name="numOfContainers">Number of containers that need to be shipped.</param>
         /// <param name="natureOfPackage">Whats in the package (ie auto parts).</param>
         /// <param name="natureOfJob">The details of the job (ie import/export, fumigation, packing/unpacking and quarantine requirements).</param>
-        public Quotation(string customerInformation, string source, string destination, int numOfContainers, string natureOfPackage, string natureOfJob)
+        public Quotation(string customerInformation, string source, string destination, int numOfContainers, string natureOfPackage, bool import, bool packing, string quarantineReq)
         {
             _customerInformation = customerInformation;
             _source = source;
             _destination = destination;
             _numOfContainers = numOfContainers;
             _natureOfPackage = natureOfPackage;
-            _natureOfJob = natureOfJob;
+            _import = import;
+            _packing = packing;
+            _quarantineReq = quarantineReq;
+            //_natureOfJob = natureOfJob;
+            _import = import;
+            _packing = packing;
+            _quarantineReq = quarantineReq;
         }
 
         //Getters and setters
@@ -53,8 +62,18 @@
         public string getNatureOfPackage() {  return _natureOfPackage; }
         public void setNatureOfPackage(string natureOfPackage) { _natureOfPackage= natureOfPackage; }
 
-        public string getNatureOfJob() {  return _natureOfJob; }
-        public void setNatureOfJob(string natureOfJob) { _natureOfJob= natureOfJob; }
+        public bool getImport() { return _import; }
+        public void setImport(bool import) { _import = import; }
+
+        public bool getPacking() { return _packing; }
+        public void setPacking(bool packing) { _packing = packing; }
+
+        public string getQuarantineRequirements() { return _quarantineReq; }
+        public void setQuarantineRequirements(string quarantineReq) { _quarantineReq = quarantineReq; }
+
+
+        //public string getNatureOfJob() {  return _natureOfJob; }
+        //public void setNatureOfJob(string natureOfJob) { _natureOfJob= natureOfJob; }
 
         public int getCustomerId() { return _customerId; }
         public void setCustomerId(int  customerId) { _customerId = customerId;}
