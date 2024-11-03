@@ -20,12 +20,69 @@ html {
 body {
   margin-bottom: 60px;
 }
-
-.pill-box {
-    background-color: rgba(130, 177, 228, 0.8);
-    border-radius: 25px;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* Full-page layout */
+html, body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+    width: 100%;
+    padding: 15px;
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    position: relative;
+}
+
+/* Main content area */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Pill box styling */
+.pill-box {
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Footer styling */
+.footer {
+    width: 100%;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+    position: relative;
+}
+
+    .footer h2 {
+        margin: 0;
+        font-size: 1.2em;
+    }

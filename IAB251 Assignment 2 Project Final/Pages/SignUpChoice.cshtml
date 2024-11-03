@@ -1,0 +1,85 @@
+﻿@page
+@model IAB251_Assignment_2_Project_Final.Pages.SignUpChoiceModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Options</title>
+
+    <style>
+        /*we need this to work so comments so that we can commit please */
+        /* Basic reset for full-screen setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Centering layout setup */
+        html, body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4; /* Light background for the page */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container for the buttons */
+        .signup-container {
+            text-align: center;
+            padding: 40px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+            .signup-container h1 {
+                margin-bottom: 20px;
+                font-size: 2em;
+                color: #333;
+            }
+
+            /* Button styling */
+            .signup-container button {
+                border: none;
+                outline: none;
+                padding: 15px 30px;
+                margin: 10px;
+                color: white;
+                background-color: #2CA8E2;
+                text-align: center;
+                cursor: pointer;
+                font-size: 1.1em;
+                border-radius: 5px;
+                width: 250px;
+            }
+
+                .signup-container button:hover {
+                    background-color: #0C6B97;
+                }
+    </style>
+</head>
+<body>
+
+    <!-- Sign-Up Options Section -->
+    <div class="signup-container">
+        <h1>Choose Your Sign-Up Option</h1>
+        <!-- Sign Up as Customer Button -->
+        <form method="get" action="signup-customer.html">
+            <button type="submit">Sign Up as a Customer</button>
+        </form>
+
+        <!-- Sign Up as Employee Button -->
+        <form method="get" action="signup-employee.html">
+            <button type="submit">Sign Up as an Employee</button>
+        </form>
+    </div>
+
+</body>
+</html>

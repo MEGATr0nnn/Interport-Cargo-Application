@@ -12,14 +12,24 @@
   <ItemGroup>
     <Content Remove="Pages\LoginPage.cshtml" />
     <Content Remove="Pages\SignUpPage.cshtml" />
+    <Content Remove="wwwroot\images\" />
+    <Content Remove="Pages\CustomerSignIn.cshtml" />
+    <Content Remove="Pages\EmployeeSignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scrum Notes\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\images\ship.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

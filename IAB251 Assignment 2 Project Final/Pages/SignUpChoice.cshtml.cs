@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace IAB251_Assignment_2_Project_Final.Pages
+{
+	public class SignUpChoiceModel : PageModel
+    {
+        public void OnGet()
+        {
+        }
+    }
+}
+/* 23N me is a scam*/

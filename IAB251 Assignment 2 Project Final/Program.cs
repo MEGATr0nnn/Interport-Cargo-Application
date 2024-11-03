@@ -18,6 +18,7 @@ catch (FileNotFoundException)
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 try
 {
     // Check DB state before building the app
