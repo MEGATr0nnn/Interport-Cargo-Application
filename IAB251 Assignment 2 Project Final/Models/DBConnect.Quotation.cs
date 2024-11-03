@@ -63,6 +63,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         }
 
 
+
         /// <summary>
         /// This method is designed to return single instances of quotation associated with the applied query and parameters
         /// </summary>
