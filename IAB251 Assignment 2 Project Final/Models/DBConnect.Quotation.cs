@@ -36,15 +36,20 @@ namespace IAB251_Assignment_2_Project_Final.Models
                         {
                             int id = reader.GetInt32(reader.GetOrdinal("id")),
                                 numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
+                                
                                 customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
 
                             string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
                                 source = reader.GetString(reader.GetOrdinal("source")),
                                 destination = reader.GetString(reader.GetOrdinal("destination")),
                                 natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
+                                quarantineReq = reader.GetString(reader.GetOrdinal("quarantineReq"));
 
-                            var quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be added, then loops
+                            bool isImport = reader.GetBoolean(reader.GetOrdinal("isImport")),
+                                isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking"));
+
+
+                            var quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, isImport, isPacking, quarantineReq); //create new instance to be added, then loops
                             quotation.setId(id);
                             quotation.setCustomerId(customerId);
 
@@ -96,9 +101,12 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                 source = reader.GetString(reader.GetOrdinal("source")),
                                 destination = reader.GetString(reader.GetOrdinal("destination")),
                                 natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                natureOfJob = reader.GetString(reader.GetOrdinal("natureOfJob"));
+                                quarantineReq = reader.GetString(reader.GetOrdinal("quarantineReq"));
 
-                            quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob); //create new instance to be returned to the user
+                            bool isImport = reader.GetBoolean(reader.GetOrdinal("isImport")),
+                                isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking"));
+
+                            quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, isImport, isPacking, quarantineReq); //create new instance to be returned to the user
                             quotation.setId(id);
                             quotation.setCustomerId(customerId);
                         }

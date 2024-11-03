@@ -19,12 +19,19 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         public Customer customer { get; set; }
 
+        private readonly QuotationDAO _quotationDAO;
+
+        public Quotation quotation { get; set; }
+
         public CustomerDashboardModel(IUserSessionControl userSessionControl)
         {
             _customerDAO = new CustomerDAO();
             _userSessionService = userSessionControl;
-
+            _quotationDAO = new QuotationDAO();
         }
+
+        public List<Quotation> Quotations { get; set; }
+
 
 
         public IActionResult OnPost()
@@ -37,7 +44,27 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         public void OnGet()
         {
             customer = _userSessionService.currentCustomerUser;
-            customerName = customer.getFirstName() + " " + customer.getLastName();  
+
+            Quotations = _quotationDAO.getAllFromCustomerId(_userSessionService.currentCustomerUser.getId());
+
+            /*
+            foreach (var item in x)
+            {
+                item.getCustomerId();
+                item.getCustomerInformation();
+                item.getSource();
+                item.getDestination();
+                item.getNumOfContainers();
+                item.getNatureOfPackage();
+                item.getImport();
+                item.getPacking();
+                item.getQuarantineRequirements();
+            }
+            */
+
+
+            customerName = customer.getFirstName() + " " + customer.getLastName();
+
         }
     }
 }

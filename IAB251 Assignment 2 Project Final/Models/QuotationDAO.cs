@@ -25,7 +25,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             destination VARCHAR NOT NULL,
                             numOfContainers INTEGER NOT NULL,
                             natureOfPackage VARCHAR NOT NULL,
-                            natureOfJob VARCHAR NOT NULL,
+                            isImport INTEGER NOT NULL,
+                            isPacking INTEGER NOT NULL,
+                            quarantineReq VARCHAR NOT NULL,
                             customerId INTEGER NOT NULL
                         )";
             _connect.executeQuery(query);
@@ -84,8 +86,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void insertNew(Quotation quotation, Customer customer)
         {
             string insertUserQuery = @"
-                    INSERT INTO quotation (customerInformation, source, destination, numOfContainers, natureOfPackage, natureOfJob, customerId)
-                    VALUES (@customerInformation, @source, @destination, @numOfContainers, @natureOfPackage, @natureOfJob, @customerId)
+                    INSERT INTO quotation (customerInformation, source, destination, numOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, customerId)
+                    VALUES (@customerInformation, @source, @destination, @numOfContainers, @natureOfPackage, @isImport, @isPacking, @quarantineReq, @customerId)
                     RETURNING id";
 
             SqliteParameter[] parameters = new SqliteParameter[]
@@ -95,7 +97,10 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 new SqliteParameter("@destination", quotation.getDestination()),
                 new SqliteParameter("@numOfContainers", quotation.getNumOfContainers()),
                 new SqliteParameter("@natureOfPackage", quotation.getNatureOfPackage()),
-                new SqliteParameter("@natureOfJob", quotation.getNatureOfJob()),
+                new SqliteParameter("@isImport", quotation.getImport()),
+                new SqliteParameter("@isPacking", quotation.getPacking()),
+                new SqliteParameter("@quarantineReq", quotation.getQuarantineRequirements()),
+                //new SqliteParameter("@natureOfJob", quotation.getNatureOfJob()),
                 new SqliteParameter("@customerId", customer.getId())
             };
             quotation.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
