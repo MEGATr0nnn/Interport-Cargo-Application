@@ -16,7 +16,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
             createTable();
         }
 
-        public void createTable()
+        public void createTable() //not finished
         {
             string query = @"CREATE TABLE IF NOT EXISTS quotation (
                             id INTEGER PRIMARY KEY AUTOINCREMENT,
