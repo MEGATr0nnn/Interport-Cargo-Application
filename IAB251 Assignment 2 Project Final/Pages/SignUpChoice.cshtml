@@ -1,6 +1,7 @@
 ﻿@page
 @model IAB251_Assignment_2_Project_Final.Pages.SignUpChoiceModel
 @{
+    ViewData["ShowNavbar"] = false;
 }
 
 <!DOCTYPE html>
@@ -66,20 +67,17 @@
     </style>
 </head>
 <body>
-
-    <!-- Sign-Up Options Section -->
-    <div class="signup-container">
-        <h1>Choose Your Sign-Up Option</h1>
-        <!-- Sign Up as Customer Button -->
-        <form method="get" action="signup-customer.html">
-            <button type="submit">Sign Up as a Customer</button>
-        </form>
-
-        <!-- Sign Up as Employee Button -->
-        <form method="get" action="signup-employee.html">
-            <button type="submit">Sign Up as an Employee</button>
-        </form>
+    <div class="signup-container pill-box">
+        <h1>Sign Up</h1>
+        <div class="button-group">
+            <form method="get" asp-page ="/EmployeeSignIn">
+                <button type="submit" class="btn">Sign Up as a Customer</button>
+            </form>
+            <form method="get" asp-page ="/CustomerSignIn">
+                <button type="submit" class="btn">Sign Up as an Employee</button>
+            </form>
+        </div>
     </div>
-
 </body>
+
 </html>
