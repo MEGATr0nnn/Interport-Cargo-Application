@@ -6,12 +6,14 @@ using System.ComponentModel.DataAnnotations;
 namespace IAB251_Assignment_2_Project_Final.Pages
 {
     /// <summary>
-    /// 
+    /// Class is used for the management and creation of the employee user
+    /// Takes all necessary attributes and stored within the Employee DB Table
+    /// Will direct to the Employee Dashboard upon successfull account creation
     /// </summary>
     public class SignUpEmployeeModel : PageModel
     {
         /// <summary>
-        /// Relevent fields for employee
+        /// Relevent input fields for employee
         /// </summary>
         [BindProperty]
         [Required(ErrorMessage = "A First Name is Required.")]
@@ -44,8 +46,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [DataType(DataType.Password)]
         public string password { get; set; }
 
-        [BindProperty]
-        public string type { get; set; }
 
         /// <summary>
         /// Allows access to current user funcs
@@ -72,32 +72,35 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         }
 
         /// <summary>
-        /// 
+        /// Logic for when an employee successfully registers. 
+        /// Directs to the Employee Dashboard if successfull
+        /// Returns back to same page if unsuccessful account creation
         /// </summary>
         /// <returns>Returns a redirect to the quotation page upon successful registration</returns>
-        public IActionResult OnPost()
+        public IActionResult OnPost(string action)
         {
-            try
+            if (action == "signup")
             {
-                string hashed = _passwordHasher.hashPassword(password);
+                Console.WriteLine("Action Inputted: " + action);
+                try
+                {
+                    string hashed = _passwordHasher.hashPassword(password);
 
-                Employee employee = new Employee(firstName, lastName, email, phoneNumber, hashed, type);
-                _employeeDAO.insertNew(employee);
+                    Employee employee = new Employee(firstName, lastName, email, phoneNumber, hashed, employeeType);
+                    _employeeDAO.insertNew(employee);
 
-                _userSessionService.currentEmployeeUser = employee;
+                    _userSessionService.currentEmployeeUser = employee;
 
-                return RedirectToPage("/QuotationManagement");
+                    return RedirectToPage("/EmployeeDashboard");
+                }
+
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    return Page(); 
+                }
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                return Page(); // Return to the same page to show the error message
-            }
+            return Page();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnGet() { }
     }
 }

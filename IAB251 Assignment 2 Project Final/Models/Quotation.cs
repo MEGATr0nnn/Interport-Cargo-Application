@@ -15,7 +15,6 @@
         private bool _import;
         private bool _packing;
         private string _quarantineReq;
-        //private string _natureOfJob;
         private int _customerId;
 
         /// <summary>
@@ -26,7 +25,10 @@
         /// <param name="destination">The desired destination.</param>
         /// <param name="numOfContainers">Number of containers that need to be shipped.</param>
         /// <param name="natureOfPackage">Whats in the package (ie auto parts).</param>
-        /// <param name="natureOfJob">The details of the job (ie import/export, fumigation, packing/unpacking and quarantine requirements).</param>
+        /// <param name="import">Is the quotation for importing or exporting (True = Importing).</param>
+        /// <param name="packing">Is the quotation for packing or unpacking (True = Packing).</param>
+        /// <param name="quarantineReq">Any necessary quarantine requirements for the package.</param>
+
         public Quotation(string customerInformation, string source, string destination, int numOfContainers, string natureOfPackage, bool import, bool packing, string quarantineReq)
         {
             _customerInformation = customerInformation;
@@ -36,8 +38,6 @@
             _natureOfPackage = natureOfPackage;
             _import = import;
             _packing = packing;
-            _quarantineReq = quarantineReq;
-            //_natureOfJob = natureOfJob;
             _import = import;
             _packing = packing;
             _quarantineReq = quarantineReq;
