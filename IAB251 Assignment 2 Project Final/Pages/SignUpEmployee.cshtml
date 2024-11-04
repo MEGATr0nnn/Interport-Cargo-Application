@@ -2,69 +2,64 @@
 @model IAB251_Assignment_2_Project_Final.Pages.SignUpEmployeeModel
 @{
     ViewData["Title"] = "Register Details Employee";
-
+    ViewData["ShowNavbar"] = false;
 }
 
-
 <body>
+    <h1 style="text-align: center" class="pill-box">
+        Register Details - Employee
+    </h1>
 
-    <!-- Navbar at the top -->
-    <div class="navbar">
-      
+    <div class="pill-box">
+        <form method="post">
+            <div>
+                <label for="inputFirst">Enter First Name:</label>
+                <input type="text" asp-for="firstName" class="form-control" />
+                <span asp-validation-for="firstName" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="inputLast">Enter Last Name:</label>
+                <input type="text" asp-for="lastName" class="form-control" />
+                <span asp-validation-for="lastName" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="inputEmail">Enter Email Address:</label>
+                <input type="text" asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="inputPhone">Enter Phone Number:</label>
+                <input type="text" asp-for="phoneNumber" class="form-control" />
+                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="inputEmployeeType">Select Employee Type:</label>
+                <input type="text" asp-for="employeeType" class="form-control" />
+                <span asp-validation-for="employeeType" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="inputAddress">Enter Address:</label>
+                <input type="text" asp-for="address" class="form-control" />
+                <span asp-validation-for="address" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="inputPassword">Enter Password:</label>
+                <input type="text" asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+
+            <br />
+
+            <div style="text-align: center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
-
-    <!-- Main Content Area -->
-    <div class="main-content">
-        <div class="pill-box">
-            <h1 style="text-align: center">Register Details - Employee</h1>
-            <form method="post">
-                <div>
-                    <label for="inputFirst">Enter First Name:</label>
-                    <input type="text" asp-for="firstName" class="form-control" />
-                    <span asp-validation-for="firstName" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="inputFirst">Enter Last Name:</label>
-                    <input type="text" asp-for="lastName" class="form-control" />
-                    <span asp-validation-for="lastName" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="inputFirst">Enter Email Address:</label>
-                    <input type="text" asp-for="email" class="form-control" />
-                    <span asp-validation-for="email" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="inputFirst">Enter Phone Number:</label>
-                    <input type="text" asp-for="phoneNumber" class="form-control" />
-                    <span asp-validation-for="phoneNumber" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="inputFirst">Select Employee Type:</label>
-                    <input type="text" asp-for="employeeType" class="form-control" />
-                    <span asp-validation-for="employeeType" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="inputFirst">Enter Address:</label>
-                    <input type="text" asp-for="address" class="form-control" />
-                    <span asp-validation-for="address" class="text-danger"></span>
-                </div>
-                <div>
-                    <label for="inputFirst">Enter Password:</label>
-                    <input type="text" asp-for="password" class="form-control" />
-                    <span asp-validation-for="password" class="text-danger"></span>
-                </div>
-                <br />
-                <div style="text-align: center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer Section -->
-    <div class="footer">
-    
-    </div>
-
 </body>
-</html>
+>

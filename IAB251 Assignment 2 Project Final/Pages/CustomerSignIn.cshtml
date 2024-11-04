@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@page
+@model IAB251_Assignment_2_Project_Final.Pages.CustomerSignInModel
+@{
+    ViewData["ShowNavbar"] = false;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,7 +19,7 @@
             box-sizing: border-box;
         }
 
-        /* Full-page layout setup */
+        /* Center layout */
         html, body {
             width: 100%;
             height: 100%;
@@ -24,7 +30,7 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Sign-in form container */
+        /* Form container styling */
         .signin-form-container {
             width: 90%;
             max-width: 400px;
@@ -49,7 +55,6 @@
                 margin: 10px 0;
                 border: 1px solid #ddd;
                 border-radius: 5px;
-                font-size: 1em;
             }
 
             /* Submit button styling */
@@ -67,18 +72,6 @@
                 .signin-form-container button:hover {
                     background-color: #0056b3;
                 }
-
-            /* Forgot password link */
-            .signin-form-container a {
-                display: block;
-                margin-top: 15px;
-                color: #007bff;
-                text-decoration: none;
-            }
-
-                .signin-form-container a:hover {
-                    text-decoration: underline;
-                }
     </style>
 </head>
 <body>
@@ -87,13 +80,11 @@
     <div class="signin-form-container">
         <h1>Customer Sign In</h1>
         <form method="post" action="submit-customer-signin">
-            <input type="text" asp-for="email" class="form-control" />
-            <span asp-validation-for="email" class="text-danger"></span>
-
+            <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
+
             <button type="submit">Sign In</button>
         </form>
-        <a href="forgot-password.html">Forgot Password?</a>
     </div>
 
 </body>
