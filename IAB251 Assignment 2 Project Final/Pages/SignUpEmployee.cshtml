@@ -4,7 +4,6 @@
     ViewData["Title"] = "Register Details Employee";
     ViewData["ShowNavbar"] = false;
 }
-
 <body>
     <h1 style="text-align: center" class="pill-box">
         Register Details - Employee
@@ -38,7 +37,13 @@
 
             <div>
                 <label for="inputEmployeeType">Select Employee Type:</label>
-                <input type="text" asp-for="employeeType" class="form-control" />
+                <select asp-for="employeeType" class="form-control">
+                    <option value="" disabled selected> Employee Type</option>
+                    <option value="type1">Admin</option>
+                    <option value="type2">Quotation officer</option>
+                    <option value="type3">Manager</option>
+                    
+                </select>
                 <span asp-validation-for="employeeType" class="text-danger"></span>
             </div>
 
@@ -62,4 +67,3 @@
         </form>
     </div>
 </body>
->
