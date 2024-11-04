@@ -1,4 +1,20 @@
 ﻿using IAB251_Assignment_2_Project_Final.Models;
+using System.Reflection;
+
+//ensuring users have installed the DB package to run this program package has been added as a dependency into the .csproj file 
+try
+{
+    Assembly.Load("Microsoft.Data.Sqlite");
+    Console.WriteLine("Assembly Loaded Sucessfully");
+}
+catch (FileNotFoundException)
+{
+    throw new InvalidOperationException("The required package 'Microsoft.Data.Sqlite' is not installed. Please install it using the following command: \n\n" +
+                                               "Install-Package Microsoft.Data.Sqlite\n\n" +
+                                               "or, using .NET CLI:\n\n" +
+                                               "dotnet add package Microsoft.Data.Sqlite");
+}
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +31,7 @@ try
     // Continue building application normally
     builder.Services.AddSingleton<IUserSessionControl, UserSessionService>();
     builder.Services.AddRazorPages();
+
 }
 catch (Exception ex)
 {

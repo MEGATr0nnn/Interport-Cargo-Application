@@ -4,9 +4,9 @@
 }
 
 <div class="pill-box">
-    <h1>
-        Welcome @Model.customerName to Your Dashboard
-    </h1>
+    <h2 style="text-align: center">
+        Welcome @Model.customer.getFirstName() to Your Dashboard
+    </h2>
 </div>
 
 <div class="pill-box">
@@ -15,14 +15,46 @@
     </h3>
 
     <div>
-        Quotation 1:
+        @if (Model.Quotations != null && Model.Quotations.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Customer Information</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Number of Containers</th>
+                        <th>Nature of Package</th>
+                        <th>Import/Export</th>
+                        <th>Packing</th>
+                        <th>Quarantine Requirements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var quote in Model.Quotations)
+                    {
+                        <tr>
+                            <td>@quote.getCustomerId();</td>
+                            <td>@quote.getCustomerInformation();</td>
+                            <td>@quote.getSource();</td>
+                            <td>@quote.getDestination();</td>
+                            <td>@quote.getNumOfContainers();</td>
+                            <td>@quote.getNatureOfPackage();</td>
+                            <td>@quote.getImport();</td>
+                            <td>@quote.getPacking();</td>
+                            <td>@quote.getQuarantineRequirements();</td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        }
+
     </div>
 
     <br />
-
-    <div>
-        Quotation 2:
-    </div>
 </div>
 
 <form method="post">

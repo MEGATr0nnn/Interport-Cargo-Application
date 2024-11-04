@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    ViewData["ShowNavbar"] = false; // Set this to hide the navbar
+}
+
+
+
+<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="text-center">
+        <h1>Welcome to Interport Cargo Services</h1>
+        <br />
+        <h4>Sign In or Sign Up</h4>
+        <br />
+
+        <div>
+            <form method="post">
+                <button type="submit" name="action" value="signinEmployee" class="btn btn-primary btn-lg mb-3" style="width: 200px;">Employee</button>
+                <br />
+                <button type="submit" name="action" value="signinCustomer" class="btn btn-secondary btn-lg mb-3" style="width: 200px;">Customer</button>
+                <br />
+                <button type="submit" name="action" value="signup" class="btn btn-success btn-lg" style="width: 200px;">Sign Up / Create Account</button>
+            </form>
+        </div>
+    </div>
+</div>

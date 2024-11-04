@@ -45,6 +45,15 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         private CustomerDAO _customerDAO;
 
+        /// <summary>
+        /// Allows for password to be hashed via SHA256
+        /// </summary>
+        private PasswordHasher _passwordHasher = new PasswordHasher();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userSessionControl"></param>
         public SignUp(IUserSessionControl userSessionControl)
         {
             _customerDAO = new CustomerDAO();
@@ -58,15 +67,16 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         public void OnGet() { }
 
         /// <summary>
-        /// 
+        /// Logic for when signup has been done correctly
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A redirect to the customer dashboard upon successful signup</returns>
         public IActionResult OnPost()
         {
             try 
             { 
+                string hashed = _passwordHasher.hashPassword(password);
 
-                Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, password);
+                Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, hashed);
                 _customerDAO.insertNew(currentUser);
 
                 _userSessionService.currentCustomerUser = currentUser;

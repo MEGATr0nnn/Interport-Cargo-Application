@@ -4,5 +4,45 @@
 }
 
 <h1 style="text-align: center">
-    Welcome @Model.employeeName to Your Quotation Management Dashboard
+    Welcome @Model.employee.getFirstName() to Your Quotation Management Dashboard
 </h1>
+
+<div>
+    @if (Model.allQuotations != null && Model.allQuotations.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Customer Information</th>
+                    <th>Source</th>
+                    <th>Destination</th>
+                    <th>Number of Containers</th>
+                    <th>Nature of Package</th>
+                    <th>Import/Export</th>
+                    <th>Packing</th>
+                    <th>Quarantine Requirements</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var quote in Model.allQuotations)
+                {
+                    <tr>
+                        <td>@quote.getCustomerId();</td>
+                        <td>@quote.getCustomerInformation();</td>
+                        <td>@quote.getSource();</td>
+                        <td>@quote.getDestination();</td>
+                        <td>@quote.getNumOfContainers();</td>
+                        <td>@quote.getNatureOfPackage();</td>
+                        <td>@quote.getImport();</td>
+                        <td>@quote.getPacking();</td>
+                        <td>@quote.getQuarantineRequirements();</td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    }
+
+</div>
