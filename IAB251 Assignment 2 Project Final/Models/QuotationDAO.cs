@@ -128,5 +128,32 @@ namespace IAB251_Assignment_2_Project_Final.Models
             };
             quotation.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
         }
+
+
+        public void update(Quotation quotation, int customerID)
+        {
+            string updateQuery = @"
+                    INSERT INTO quotation (customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status, customerId)
+                    VALUES (@customerInformation, @source, @destination, @numOfContainers, @sizeOfContainers, @natureOfPackage, @isImport, @isPacking, @quarantineReq, @fumigation, @crane, @status, @customerId)
+                    WHERE id = @id"; 
+            SqliteParameter[] parameters = new SqliteParameter[]
+            {
+                new SqliteParameter("@id", quotation.getId()),
+                new SqliteParameter("@customerInformation", quotation.getCustomerInformation()),
+                new SqliteParameter("@source", quotation.getSource()),
+                new SqliteParameter("@destination", quotation.getDestination()),
+                new SqliteParameter("@numOfContainers", quotation.getNumOfContainers()),
+                new SqliteParameter("@sizeOfContainers", quotation.getsizeOfContainers()),
+                new SqliteParameter("@natureOfPackage", quotation.getNatureOfPackage()),
+                new SqliteParameter("@isImport", quotation.getImport()),
+                new SqliteParameter("@isPacking", quotation.getPacking()),
+                new SqliteParameter("@quarantineReq", quotation.getQuarantineRequirements()),
+                new SqliteParameter("@fumigation", quotation.getFumigation()),
+                new SqliteParameter("@crane", quotation.getCrane()),
+                new SqliteParameter("@status", quotation.getStatus()),
+                new SqliteParameter("@customerId", customerID)
+            };
+            _connect.executeQuery(updateQuery, parameters);
+        }
     }
 }

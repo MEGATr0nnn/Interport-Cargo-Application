@@ -91,6 +91,7 @@
                             <td>@quote.getQuarantineRequirements()</td>
                             <td>@quote.getFumigation()</td>
                             <td>@quote.getCrane()</td>
+                            <td>@quote.getId()</td>
                             <td>
                                 @if (quote.getStatus() == "quoteSent")
                                 {
@@ -123,8 +124,15 @@
                                     <span>$@quote.calculateCharges(quote.getsizeOfContainers(), 0)</span>
                                 }
                             </td>
-                            <td><button value="accept">Accept</button></td>
-                            <td><button value="reject">Reject</button></td>
+                            <td>
+                                <input type="hidden" name="quoteIDAccept" value="@quote.getId()" />
+                                <button type="submit" name="action" value="accept">Accept</button>
+                            </td>
+
+                            <td>
+                                <input type="hidden" name="quoteIDReject" value="@quote.getId()" />
+                                <button type="submit" name="action" value="reject">Reject</button>
+                            </td>
                         </tr>
                     }
                 </tbody>

@@ -15,8 +15,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public bool Discount { get; set; } = false;
 
-
-
         /// <summary>
         /// Instance of Quotation Database
         /// </summary>
@@ -27,6 +25,10 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Creating a new Quotation model
         /// </summary>
         private Quotation Quotation { get; set; }
+
+        private CustomerDAO customerDAO { get; set; }
+
+        private Customer customer { get; set; }
 
         /// <summary>
         /// Creating a list of all quotations to showcase to the employee dashboard
@@ -55,7 +57,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Logic for employee button press
         /// </summary>
         /// <returns></returns>
-        public IActionResult OnPost(string action)
+        public IActionResult OnPost(string action, int quoteIDAccept, int quoteIDReject)
         {
             if (action == "Discount")
             {
@@ -64,6 +66,26 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 Discount = true;
                 Console.WriteLine("Discount after:" + Discount);
 
+            }
+
+            if (action == "accept")
+            {
+                Console.WriteLine("Button Accept has been pressed");
+                Console.WriteLine(quoteIDAccept + "ID ACCEPTED!");
+                Quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
+                Console.WriteLine(_quotationDAO.getSpecificQuotation(quoteIDAccept).getStatus() + "Status update");
+                Quotation.setStatus("Accepted");
+                _quotationDAO.update(Quotation, Quotation.getCustomerId());
+            }
+
+            if (action == "reject")
+            {
+                Console.WriteLine("Button REJECT has been pressed");
+                Console.WriteLine(quoteIDAccept + "ID REJECTED!");
+                Quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
+                Console.WriteLine(_quotationDAO.getSpecificQuotation(quoteIDAccept).getStatus() + " Status update");
+                Quotation.setStatus("Rejected");
+                _quotationDAO.update(Quotation, Quotation.getCustomerId());
             }
             return Page();
         }
