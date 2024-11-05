@@ -5,7 +5,7 @@
     /// </summary>
     public class Quotation
     {
-        //fields
+        //quotation fields
         private int _id;
         private string _customerInformation;
         private string _source;
@@ -20,6 +20,17 @@
         private bool _crane;
         private int _customerId;
         private string _status;
+
+        //cost fields
+        private int _wharffBookingFee;
+        private int _craneFee;
+        private int _fumigationFee;
+        private int _LCLDeliveryDepot;
+        private int _tailgateInspection;
+        private int _storageFee;
+        private int _facilityFee;
+        private int _wharfInspection;
+        private int _GST;
 
         /// <summary>
         /// Quotation class constructior. Used to instantise the Quotation Object
@@ -45,6 +56,22 @@
             _crane = crane;
             _status = status;
         }
+
+        //methods
+        public void calculateCharges(int sizeOfContainer)
+        {
+            if (sizeOfContainer == 20)
+            {
+
+            }
+
+            else
+            {
+
+            }
+        }
+
+
 
         //Getters and setters
         public int getId() { return _id; }
@@ -88,5 +115,8 @@
 
         public int getCustomerId() { return _customerId; }
         public void setCustomerId(int  customerId) { _customerId = customerId;}
+
+
+
     }
 }

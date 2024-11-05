@@ -24,7 +24,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             source VARCHAR NOT NULL,
                             destination VARCHAR NOT NULL,
                             numOfContainers INTEGER NOT NULL,
-                            sizeOfContainers VARCHAR NOT NULL,
+                            sizeOfContainers INTEGER NOT NULL,
                             natureOfPackage VARCHAR NOT NULL,
                             isImport INTEGER NOT NULL,
                             isPacking INTEGER NOT NULL,
