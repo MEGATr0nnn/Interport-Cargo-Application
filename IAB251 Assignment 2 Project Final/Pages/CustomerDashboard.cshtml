@@ -38,25 +38,33 @@
                         <th>Source</th>
                         <th>Destination</th>
                         <th>Number of Containers</th>
+                        <th>Size of Containers</th>
                         <th>Nature of Package</th>
-                        <th>Import/Export</th>
+                        <th>Import</th>
                         <th>Packing</th>
                         <th>Quarantine Requirements</th>
+                        <th>Fumigation</th>
+                        <th>Crane</th>
+                        <th>Status of Quotation</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var quote in Model.Quotations)
                     {
                         <tr>
-                            <td>@quote.getCustomerId();</td>
-                            <td>@quote.getCustomerInformation();</td>
-                            <td>@quote.getSource();</td>
-                            <td>@quote.getDestination();</td>
+                            <td>@quote.getCustomerId()</td>
+                            <td>@quote.getCustomerInformation()</td>
+                            <td>@quote.getSource()</td>
+                            <td>@quote.getDestination()</td>
                             <td>@quote.getNumOfContainers();</td>
-                            <td>@quote.getNatureOfPackage();</td>
-                            <td>@quote.getImport();</td>
-                            <td>@quote.getPacking();</td>
-                            <td>@quote.getQuarantineRequirements();</td>
+                            <td>@quote.getsizeOfContainers()</td>
+                            <td>@quote.getNatureOfPackage()</td>
+                            <td>@quote.getImport()</td>
+                            <td>@quote.getPacking()</td>
+                            <td>@quote.getQuarantineRequirements()</td>
+                            <td>@quote.getFumigation()</td>
+                            <td>@quote.getCrane()</td>
+                            <td>@quote.getStatus()</td>
                         </tr>
                     }
 

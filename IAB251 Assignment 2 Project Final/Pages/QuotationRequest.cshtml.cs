@@ -8,7 +8,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
     public class QuotationRequest : PageModel
     {
         /// <summary>
-        /// 
+        /// All necessary user input fields 
         /// </summary>
         [BindProperty]
         public int requestID { get; set; }
@@ -35,7 +35,19 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         public bool isPacking { get; set; }
 
         [BindProperty]
-        public string quarantineReq { get; set; }
+        public bool quarantineReq { get; set; }
+
+        [BindProperty]
+        public int sizeContainer { get; set; }
+
+        [BindProperty]
+        public bool isFumigation { get; set; }
+
+        [BindProperty]
+        public bool isCrane { get; set; }
+
+        [BindProperty]
+        public string status { get; set; }
 
 
         private readonly QuotationDAO _quotation;
@@ -49,11 +61,13 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             _userSessionService = userSessionControl;
         }
 
-
+        /// <summary>
+        /// Return to the homepage after logout button is pressed
+        /// set user session service to null
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnPostLogout()
         {
-            // Return to the homepage
-            //set user session service to null
             return RedirectToPage("/Index");
         }
 
@@ -63,7 +77,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <returns>Redirects to Dashboard Upon Successful Quotation Creation</returns>
         public IActionResult OnPost()
         {
-            Quotation quotation = new Quotation(customerInfo, source, destination, numContainers, packageNature, isImport, isPacking, quarantineReq);
+            Quotation quotation = new Quotation(customerInfo, source, destination, numContainers, sizeContainer, packageNature, isImport, isPacking, quarantineReq, isFumigation, isCrane, status);
 
             _quotation.insertNew(quotation, _userSessionService.currentCustomerUser);
 

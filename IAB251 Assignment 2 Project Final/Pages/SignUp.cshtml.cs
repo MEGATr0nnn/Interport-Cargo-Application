@@ -35,6 +35,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [DataType(DataType.Password)]
         public string password { get; set; }
 
+        [BindProperty]
+        public string company { get; set; }
+
         /// <summary>
         /// Allows access to the current sessions user
         /// </summary>
@@ -76,7 +79,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             { 
                 string hashed = _passwordHasher.hashPassword(password);
 
-                Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, hashed);
+                Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, hashed, company);
                 _customerDAO.insertNew(currentUser);
 
                 _userSessionService.currentCustomerUser = currentUser;

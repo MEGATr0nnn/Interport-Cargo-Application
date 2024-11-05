@@ -44,6 +44,11 @@
                 </div>
 
                 <div>
+                    <label for="inputCompany">Enter Company Name (Optional):</label>
+                    <input type="text" asp-for="company" class="form-control" />
+                </div>
+
+                <div>
                     <label for="inputPassword">Enter Password:</label>
                     <input type="password" asp-for="password" class="form-control" />
                     <span asp-validation-for="password" class="text-danger"></span>

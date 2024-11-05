@@ -46,6 +46,12 @@
             <input type="text" asp-for="numContainers" class="form-control" />
         </div>
 
+        <!--This needs to be a radio button vuyo-->
+        <div>
+            <label for="sizeContainer">Enter Size of Containers (20 or 40 Feet):</label>
+            <input type="text" asp-for="sizeContainer" class="form-control" />
+        </div>
+
         <div>
             <label for="packageNature">Enter Nature of Package:</label>
             <input type="text" asp-for="packageNature" class="form-control" />
@@ -81,11 +87,52 @@
             </div>
         </div>
 
-        <div>
-            <label for="quarantineReq">Enter Quarantine Requirements:</label>
-            <input type="text" asp-for="quarantineReq" class="form-control" />
+
+        <div class="pill-box">
+            <label for="quarantineReq" style="text-align: center">Quarantine:</label>
+            <br />
+            <div>
+                <input type="radio" asp-for="quarantineReq" id="Yes" value="True" />
+                <label for="quarantine"> Yes </label><br />
+            </div>
+            <div>
+                <input type="radio" asp-for="quarantineReq" id="No" value="False" />
+                <label for="quarantine"> No </label>
+            </div>
         </div>
 
+
+        <div class="pill-box">
+            <label for="isFumigation" style="text-align: center">Fumigation:</label>
+            <br />
+            <div>
+                <input type="radio" asp-for="isFumigation" id="Yes" value="True" />
+                <label for="fumigation"> Yes </label><br />
+            </div>
+            <div>
+                <input type="radio" asp-for="isFumigation" id="No" value="False" />
+                <label for="fumigation"> No </label>
+            </div>
+        </div>
+
+        <div class="pill-box">
+            <label for="isCrane" style="text-align: center">Crane:</label>
+            <br />
+            <div>
+                <input type="radio" asp-for="isCrane" id="Yes" value="True" />
+                <label for="crane"> Yes </label><br />
+            </div>
+            <div>
+                <input type="radio" asp-for="isCrane" id="No" value="False" />
+                <label for="crane"> No </label>
+            </div>
+        </div>
+
+        <!--This needs to be a dropdown with 4 values, talk to harry about the values-->
+        <div>
+            <label for="quotationStatus">Quotation Status:</label>
+            <input type="text" asp-for="status" class="form-control" />
+        </div>
 
         <br />
 

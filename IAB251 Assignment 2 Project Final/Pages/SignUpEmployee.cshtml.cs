@@ -37,6 +37,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [Required(ErrorMessage = "An Employee Type Must be Defined.")]
         public string employeeType { get; set; }
 
+
         [BindProperty]
         [Required(ErrorMessage = "An Employee Address Must be Listed.")]
         public string address { get; set; }
@@ -45,6 +46,8 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [Required(ErrorMessage = "A Password is Required.")]
         [DataType(DataType.Password)]
         public string password { get; set; }
+
+
 
 
         /// <summary>
@@ -86,7 +89,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 {
                     string hashed = _passwordHasher.hashPassword(password);
 
-                    Employee employee = new Employee(firstName, lastName, email, phoneNumber, hashed, employeeType);
+                    string dateJoined = DateTime.Now.ToString("yyyy-MM-dd");
+
+                    Employee employee = new Employee(firstName, lastName, email, phoneNumber, hashed, employeeType, address, dateJoined);
                     _employeeDAO.insertNew(employee);
 
                     _userSessionService.currentEmployeeUser = employee;

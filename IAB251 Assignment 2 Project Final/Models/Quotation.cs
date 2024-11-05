@@ -99,8 +99,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
             _status = status;
         }
 
-        //methods
-
         /// <summary>
         /// Calculates if a discount is applicable
         /// </summary>
