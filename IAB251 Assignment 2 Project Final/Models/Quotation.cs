@@ -11,18 +11,18 @@
         private string _source;
         private string _destination;
         private int _numOfContainers;
-        private int _sizeOfContainers;
+        private int _sizeOfContainers; //new dropdown box only two sizes 20ft 40ft
         private string _natureOfPackage;
         private bool _importExport;
         private bool _packing;
         private string _quarantineReq;
-        private bool _fumigation;
-        private bool _crane;
+        private bool _fumigation; //new radio
+        private bool _crane; //new radio
         private int _customerId;
-        private string _status;
+        private string _status; //new automatically assign to pending when initally created in quotation request
 
         //cost fields
-        private int _wharffBookingFee;
+        private int _wharfBookingFee;
         private int _craneFee;
         private int _fumigationFee;
         private int _LCLDeliveryDepot;
@@ -62,7 +62,7 @@
         {
             if (sizeOfContainer == 20)
             {
-
+                
             }
 
             else
