@@ -9,50 +9,34 @@ namespace IAB251_Assignment_2_Project_Final.Pages
     /// </summary>
     public class EmployeeDashboardModel : PageModel
     {
-
+        /// <summary>
+        /// Instance of Quotation Database
+        /// </summary>
         private readonly QuotationDAO _quotationDAO;
 
-        private readonly IUserSessionControl _userSessionService;
-        
-        private EmployeeDAO _employeeDAO;
+        /// <summary>
+        /// Creating a new Quotation model
+        /// </summary>
+        private Quotation Quotation { get; set; }
 
-        private Quotation Quotation {  get; set; }
-
-        [BindProperty]
-        public string employeeName { get; set; }
-
-        public Employee employee { get; set; }
-
+        /// <summary>
+        /// Creating a list of all quotations to showcase to the employee dashboard
+        /// </summary>
         public List<Quotation> allQuotations { get; set; }
 
-
-
-        public EmployeeDashboardModel(IUserSessionControl userSessionControl)
+        /// <summary>
+        /// Constructor to intialise the employee database and the quotationDAO
+        /// </summary>
+        public EmployeeDashboardModel()
         {
-            _employeeDAO = new EmployeeDAO();
-            _userSessionService = userSessionControl;
             _quotationDAO = new QuotationDAO();
-
         }
-
-        public IActionResult OnPost(string action)
-        {
-            if (action == "rates")
-            {
-                return RedirectToPage("/RatesSchedule");
-            }
-
-            return Page();
-            //return RedirectToPage("/QuotationManagement");
-        }
-
 
         /// <summary>
         /// Getting current user and all quotations stored in QuotationDAO
         /// </summary>
         public void OnGet()
         {
-            employee = _userSessionService.currentEmployeeUser;
             allQuotations = _quotationDAO.getAllQuotations();
         }
     }

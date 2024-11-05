@@ -11,36 +11,62 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 {
 	public class EmployeeSignInModel : PageModel
     {
+        /// <summary>
+        /// Email from user input
+        /// Required field
+        /// </summary>
         [BindProperty]
         [Required]
         [EmailAddress]
         public string email { get; set; }
 
+        /// <summary>
+        /// Password from user input
+        /// Required field
+        /// </summary>
         [BindProperty]
         [Required]
         [DataType(DataType.Password)]
         public string password { get; set; }
 
+        /// <summary>
+        /// Boolean for if the signin was successfull
+        /// </summary>
         [BindProperty]
         public bool SignIn { get; set; } = true;
 
-
+        /// <summary>
+        /// New instance of Employee database for checking values
+        /// </summary>
         private readonly EmployeeDAO _employeeDAO;
 
+        /// <summary>
+        /// Instance of paswordhasher to hash the password
+        /// </summary>
         private PasswordHasher _passwordHasher = new PasswordHasher();
 
+        /// <summary>
+        /// Instance of current user session
+        /// </summary>
         private readonly IUserSessionControl _userSessionService;
 
+        /// <summary>
+        /// Constructor to create an instance of the Employee database
+        /// Initialise user session
+        /// </summary>
+        /// <param name="userSessionControl"></param>
         public EmployeeSignInModel(IUserSessionControl userSessionControl)
         {
             _employeeDAO = new EmployeeDAO();
             _userSessionService = userSessionControl;
 
         }
-        public void OnGet()
-        {
-        }
 
+        /// <summary>
+        /// Logic for when user successfilly signs in 
+        /// </summary>
+        /// <param name="action">User button input</param>
+        /// <returns>Page redirect depending on successful signin</returns>
         public IActionResult OnPost(string action)
         {
             if (action == "signin")
