@@ -15,7 +15,7 @@
         private string _natureOfPackage;
         private bool _importExport;
         private bool _packing;
-        private string _quarantineReq;
+        private bool _quarantineReq;
         private bool _fumigation; //new radio
         private bool _crane; //new radio
         private int _customerId;
@@ -48,7 +48,7 @@
         /// <param name="numOfContainers">Number of containers that need to be shipped.</param>
         /// <param name="natureOfPackage">Whats in the package (ie auto parts).</param>
         /// <param name="natureOfJob">The details of the job (ie import/export, fumigation, packing/unpacking and quarantine requirements).</param>
-        public Quotation(string customerInformation, string source, string destination, int numOfContainers, int sizeOfContainers, string natureOfPackage, bool importExport, bool packing, string quarantineReq, bool fumigation, bool crane, string status)
+        public Quotation(string customerInformation, string source, string destination, int numOfContainers, int sizeOfContainers, string natureOfPackage, bool importExport, bool packing, bool quarantineReq, bool fumigation, bool crane, string status)
         {
             _customerInformation = customerInformation;
             _source = source;
@@ -64,28 +64,46 @@
             _status = status;
         }
 
+
+
+        public double calculateDiscount()
+        {
+            if (getNumOfContainers() > 5 && (getQuarantineRequirements() ||  getFumigation()))
+            {
+                return 0.025;
+            }
+            if (getNumOfContainers() > 5 && (getQuarantineRequirements() && getFumigation()))
+            {
+                return 0.05;
+            }
+            if (getNumOfContainers() > 10 && (getQuarantineRequirements() && getFumigation()))
+            {
+                return 0.1;
+            }
+            return 0;
+        }
         //methods
         /// <summary>
         /// Automatically alculates the charges via the corresponding fees and container sizes. This was made in a rush and could be better optimised with a dictonary
+        /// or a class that has the fee structure and initalises a switch case based on if _crane ? craneFee : 0;
         /// </summary>
         /// <param name="sizeOfContainer">The size of the container</param>
         /// <returns>A double</returns>
-        public double calculateCharges(int sizeOfContainer)
+        public double calculateCharges(int sizeOfContainer, double discount)
         {
             if (sizeOfContainer == 20)
             {
-                if (_fumigation && _crane) //if both
+                if (getFumigation() && getCrane()) //if both
                 {
-                    return calculate(60, 80, 220, 400, 120, 240, 70, 60, 0.1);
+                    return calculate(60, 80, 220, 400, 120, 240, 70, 60, 0.1, discount);
                 }
-                else if (_fumigation) //if one
+                else if (getFumigation()) //if one
                 {
-                   
-                    return calculate(60, 0, 220, 400, 120, 240, 70, 60, 0.1);
+                    return calculate(60, 0, 220, 400, 120, 240, 70, 60, 0.1, discount);
                 }
-                else if (_crane) //if one
+                else if (getCrane()) //if one
                 {
-                    return calculate(60, 80, 0, 400, 120, 240, 70, 60, 0.1);
+                    return calculate(60, 80, 0, 400, 120, 240, 70, 60, 0.1, discount);
                 }
                 else //if none
                 {
@@ -94,17 +112,17 @@
             }
             else 
             {
-                if (_fumigation && _crane) //if both
+                if (getFumigation() && getCrane()) //if both
                 {
-                    return calculate(70, 120, 280, 500, 160, 300, 100, 90, 0.1);
+                    return calculate(70, 120, 280, 500, 160, 300, 100, 90, 0.1, discount);
                 }
-                else if (_fumigation) //if one
+                else if (getFumigation()) //if one
                 {
-                    return calculate(70, 0, 280, 500, 160, 300, 100, 90, 0.1);
+                    return calculate(70, 0, 280, 500, 160, 300, 100, 90, 0.1, discount);
                 }
-                else if (_crane) //if one
+                else if (getCrane()) //if one
                 {
-                    return calculate(70, 120, 0, 500, 160, 300, 100, 90, 0.1);
+                    return calculate(70, 120, 0, 500, 160, 300, 100, 90, 0.1, discount);
                 }
                 else //if none
                 {
@@ -126,8 +144,9 @@
         /// <param name="wharfInspection">Wharf Inspection Fee</param>
         /// <param name="GST">GST</param>
         /// <returns>A double, Total</returns>
-        public double calculate(int wharfFee, int craneFee, int fumigationFee, int LCL, int tailgateFee, int storageFee, int facilityFee, int wharfInspection, double GST)
+        public double calculate(int wharfFee, int craneFee, int fumigationFee, int LCL, int tailgateFee, int storageFee, int facilityFee, int wharfInspection, double GST, double discount)
         {
+            
             setWharfFee(wharfFee);
             setCraneFee(craneFee);
             setFumigationFee(fumigationFee);
@@ -137,8 +156,13 @@
             setFacilityFee(facilityFee);
             setWharfInspectionFee(wharfInspection);
             setGST(GST);
-            setTotal(getWharfFee() + getCraneFee() + getFumigationFee() + getLCLFee() 
-                + getTailgateFee() + getStorageFee() + getFacilityFee() + getWharfInspectionFee() + getGST());
+            double subtotal = (getWharfFee() + getCraneFee() + getFumigationFee() + getLCLFee() 
+                + getTailgateFee() + getStorageFee() + getFacilityFee() + getWharfInspectionFee());
+            if (discount != 0)
+            {
+                setTotal((subtotal * discount) * getGST());
+            }
+            else setTotal(subtotal * getGST());
             return getTotal();
         }
 
@@ -169,8 +193,8 @@
         public bool getPacking() { return _packing; }
         public void setPacking(bool packing) { _packing = packing; }
 
-        public string getQuarantineRequirements() { return _quarantineReq; }
-        public void setQuarantineRequirements(string quarantineReq) { _quarantineReq = quarantineReq; }
+        public bool getQuarantineRequirements() { return _quarantineReq; }
+        public void setQuarantineRequirements(bool quarantineReq) { _quarantineReq = quarantineReq; }
 
         public int getsizeOfContainers() { return _sizeOfContainers; }
         public void setContainerSize(int size) { _sizeOfContainers = size; }
