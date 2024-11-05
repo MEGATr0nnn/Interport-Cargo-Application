@@ -75,8 +75,8 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <returns>A redirect to the customer dashboard upon successful signup</returns>
         public IActionResult OnPost()
         {
-            try 
-            { 
+            try
+            {
                 string hashed = _passwordHasher.hashPassword(password);
 
                 Customer currentUser = new Customer(firstName, lastName, email, phoneNumber, hashed, company);

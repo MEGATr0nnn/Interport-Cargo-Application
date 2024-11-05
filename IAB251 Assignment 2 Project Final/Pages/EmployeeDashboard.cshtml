@@ -8,13 +8,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <div class="header-container">
-    <form method="post" asp-page-handler="Back">
+    <form method="post" >
         <button type="submit" class="btn btn-secondary">Back</button>
     </form>
 
 
-<form method="post" asp-page-handler="Logout">
-    <button type="Logout" class="btn btn-primary">Logout</button>
+<form method="post">
+    <button type="Logout" name="Logout" class="btn btn-primary">Logout</button>
 </form>
     </div>
 <br />
@@ -64,7 +64,6 @@
                     <th>Packing</th>
                     <th>Quarantine Requirements</th>
                     <th>Status</th>
-                    <th>Discount</th>
                     <th>Total Cost</th>
                     <th>Accept</th>
                     <th>Reject</th>
@@ -84,36 +83,8 @@
                         <td>@quote.getImport();</td>
                         <td>@quote.getPacking();</td>
                         <td>@quote.getQuarantineRequirements();</td>
-                        <td>
-                            @if (quote.getStatus() == "quoteSent")
-                            {
-                            <span>Pending</span>
-                            }
-                            else
-                            {
-                            <span>@quote.getStatus()</span>
-                            }
-                        </td>
-                        <td>
-                            @if(quote.calculateDiscount() > 0)
-                            {
-                            <span><button value="Discount">Apply Discount</button></span>
-                            }
-                            else
-                            {
-                            <span>No Discount to Apply</span>
-                            }
-                        </td>
-                        <td>
-                            @if(Model.Discount)
-                            {
-                                <span>@quote.calculateCharges(quote.getsizeOfContainers(), quote.calculateDiscount());</span>
-                            }
-                            else
-                            {
-                                <span>@quote.calculateCharges(quote.getsizeOfContainers(), 0);</span>
-                            }
-                        </td>
+                        <td>STATUS (DONE BY HARRY)</td>
+                        <td>TOTAL COST (DONE BY HARRY)</td>
                         <td><button value="accept">Accept</button></td>
                         <td><button value="reject">Reject</button></td>
                     </tr>
