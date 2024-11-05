@@ -24,7 +24,7 @@ namespace Tests
         [TestMethod]
         public void testValidEmail()
         {
-            Assert.IsTrue(_quotation.testValidEmail(_quotation.getCustomerInformation()), "Email must have @ symbol");
+            Assert.IsTrue(_quotation.checkValidEmail(_quotation.getCustomerInformation()), "Email must have @ symbol");
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Tests
         [TestMethod]
         public void testValidCountrySource()
         {
-            Assert.IsTrue(_quotation.testValidCountry(_quotation.getSource()), "Source country is not valid");
+            Assert.IsTrue(_quotation.checkValidCountry(_quotation.getSource()), "Source country is not valid");
         }
 
 
@@ -43,7 +43,7 @@ namespace Tests
         [TestMethod]
         public void testValidCountryDestination()
         {
-            Assert.IsTrue(_quotation.testValidCountry(_quotation.getDestination()), "Destination country is not valid");
+            Assert.IsTrue(_quotation.checkValidCountry(_quotation.getDestination()), "Destination country is not valid");
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Tests
         [TestMethod]
         public void testValidContainers()
         {
-            Assert.IsTrue(_quotation.testNumberContainers(_quotation.getNumOfContainers()), "Containers must be of a whole number");
+            Assert.IsTrue(_quotation.checkNumberContainers(_quotation.getNumOfContainers()), "Containers must be of a whole number");
         }
     }
 }

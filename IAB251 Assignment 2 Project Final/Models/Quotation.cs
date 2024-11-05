@@ -83,7 +83,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <param name="packing">Is the quotation for packing or unpacking (True = Packing).</param>
         /// <param name="quarantineReq">Any necessary quarantine requirements for the package.</param>
 
-        public Quotation(string customerInformation, string source, string destination, int numOfContainers, string natureOfPackage, bool import, bool packing, string quarantineReq)
+        public Quotation(string customerInformation, string source, string destination, int numOfContainers, int sizeOfContainers, string natureOfPackage, bool importExport, bool packing, bool quarantineReq, bool fumigation, bool crane, string status)
         {
             _customerInformation = customerInformation;
             _source = source;
@@ -99,11 +99,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
             _status = status;
         }
 
+        //methods
 
-
+        /// <summary>
+        /// Calculates if a discount is applicable
+        /// </summary>
+        /// <returns></returns>
         public double calculateDiscount()
         {
-            if (getNumOfContainers() > 5 && (getQuarantineRequirements() ||  getFumigation()))
+            if (getNumOfContainers() > 5 && (getQuarantineRequirements() || getFumigation()))
             {
                 return 0.025;
             }
@@ -117,7 +121,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
             }
             return 0;
         }
-        //methods
+
         /// <summary>
         /// Automatically alculates the charges via the corresponding fees and container sizes. This was made in a rush and could be better optimised with a dictonary
         /// or a class that has the fee structure and initalises a switch case based on if _crane ? craneFee : 0;
@@ -201,6 +205,50 @@ namespace IAB251_Assignment_2_Project_Final.Models
             return getTotal();
         }
 
+        /// <summary>
+        /// Test to determine whether email format is valid
+        /// </summary>
+        /// <param name="email">The user input for email address</param>
+        /// <returns>True if format is correct</returns>
+        public bool checkValidEmail(string email)
+        {
+            if (email.Contains('@'))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Test to determine if the country inputted is a valid country
+        /// </summary>
+        /// <param name="country">The user input for source/destination</param>
+        /// <returns>True if input is a country</returns>
+        public bool checkValidCountry(string country)
+        {
+            foreach (string c in Countries)
+            {
+                if (country.Equals(c))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Test to determine the number of containers is valid
+        /// </summary>
+        /// <param name="numberContainers">The number of containers to ship</param>
+        /// <returns>True is input is greater than 0</returns>
+        public bool checkNumberContainers(int numberContainers)
+        {
+            if (numberContainers > 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
 
         //Getters and setters
@@ -239,40 +287,11 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public bool getCrane() { return _crane; }
         public void setCrane(bool crane) { _crane = crane; }
 
-
-        /// <summary>
-        /// Test to determine whether email format is valid
-        /// </summary>
-        /// <param name="email">The user input for email address</param>
-        /// <returns>True if format is correct</returns>
-        public bool testValidEmail(string email)
-        {
-            if (email.Contains('@'))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Test to determine if the country inputted is a valid country
-        /// </summary>
-        /// <param name="country">The user input for source/destination</param>
-        /// <returns>True if input is a country</returns>
-        public bool testValidCountry(string country)
-        {
-            foreach (string c in Countries)
-            {
-                if (country.Equals(c))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public int getCustomerId() { return _customerId; }
         public void setCustomerId(int  customerId) { _customerId = customerId;}
+
+        public string getStatus() { return _status; }
+        public void setStatus(string status) { _status = status; }
 
         //cost getters and setters
         public int getWharfFee() { return _wharfBookingFee; }
@@ -304,20 +323,5 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
         public double getTotal() { return _total; }
         public void setTotal(double total) { _total = total; }
-
-
-        /// <summary>
-        /// Test to determine the number of containers is valid
-        /// </summary>
-        /// <param name="numberContainers">The number of containers to ship</param>
-        /// <returns>True is input is greater than 0</returns>
-        public bool testNumberContainers(int numberContainers)
-        {
-            if (numberContainers > 0)
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }
