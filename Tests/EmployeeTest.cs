@@ -39,7 +39,7 @@ namespace Tests
         [TestMethod]
         public void TestEmail()
         {
-            Assert.IsTrue(_employee.testValidEmail(_employee.getEmail()), "Employee must have valid email.");
+            Assert.IsTrue(_employee.checkValidEmail(_employee.getEmail()), "Employee must have valid email.");
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Tests
         [TestMethod]
         public void TestPhoneNumber()
         {
-            Assert.IsTrue(_employee.testValidNumber(_employee.getPhoneNumber()), "Employee must have a valid phone number");
+            Assert.IsTrue(_employee.checkValidNumber(_employee.getPhoneNumber()), "Employee must have a valid phone number");
         }
 
         //****** LOGIC FOR THIS DOESNT WORK YET ********
@@ -58,7 +58,7 @@ namespace Tests
         [TestMethod]
         public void TestPhoneNumbersOnly()
         {
-            Assert.IsTrue(_employee.testValidEmail(_employee.getPhoneNumber()), "Phone number must only contain digits");            
+            Assert.IsTrue(_employee.checkValidEmail(_employee.getPhoneNumber()), "Phone number must only contain digits");            
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Tests
         [TestMethod]
         public void TestEmployeeType()
         {
-            Assert.IsTrue(_employee.testVaildEmployeeType(_employee.getType()), "Employee must have a valid Employee Type");
+            Assert.IsTrue(_employee.checkVaildEmployeeType(_employee.getType()), "Employee must have a valid Employee Type");
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Tests
         [TestMethod]
         public void TestDuplicateEmail()
         {
-            Assert.IsTrue(_employee.testDuplicateEmail(_employee.getEmail(), _employeeDuplicate.getEmail()), "There is already an account associated with this email address");
+            Assert.IsTrue(_employee.checkDuplicateEmail(_employee.getEmail(), _employeeDuplicate.getEmail()), "There is already an account associated with this email address");
         }
     }
 }
