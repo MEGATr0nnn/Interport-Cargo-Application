@@ -12,21 +12,19 @@
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
-
-
-body {
-   
-    margin-bottom: 60px;
-}
 /* Basic reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for a lifted effect */
 }
 
 /* Full-page layout */
@@ -36,7 +34,7 @@ html, body {
     min-height: 100vh;
     width: 100vw;
     overflow-x: hidden; /* Prevent horizontal scroll */
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; /* Light background for the page */
     font-family: Arial, sans-serif;
 }
 
@@ -51,19 +49,19 @@ html, body {
     position: relative;
 }
 
-/* Main content area */
+/* Main content area EVERYTHING SITS INSIDE THIS */
 .main-content {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    position: relative;
+    padding: 5px;
 }
 
 .container, .container-fluid {
     max-width: 100%; /* Ensures the container does not exceed the viewport width */
-    padding: 20px 15px; /* Optional: add some padding for aesthetics */
 }
 
 /* Full-page center container */
@@ -84,17 +82,8 @@ html, body {
     padding: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    align-items: center;
     margin-bottom: 20px; /* Space between stacked boxes */
-}
-
-
-/* Centering the signup container */
-.signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers content horizontally */
-    margin: 0 auto; /* Centers the container itself */
-    text-align: center;
 }
 
 /* Extended pill-box for full content coverage */
@@ -112,6 +101,17 @@ html, body {
     align-items: center;
     text-align: left;
 }
+
+/* Centering the signup container */
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    margin: 0 auto; /* Centers the container itself */
+    text-align: center;
+}
+
+
 
 /* Container to align the welcome message and chart side by side */
 .welcome-and-chart-container {
@@ -131,18 +131,6 @@ html, body {
         flex: 1;
         max-width: 600px; /* Control the maximum width of the chart */
     }
-
-
-/* Center layout */
-html, body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
-}
 
 /* Form container styling */
 .signin-form-container {
@@ -197,42 +185,6 @@ html, body {
         .signin-form-container button:hover {
             background-color: #0056b3;
         }
-
-/* Footer styling */
-.footer {
-    width: 100%;
-    padding: 20px;
-    background-color: white;
-    color: white;
-    text-align: center;
-    font-size: 1em;
-    position: relative;
-    bottom: 0;
-}
-
-    .footer h2 {
-        margin: 0;
-        font-size: 1.2em;
-    }
-
-
-/* Basic reset for full-screen setup */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Centering layout setup */
-html, body {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4; /* Light background for the page */
-    font-family: Arial, sans-serif;
-}
 
 /* Container for the buttons */
 .signup-container {
@@ -292,33 +244,6 @@ html, body {
     margin-right: 10px;
 }
 
-<style >
-/* Basic reset and full viewport setup */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    width: 100vw;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    background-color: #f4f4f4;
-    font-family: Arial, sans-serif;
-}
-
-/* Main content area */
-.main-content {
-    flex: 1; /* Allows the main content to expand */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
 /* Hero image section */
 .hero-image1 {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/ship.jpg');
@@ -374,11 +299,19 @@ html, body {
             color: white;
         }
 
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Footer styling */
+.footer {
     width: 100%;
-
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for a lifted effect */
+    padding: 20px;
+    background-color: white;
+    color: white;
+    text-align: center;
+    font-size: 1em;
+    position: relative;
+    bottom: 0;
 }
+
+    .footer h2 {
+        margin: 0;
+        font-size: 1.2em;
+    }
