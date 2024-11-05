@@ -20,6 +20,8 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         private readonly IUserSessionControl _userSessionService;
 
+        private Quotation quotation { get; set; }   
+
         /// <summary>
         /// Creating a list of all quotations that have been created by this customer
         /// </summary>
@@ -40,9 +42,34 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Once user clicks quotation request button direct to Quotation Request Form
         /// </summary>
         /// <returns>Returns a redirect to next page</returns>
-        public IActionResult OnPost()
+        public IActionResult OnPost(string action, int quoteIDAccept, int quoteIDReject)
         {
-            return RedirectToPage("/QuotationRequest");
+            if (action == "quotation")
+            {
+                return RedirectToPage("/QuotationRequest");
+            }
+
+            if (action == "accept")
+            {
+                Console.WriteLine("Button Accept has been pressed");
+                Console.WriteLine(quoteIDAccept + "ID ACCEPTED!");
+                quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
+                Console.WriteLine(_quotationDAO.getSpecificQuotation(quoteIDAccept).getStatus() + "Status update");
+                quotation.setStatus("Accepted");
+                _quotationDAO.update(quotation, quotation.getCustomerId());
+            }
+
+            if (action == "reject")
+            {
+                Console.WriteLine("Button REJECT has been pressed");
+                Console.WriteLine(quoteIDReject + " ID REJECTED!");
+                quotation = _quotationDAO.getSpecificQuotation(quoteIDReject);
+                Console.WriteLine(_quotationDAO.getSpecificQuotation(quoteIDReject).getStatus() + " Status update");
+                quotation.setStatus("Rejected");
+                _quotationDAO.update(quotation, quotation.getCustomerId());
+            }
+            return RedirectToPage("/CustomerDashboard");
+
         }
 
         /// <summary>
