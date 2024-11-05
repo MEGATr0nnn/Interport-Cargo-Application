@@ -41,9 +41,10 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                 lastName = reader.GetString(reader.GetOrdinal("lastName")),
                                 email = reader.GetString(reader.GetOrdinal("email")),
                                 password = reader.GetString(reader.GetOrdinal("password")),
-                                phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber"));
+                                phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber")),
+                                company = reader.GetString(reader.GetOrdinal("company"));
 
-                            customer = new Customer(firstName, lastName, email, phoneNumber, password);
+                            customer = new Customer(firstName, lastName, email, phoneNumber, password, company);
                             customer.setId(id);
                         }
                     }
