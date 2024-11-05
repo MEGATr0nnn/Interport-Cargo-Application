@@ -11,9 +11,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// All necessary user input fields 
         /// </summary>
         [BindProperty]
-        public int requestID { get; set; }
-
-        [BindProperty]
         public string customerInfo { get; set; }
 
         [BindProperty]

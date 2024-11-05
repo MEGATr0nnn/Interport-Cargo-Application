@@ -27,6 +27,10 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for a lifted effect */
 }
 
+head{
+    align-content: center;
+    text-align: center;
+}
 /* Full-page layout */
 html, body {
     display: flex;
@@ -49,15 +53,28 @@ html, body {
     position: relative;
 }
 
-/* Main content area EVERYTHING SITS INSIDE THIS */
-.main-content {
-    flex: 1;
+/* Header container to hold back and logout buttons */
+.header-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    position: relative;
-    padding: 5px;
+    width: 100%;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent; /* Optional: Background color for visibility */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Styling for the back button */
+.back-button {
+    margin-left: 10px;
+}
+
+/* Styling for the logout button */
+.logout-button {
+    margin-right: 10px;
 }
 
 .container, .container-fluid {
@@ -68,10 +85,12 @@ html, body {
 .center-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
     min-height: 100vh; /* Full viewport height */
-    text-align: center;
+    width: 100vw; /* Full viewport width */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    text-align: center; /* Center text within child elements */
 }
 
 /* Pill-box styling */
@@ -83,6 +102,7 @@ html, body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     align-items: center;
+    text-align: center;
     margin-bottom: 20px; /* Space between stacked boxes */
 }
 
@@ -110,8 +130,6 @@ html, body {
     margin: 0 auto; /* Centers the container itself */
     text-align: center;
 }
-
-
 
 /* Container to align the welcome message and chart side by side */
 .welcome-and-chart-container {
@@ -219,30 +237,6 @@ html, body {
         .signup-container button:hover {
             background-color: #0C6B97;
         }
-
-/* Header container to hold back and logout buttons */
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: transparent; /* Optional: Background color for visibility */
-    z-index: 1000; /* Ensure it stays on top */
-}
-
-/* Styling for the back button */
-.back-button {
-    margin-left: 10px;
-}
-
-/* Styling for the logout button */
-.logout-button {
-    margin-right: 10px;
-}
 
 /* Hero image section */
 .hero-image1 {
