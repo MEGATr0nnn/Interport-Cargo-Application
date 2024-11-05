@@ -49,49 +49,90 @@
     });</script>
 
 <div class="pill-box-full">
-    @if (Model.allQuotations != null && Model.allQuotations.Any())
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Customer ID</th>
-                    <th>Customer Information</th>
-                    <th>Source</th>
-                    <th>Destination</th>
-                    <th>Number of Containers</th>
-                    <th>Nature of Package</th>
-                    <th>Import/Export</th>
-                    <th>Packing</th>
-                    <th>Quarantine Requirements</th>
-                    <th>Status</th>
-                    <th>Total Cost</th>
-                    <th>Accept</th>
-                    <th>Reject</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var quote in Model.allQuotations)
-                {
+    <form method="post">
+        @if (Model.allQuotations != null && Model.allQuotations.Any())
+        {
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>@quote.getCustomerId()</td>
-                        <td>@quote.getCustomerInformation()</td>
-                        <td>@quote.getSource()</td>
-                        <td>@quote.getDestination()</td>
-                        <td>@quote.getNumOfContainers()</td>
-                        <td>@quote.getNatureOfPackage()</td>
-                        <td>@quote.getImport()</td>
-                        <td>@quote.getPacking()</td>
-                        <td>@quote.getQuarantineRequirements()</td>
-                        <td>STATUS (DONE BY HARRY)</td>
-                        <td>TOTAL COST (DONE BY HARRY)</td>
-                        <td><button value="accept">Accept</button></td>
-                        <td><button value="reject">Reject</button></td>
+                        <th>Customer ID</th>
+                        <th>Customer Information</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                        <th>Number of Containers</th>
+                        <th>Size of Containers</th>
+                        <th>Nature of Package</th>
+                        <th>Importing</th>
+                        <th>Packing</th>
+                        <th>Quarantine Requirements</th>
+                        <th>Fumigation</th>
+                        <th>Crane</th>
+                        <th>Status</th>
+                        <th>Discount</th>
+                        <th>Total Cost</th>
+                        <th>Accept</th>
+                        <th>Reject</th>
                     </tr>
-                }
-            </tbody>
-     </table>
-     }
+                </thead>
+
+                <tbody>
+                    @foreach (var quote in Model.allQuotations)
+                    {
+                        <tr>
+                            <td>@quote.getCustomerId()</td>
+                            <td>@quote.getCustomerInformation()</td>
+                            <td>@quote.getSource()</td>
+                            <td>@quote.getDestination()</td>
+                            <td>@quote.getNumOfContainers()</td>
+                            <td>@quote.getsizeOfContainers()</td>
+                            <td>@quote.getNatureOfPackage()</td>
+                            <td>@quote.getImport()</td>
+                            <td>@quote.getPacking()</td>
+                            <td>@quote.getQuarantineRequirements()</td>
+                            <td>@quote.getFumigation()</td>
+                            <td>@quote.getCrane()</td>
+                            <td>
+                                @if (quote.getStatus() == "quoteSent")
+                                {
+                                    <span>Pending</span>
+                                }
+                                else
+                                {
+                                    <span>@quote.getStatus()</span>
+                                }
+                            </td>
+                            <td>
+                                @if (quote.calculateDiscount() > 0)
+                                {
+                                    <div>
+                                        <button type="submit" value="Discount" name="action">Apply Discount</button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span>No Discount to Apply</span>
+                                }
+                            </td>
+                            <td>
+                                @if (Model.Discount == true)
+                                {
+                                    <span>$@quote.calculateCharges(quote.getsizeOfContainers(), quote.calculateDiscount())</span>
+                                }
+                                else
+                                {
+                                    <span>$@quote.calculateCharges(quote.getsizeOfContainers(), 0)</span>
+                                }
+                            </td>
+                            <td><button value="accept">Accept</button></td>
+                            <td><button value="reject">Reject</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </form>
+
 </div>
 
 <h2 style="text-align: center"> Rates Schedule </h2>
@@ -158,3 +199,4 @@
         </tr>
     </table>
 </div>
+

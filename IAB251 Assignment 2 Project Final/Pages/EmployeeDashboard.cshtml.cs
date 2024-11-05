@@ -12,6 +12,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public string firstName { get; set; }
 
+        [BindProperty]
+        public bool Discount { get; set; } = false;
+
 
 
         /// <summary>
@@ -48,6 +51,21 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             allQuotations = _quotationDAO.getAllQuotations();
         }
 
+        /// <summary>
+        /// Logic for employee button press
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult OnPost(string action)
+        {
+            if (action == "Discount")
+            {
+                Console.WriteLine("Button has been pressed");
+                Console.WriteLine("Discount value: " + Discount);
+                Discount = true;
+                Console.WriteLine("Discount after:" + Discount);
 
+            }
+            return Page();
+        }
     }
 }
