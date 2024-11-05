@@ -42,12 +42,19 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Once user clicks quotation request button direct to Quotation Request Form
         /// </summary>
         /// <returns>Returns a redirect to next page</returns>
-        public IActionResult OnPost(string action, int quoteIDAccept, int quoteIDReject)
+        public IActionResult OnPost(string Logout,string Back)
         {
-            if (action == "quotation")
+            if (Logout == "Logout")
             {
-                return RedirectToPage("/QuotationRequest");
+                _userSessionService.currentEmployeeUser = null;
+                _userSessionService.currentCustomerUser = null;
+                return RedirectToPage("/Index");
             }
+
+           
+
+            return RedirectToPage("/QuotationRequest");
+        }
 
             if (action == "accept")
             {

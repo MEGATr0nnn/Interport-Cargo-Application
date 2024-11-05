@@ -73,8 +73,15 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Logic for when signup has been done correctly
         /// </summary>
         /// <returns>A redirect to the customer dashboard upon successful signup</returns>
-        public IActionResult OnPost()
+        public IActionResult OnPost(string Back)
         {
+
+
+            if (Back == "Back")
+            {
+                return RedirectToPage("/Index");
+            }
+
             try
             {
                 string hashed = _passwordHasher.hashPassword(password);

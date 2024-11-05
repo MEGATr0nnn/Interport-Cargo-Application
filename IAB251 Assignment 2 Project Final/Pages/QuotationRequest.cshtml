@@ -8,13 +8,13 @@
     Quotation Request
 </h1>
 <div class="header-container">
-    <form method="post" asp-page-handler="Back">
-        <button type="submit" class="btn btn-secondary">Back</button>
+    <form method="post">
+        <button type="submit" value="Back" name="Back" class="btn btn-secondary">Back</button>
     </form>
 
 
-<form method="post" asp-page-handler="Logout">
-    <button type="Logout" class="btn btn-primary">Logout</button>
+<form method="post">
+    <button type="submit" value="Logout" name="Logout" class="btn btn-primary">Logout</button>
 </form>
     </div>
 
@@ -41,11 +41,19 @@
             <input type="text" asp-for="numContainers" class="form-control" />
         </div>
 
-        <!--This needs to be a radio button vuyo-->
-        <div>
-            <label for="sizeContainer">Enter Size of Containers (20 or 40 Feet):</label>
-            <input type="text" asp-for="sizeContainer" class="form-control" />
-        </div>
+        <!--This needs to be a radio button-->
+        
+    <label for="sizeContainer">Enter Size of Containers (20 or 40 Feet):</label>
+    <div>
+        <input type="radio" asp-for="sizeContainer" id="size20" value="20" />
+        <label for="size20">20 Feet</label><br />
+    </div>
+    <div>
+        <input type="radio" asp-for="sizeContainer" id="size40" value="40" />
+        <label for="size40">40 Feet</label>
+    </div>
+
+
 
         <div>
             <label for="packageNature">Enter Nature of Package:</label>

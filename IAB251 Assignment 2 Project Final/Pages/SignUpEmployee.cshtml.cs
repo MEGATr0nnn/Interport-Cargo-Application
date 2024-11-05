@@ -80,8 +80,14 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Returns back to same page if unsuccessful account creation
         /// </summary>
         /// <returns>Returns a redirect to the quotation page upon successful registration</returns>
-        public IActionResult OnPost(string action)
+        public IActionResult OnPost(string action,string Back)
         {
+
+            if (Back == "Back")
+            {
+                return RedirectToPage("/CustomerDashboard");
+            }
+
             if (action == "signup")
             {
                 Console.WriteLine("Action Inputted: " + action);

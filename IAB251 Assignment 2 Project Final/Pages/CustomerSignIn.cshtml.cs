@@ -66,10 +66,18 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         /// <param name="action">The button click from the user</param>
         /// <returns>Page direct according to valid signin</returns>
-        public IActionResult OnPost(string action)
+        public IActionResult OnPost(string action, string Back)
         {
+
             if (action == "signin")
             {
+            
+
+                if (Back == "Back")
+                {
+                    return RedirectToPage("/SignUpChoice");
+                }
+
                 Console.WriteLine("input: " + action);
                 try
                 {

@@ -8,17 +8,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <div class="header-container">
-    <form method="post" >
-        <button type="submit" class="btn btn-secondary">Back</button>
+
+    <form method="post">
+        <button type="submit" value="Logout" name="Logout" class="btn btn-primary">Logout</button>
     </form>
-
-
-<form method="post">
-    <button type="Logout" name="Logout" class="btn btn-primary">Logout</button>
-</form>
-    </div>
+</div>
 <br />
-
+<!--populates graphs with the aggregate information regarding all of the quotes current status-->
 <div class="welcome-and-chart-container">
     <h1 class="pill-box">
         Welcome @Model.firstName to Your Quotation Management Dashboard
@@ -48,6 +44,7 @@
         }
     });</script>
 
+<!--if there are quotes a table is populated with all the information of the quotes-->
 <div class="pill-box-full">
         @if (Model.allQuotations != null && Model.allQuotations.Any())
         {
@@ -143,6 +140,7 @@
             </table>
         }
 </div>
+<!---lists the rate schedules-->
 
 <h2 style="text-align: center"> Rates Schedule </h2>
 <div>
