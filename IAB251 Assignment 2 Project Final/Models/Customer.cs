@@ -12,6 +12,7 @@
         private string _email;
         private string _phoneNumber;
         private string _password;
+        private string _company;
 
         /// <summary>
         /// This is the constructor for customer, that instantises a new customer
@@ -21,13 +22,14 @@
         /// <param name="email">The Customers email</param>
         /// <param name="phoneNumber">The Customers phoneNumber</param>
         /// <param name="password">The Customers password</param>
-        public Customer(string firstName, string lastName, string email, string phoneNumber, string password)
+        public Customer(string firstName, string lastName, string email, string phoneNumber, string password, string company)
         {
             this._firstName = firstName;
             this._lastName = lastName;
             this._email = email;
             this._phoneNumber = phoneNumber;
             this._password = password;
+            this._company = company;
         }
 
         //getters and setters
@@ -48,6 +50,9 @@
 
         public string getPassword() { return _password; }
         public void setPassword(string password) {  this._password = password;}
+
+        public string getCompany() { return _company;}
+        public void setCompany(string company) {  this._company = company;}
 
     }
 }

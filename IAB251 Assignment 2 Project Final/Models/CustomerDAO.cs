@@ -25,7 +25,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             lastName VARCHAR NOT NULL,
                             email VARCHAR NOT NULL,
                             phoneNumber VARCHAR NOT NULL,
-                            password VARCHAR NOT NULL
+                            password VARCHAR NOT NULL,
+                            company VARCHAR NOT NULL
                         )";
             _connect.executeQuery(createTableQuery);
         }
@@ -80,8 +81,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void insertNew(Customer customer)
         {
             string insertUserQuery = @"
-                    INSERT INTO customer (firstName, lastName, email, phoneNumber, password)
-                    VALUES (@firstName, @lastName, @email, @phoneNumber, @password)
+                    INSERT INTO customer (firstName, lastName, email, phoneNumber, password, company)
+                    VALUES (@firstName, @lastName, @email, @phoneNumber, @password, @company)
                     RETURNING id";
 
             SqliteParameter[] parameters = new SqliteParameter[] 
@@ -90,7 +91,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 new SqliteParameter("@lastName", customer.getLastName()),
                 new SqliteParameter("@email", customer.getEmail()), 
                 new SqliteParameter("@phoneNumber", customer.getPhoneNumber()),
-                new SqliteParameter("@password", customer.getPassword())
+                new SqliteParameter("@password", customer.getPassword()),
+                new SqliteParameter("@company", customer.getCompany())
             };
             customer.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
             

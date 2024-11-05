@@ -36,20 +36,23 @@ namespace IAB251_Assignment_2_Project_Final.Models
                         {
                             int id = reader.GetInt32(reader.GetOrdinal("id")),
                                 numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
-                                
+                                sizeOfContainers = reader.GetInt32(reader.GetOrdinal("sizeOfContainers")),
                                 customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
 
                             string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
                                 source = reader.GetString(reader.GetOrdinal("source")),
                                 destination = reader.GetString(reader.GetOrdinal("destination")),
                                 natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                quarantineReq = reader.GetString(reader.GetOrdinal("quarantineReq"));
+                                status = reader.GetString(reader.GetOrdinal("status"));
 
                             bool isImport = reader.GetBoolean(reader.GetOrdinal("isImport")),
-                                isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking"));
+                                isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking")),
+                                fumigation = reader.GetBoolean(reader.GetOrdinal("fumigation")),
+                                quarantineReq = reader.GetBoolean(reader.GetOrdinal("quarantineReq")),
+                                crane = reader.GetBoolean(reader.GetOrdinal("crane"));
 
 
-                            var quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, isImport, isPacking, quarantineReq); //create new instance to be added, then loops
+                            var quotation = new Quotation(customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status); //create new instance to be added, then loops
                             quotation.setId(id);
                             quotation.setCustomerId(customerId);
 
@@ -95,18 +98,22 @@ namespace IAB251_Assignment_2_Project_Final.Models
                         {
                             int id = reader.GetInt32(reader.GetOrdinal("id")),
                                 numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
+                                sizeOfContainers = reader.GetInt32(reader.GetOrdinal("sizeOfContainers")),
                                 customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
 
                             string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
                                 source = reader.GetString(reader.GetOrdinal("source")),
                                 destination = reader.GetString(reader.GetOrdinal("destination")),
                                 natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                quarantineReq = reader.GetString(reader.GetOrdinal("quarantineReq"));
+                                status = reader.GetString(reader.GetOrdinal("status"));
 
                             bool isImport = reader.GetBoolean(reader.GetOrdinal("isImport")),
-                                isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking"));
+                                isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking")),
+                                fumigation = reader.GetBoolean(reader.GetOrdinal("fumigation")),
+                                quarantineReq = reader.GetBoolean(reader.GetOrdinal("quarantineReq")),
+                                crane = reader.GetBoolean(reader.GetOrdinal("crane"));
 
-                            quotation = new Quotation(customerInformation, source, destination, numOfContainers, natureOfPackage, isImport, isPacking, quarantineReq); //create new instance to be returned to the user
+                            quotation = new Quotation(customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status); //create new instance to be returned to the user
                             quotation.setId(id);
                             quotation.setCustomerId(customerId);
                         }
