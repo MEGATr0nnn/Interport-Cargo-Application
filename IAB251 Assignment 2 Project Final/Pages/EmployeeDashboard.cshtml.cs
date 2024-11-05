@@ -1,6 +1,7 @@
 using IAB251_Assignment_2_Project_Final.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Xml.Schema;
 
 namespace IAB251_Assignment_2_Project_Final.Pages
 {
@@ -11,8 +12,8 @@ namespace IAB251_Assignment_2_Project_Final.Pages
     {
         [BindProperty]
         public string firstName { get; set; }
-
-
+        [BindProperty]
+        public bool Discount { get; set; }
 
         /// <summary>
         /// Instance of Quotation Database
@@ -46,6 +47,19 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         {
             firstName = _userSessionControl.currentEmployeeUser.getFirstName();
             allQuotations = _quotationDAO.getAllQuotations();
+        }
+
+        public IActionResult OnPost()
+        {
+            if (Discount)
+            {
+                Discount = true;
+            }
+            else
+            {
+                Discount = false;
+            }
+            return null;
         }
     }
 }
