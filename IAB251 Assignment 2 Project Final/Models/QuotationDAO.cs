@@ -68,6 +68,22 @@ namespace IAB251_Assignment_2_Project_Final.Models
         }
 
         /// <summary>
+        /// Returns a list of all quotations that are associated with the sessions current customer
+        /// </summary>
+        /// <param name="customerId">The ID of the current customer in the session</param>
+        /// <returns>A list of all quotations associated with the refrenced customers specific Id</returns>
+        public List<Quotation> getAllQuotations()
+        {
+            string query = @"SELECT * FROM quotation";
+            SqliteParameter[] parameter = new SqliteParameter[]
+            {
+                //new SqliteParameter("@customerId", customerId)
+            };
+
+            return _connect.quotationExecuteFetchAll(query, parameter);
+        }
+
+        /// <summary>
         /// Gets a specific quotation from the DB based on the unique identifier ID attatched to the quotation
         /// </summary>
         /// <param name="quotationId">The unique auto-generated identifier</param>

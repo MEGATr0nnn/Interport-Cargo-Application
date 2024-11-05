@@ -31,6 +31,7 @@ try
     // Continue building application normally
     builder.Services.AddSingleton<IUserSessionControl, UserSessionService>();
     builder.Services.AddRazorPages();
+
 }
 catch (Exception ex)
 {

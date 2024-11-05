@@ -4,35 +4,40 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IAB251_Assignment_2_Project_Final.Pages
 {
+    /// <summary>
+    /// Class used to manage the Employee Dashboard and necessary inputs
+    /// </summary>
     public class EmployeeDashboardModel : PageModel
     {
-        private EmployeeDAO _employeeDAO;
+        /// <summary>
+        /// Instance of Quotation Database
+        /// </summary>
+        private readonly QuotationDAO _quotationDAO;
 
-        private readonly IUserSessionControl _userSessionService;
+        /// <summary>
+        /// Creating a new Quotation model
+        /// </summary>
+        private Quotation Quotation { get; set; }
 
-        [BindProperty]
-        public string employeeName { get; set; }
+        /// <summary>
+        /// Creating a list of all quotations to showcase to the employee dashboard
+        /// </summary>
+        public List<Quotation> allQuotations { get; set; }
 
-        public Employee employee { get; set; }
-
-        public EmployeeDashboardModel(IUserSessionControl userSessionControl)
+        /// <summary>
+        /// Constructor to intialise the employee database and the quotationDAO
+        /// </summary>
+        public EmployeeDashboardModel()
         {
-            _employeeDAO = new EmployeeDAO();
-            _userSessionService = userSessionControl;
-
+            _quotationDAO = new QuotationDAO();
         }
 
-        public IActionResult OnPost()
-        {
-            return RedirectToPage("/QuotationManagement");
-        }
-
-
-
+        /// <summary>
+        /// Getting current user and all quotations stored in QuotationDAO
+        /// </summary>
         public void OnGet()
         {
-            employee = _userSessionService.currentEmployeeUser;
-            employeeName = employee.getFirstName() + " " + employee.getLastName();
+            allQuotations = _quotationDAO.getAllQuotations();
         }
     }
 }

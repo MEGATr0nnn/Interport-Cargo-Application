@@ -71,15 +71,38 @@ html, body {
     text-align: left;
 }
 
+/* Basic styling for pill-box elements */
+.pill-box {
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Centering the signup container */
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    margin: 0 auto; /* Centers the container itself */
+    text-align: center;
+}
+
+
 /* Footer styling */
 .footer {
     width: 100%;
     padding: 20px;
-    background-color: #2c3e50;
+    background-color: white;
     color: white;
     text-align: center;
     font-size: 1em;
-    position: relative;
+    position: fixed;
+    bottom:0;
 }
 
     .footer h2 {

@@ -13,8 +13,6 @@
     <Content Remove="Pages\LoginPage.cshtml" />
     <Content Remove="Pages\SignUpPage.cshtml" />
     <Content Remove="wwwroot\images\" />
-    <Content Remove="Pages\CustomerSignIn.cshtml" />
-    <Content Remove="Pages\EmployeeSignIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />

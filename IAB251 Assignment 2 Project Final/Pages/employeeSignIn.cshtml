@@ -1,4 +1,11 @@
-﻿<!<!DOCTYPE html>
+﻿@page
+@model IAB251_Assignment_2_Project_Final.Pages.EmployeeSignInModel
+@{
+    ViewData["ShowNavbar"] = false;
+}
+
+<!
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,51 +42,56 @@
             text-align: center;
         }
 
-        .signup-form-container h1 {
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            color: #333;
-        }
+            .signup-form-container h1 {
+                margin-bottom: 20px;
+                font-size: 1.8em;
+                color: #333;
+            }
 
-        /* Input field styling */
-        .signup-form-container input[type="text"],
-        .signup-form-container input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
+            /* Input field styling */
+            .signup-form-container input[type="text"],
+            .signup-form-container input[type="password"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
 
-        /* Submit button styling */
-        .signup-form-container button {
-            width: 100%;
-            padding: 12px;
-            color: white;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
-        }
+            /* Submit button styling */
+            .signup-form-container button {
+                width: 100%;
+                padding: 12px;
+                color: white;
+                background-color: #007bff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.1em;
+            }
 
-        .signup-form-container button:hover {
-            background-color: #0056b3;
-        }
+                .signup-form-container button:hover {
+                    background-color: #0056b3;
+                }
     </style>
 </head>
 <body>
 
-    <!-- Employee Sign Up Form -->
+    <!-- Employee Sign In Form -->
     <div class="signup-form-container">
         <h1>Employee Sign In</h1>
-        <form method="post" action="submit-employee-signup">
-            <input type="text" name="employee-id" placeholder="Employee ID" required>
+        <form method="post">
+            <input type="text" name="email" placeholder="Employee Email" required>
             <input type="password" name="password" placeholder="Password" required>
-           
-            <button type="submit">Sign Up</button>
+
+            <button type="submit" name="action" value="signin">Sign Up</button>
         </form>
     </div>
 
 </body>
 </html>
+
+@if (Model.SignIn == false)
+{
+    <p style="color:red;"> The details you have entered are incorrect!</p>
+}
