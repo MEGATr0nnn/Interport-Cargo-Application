@@ -56,11 +56,6 @@
             return getJoinDate();
         }
 
-        /// <summary>
-        /// Test to determine valid email
-        /// </summary>
-        /// <param name="email">Employee Email Input</param>
-        /// <returns>Boolean for valid email</returns>
         public bool checkValidEmail(string email)
         {
             if (email.Contains('@'))
@@ -71,12 +66,7 @@
             return false;
         }
 
-        /// <summary>
-        /// Test to determine valid phone number
-        /// </summary>
-        /// <param name="number">Employee Email Input</param>
-        /// <returns>Boolean for Valid Phone Number</returns>
-        public bool checkValidNumber(string number)
+        public bool checkValidPhoneNumber(string number)
         {
             if (number.Length == 10)
             {
@@ -102,11 +92,6 @@
             return true;
         }
 
-        /// <summary>
-        /// Test to determine valid employee type
-        /// </summary>
-        /// <param name="employeeType">The type of employee from user input</param>
-        /// <returns>Boolean for valid employee type</returns>
         public bool checkVaildEmployeeType(string employeeType)
         {
             foreach (string type in EmployeeTypes)

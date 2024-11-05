@@ -14,25 +14,11 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public string firstName { get; set; }
 
-        /// <summary>
-        /// Instance of the customerDAO to access customer information
-        /// </summary>
         private readonly CustomerDAO _customerDAO;
 
-        /// <summary>
-        /// Instance of QuotationDAO to access quotation information
-        /// </summary>
         private readonly QuotationDAO _quotationDAO;
 
-        /// <summary>
-        /// Assigning user to current session
-        /// </summary>
         private readonly IUserSessionControl _userSessionService;
-
-        /// <summary>
-        /// Quotation Instance
-        /// </summary>
-        public Quotation quotation { get; set; }
 
         /// <summary>
         /// Creating a list of all quotations that have been created by this customer
