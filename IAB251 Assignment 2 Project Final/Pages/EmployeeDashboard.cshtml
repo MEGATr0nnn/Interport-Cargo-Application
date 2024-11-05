@@ -49,7 +49,6 @@
     });</script>
 
 <div class="pill-box-full">
-    <form method="post">
         @if (Model.allQuotations != null && Model.allQuotations.Any())
         {
             <table class="table">
@@ -106,8 +105,8 @@
                                 @if (quote.calculateDiscount() > 0)
                                 {
                                     <form method="post">
-                                        <input type="hidden" name="Add Discount" value="@quote.getId()" />
-                                        <button type="submit" name="action" value="accept">Accept</button>
+                                        <input type="hidden" name="discountID" value="@quote.getId()" />
+                                        <button type="submit" name="action" value="addDiscount">Add Discount</button>
                                     </form>
                                 }
                                 else
@@ -143,9 +142,6 @@
                 </tbody>
             </table>
         }
-
-    </form>
-
 </div>
 
 <h2 style="text-align: center"> Rates Schedule </h2>

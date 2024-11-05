@@ -55,13 +55,15 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Logic for employee button press
         /// </summary>
         /// <returns></returns>
-        public IActionResult OnPost(string action, int quoteIDAccept, int quoteIDReject)
+        public IActionResult OnPost(string action, int quoteIDAccept, int quoteIDReject, int discountID)
         {
-            if (action == "Discount")
+            if (action == "addDiscount")
             {
-                _quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
-                total = _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
-
+                Console.WriteLine("discount added");
+                Discount = true;
+                _quotation = _quotationDAO.getSpecificQuotation(discountID);
+                _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
+                _quotationDAO.update(_quotation, _quotation.getCustomerId());
             }
 
             if (action == "accept")

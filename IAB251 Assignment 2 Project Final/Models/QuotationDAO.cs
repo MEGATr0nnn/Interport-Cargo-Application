@@ -32,7 +32,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             fumigation INTEGER NOT NULL,
                             crane INTEGER NOT NULL,
                             status VARCHAR NOT NULL,
-                            customerId INTEGER NOT NULL
+                            customerId INTEGER NOT NULL,
+                            totalCost INTEGER
                         )";
             _connect.executeQuery(query);
         }
@@ -106,8 +107,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void insertNew(Quotation quotation, Customer customer)
         {
             string insertUserQuery = @"
-                    INSERT INTO quotation (customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status, customerId)
-                    VALUES (@customerInformation, @source, @destination, @numOfContainers, @sizeOfContainers, @natureOfPackage, @isImport, @isPacking, @quarantineReq, @fumigation, @crane, @status, @customerId)
+                    INSERT INTO quotation (customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status, customerId, totalCost)
+                    VALUES (@customerInformation, @source, @destination, @numOfContainers, @sizeOfContainers, @natureOfPackage, @isImport, @isPacking, @quarantineReq, @fumigation, @crane, @status, @customerId, @totalCost)
                     RETURNING id";
 
             SqliteParameter[] parameters = new SqliteParameter[]
@@ -124,7 +125,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 new SqliteParameter("@fumigation", quotation.getFumigation()),
                 new SqliteParameter("@crane", quotation.getCrane()),
                 new SqliteParameter("@status", quotation.getStatus()),
-                new SqliteParameter("@customerId", customer.getId())
+                new SqliteParameter("@customerId", customer.getId()),
+                new SqliteParameter("@totalCost", quotation.getTotal())
             };
             quotation.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
         }
@@ -133,8 +135,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void update(Quotation quotation, int customerID)
         {
             string updateQuery = @"
-                    UPDATE quotation SET customerInformation = @customerInformation, source = @source, destination = @destination, numOfContainers = @numOfContainers, sizeOfContainers = @sizeOfContainers, natureOfPackage = @natureOfPackage, isImport =  @isImport, isPacking = @isPacking, quarantineReq = @quarantineReq, fumigation = @fumigation, crane = @crane, status = @status, customerId = @customerId
-                    WHERE id = @id"; 
+                    UPDATE quotation SET customerInformation = @customerInformation, source = @source, destination = @destination, numOfContainers = @numOfContainers, sizeOfContainers = @sizeOfContainers, natureOfPackage = @natureOfPackage, isImport =  @isImport, isPacking = @isPacking, quarantineReq = @quarantineReq, fumigation = @fumigation, crane = @crane, status = @status, customerId = @customerId, totalCost = @totalCost
+                    WHERE id = @id";
             SqliteParameter[] parameters = new SqliteParameter[]
             {
                 new SqliteParameter("@id", quotation.getId()),
@@ -150,7 +152,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 new SqliteParameter("@fumigation", quotation.getFumigation()),
                 new SqliteParameter("@crane", quotation.getCrane()),
                 new SqliteParameter("@status", quotation.getStatus()),
-                new SqliteParameter("@customerId", customerID)
+                new SqliteParameter("@customerId", customerID),
+                new SqliteParameter("@totalCost", quotation.getTotal())
             };
             _connect.executeQuery(updateQuery, parameters);
         }
