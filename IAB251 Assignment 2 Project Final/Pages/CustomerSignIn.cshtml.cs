@@ -29,6 +29,12 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         public string password { get; set; }
 
         /// <summary>
+        /// Boolean to check if user has successfully signed in
+        /// </summary>
+        [BindProperty]
+        public bool SignIn { get; set; } = true;
+
+        /// <summary>
         /// Instance of CustomerDAO to access Customer Information
         /// </summary>
         private readonly CustomerDAO _customerDAO;
@@ -67,6 +73,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 Console.WriteLine("input: " + action);
                 try
                 {
+                    SignIn = true;
                     string hashed = _passwordHasher.hashPassword(password);
                     Console.WriteLine("hashed");
 
@@ -83,6 +90,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 }
                 catch (Exception ex)
                 {
+                    SignIn = false;
                     ModelState.AddModelError(string.Empty, ex.Message);
                     return Page();
                 }

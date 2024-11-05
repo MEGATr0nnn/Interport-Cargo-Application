@@ -4,13 +4,11 @@
 }
 
 <h1 style="text-align: center">
-    Welcome @Model.employee.getFirstName() to Your Quotation Management Dashboard
+    Welcome to Your Quotation Management Dashboard
 </h1>
 
 <div>
-    @if (Model.allQuotations != null && Model.allQuotations.Any())
-    {
-        <table class="table">
+    <table class="table">
             <thead>
                 <tr>
                     <th>Customer ID</th>
@@ -22,8 +20,13 @@
                     <th>Import/Export</th>
                     <th>Packing</th>
                     <th>Quarantine Requirements</th>
+                    <th>Status</th>
+                    <th>Total Cost</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach (var quote in Model.allQuotations)
                 {
@@ -37,12 +40,77 @@
                         <td>@quote.getImport();</td>
                         <td>@quote.getPacking();</td>
                         <td>@quote.getQuarantineRequirements();</td>
+                        <td>STATUS (DONE BY HARRY)</td>
+                        <td>TOTAL COST (DONE BY HARRY)</td>
+                        <td><button value="accept">Accept</button></td>
+                        <td><button value="reject">Reject</button></td>
                     </tr>
                 }
-
             </tbody>
+     </table>
+</div>
 
-        </table>
-    }
+<h2 style="text-align: center"> Rates Schedule </h2>
+<div>
+    <table class="table">
+        <tr>
+            <td>Type</td>
+            <td>20 Feet Container</td>
+            <td>40 Feet Container</td>
+        </tr>
 
+        <tr>
+            <td>Walf Booking Fee</td>
+            <td>$60</td>
+            <td>$70</td>
+        </tr>
+
+        <tr>
+            <td>Lift On/Lift Off</td>
+            <td>$80</td>
+            <td>$120</td>
+        </tr>
+
+        <tr>
+            <td>Fumigation</td>
+            <td>$220</td>
+            <td>$280</td>
+        </tr>
+
+        <tr>
+            <td>LCL Delivery Depot</td>
+            <td>$400</td>
+            <td>$500</td>
+        </tr>
+
+        <tr>
+            <td>Tailgate Inspection</td>
+            <td>$120</td>
+            <td>$160</td>
+        </tr>
+
+        <tr>
+            <td>Storage Fee</td>
+            <td>$240</td>
+            <td>$300</td>
+        </tr>
+
+        <tr>
+            <td>Facility Fee</td>
+            <td>$70</td>
+            <td>100</td>
+        </tr>
+
+        <tr>
+            <td>Walf Inspection</td>
+            <td>$60</td>
+            <td>$90</td>
+        </tr>
+
+        <tr>
+            <td>GST</td>
+            <td>10%</td>
+            <td>10%</td>
+        </tr>
+    </table>
 </div>

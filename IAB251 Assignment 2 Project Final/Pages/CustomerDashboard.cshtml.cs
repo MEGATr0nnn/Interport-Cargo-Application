@@ -38,6 +38,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public string customerName { get; set; }
 
+
         /// <summary>
         /// Constructor to intitialise customer, quotation and user session
         /// </summary>
