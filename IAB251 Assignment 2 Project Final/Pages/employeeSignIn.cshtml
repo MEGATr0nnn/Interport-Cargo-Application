@@ -30,7 +30,10 @@
                 <form method="post">
                     <input type="email" name="email" placeholder="Employee Email" required>
                     <input type="password" name="password" placeholder="Password" required>
-
+                    @if (Model.SignIn == false)
+                    {
+                        <p style="color:red;"> The details you have entered are incorrect!</p>
+                    }
                     <button type="submit" name="action" value="signin">Sign In</button>
                 </form>
             </div>
@@ -39,7 +42,3 @@
 </body>
 </html>
 
-@if (Model.SignIn == false)
-{
-    <p style="color:red;"> The details you have entered are incorrect!</p>
-}
