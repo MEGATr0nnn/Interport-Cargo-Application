@@ -40,6 +40,14 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             return RedirectToPage("/QuotationManagement");
         }
 
+        public IActionResult OnPostLogout()
+        {
+            // Return to the homepage
+            
+ 
+            return RedirectToPage("/Index");
+  
+        }
 
         /// <summary>
         /// Getting current user and all quotations stored in QuotationDAO

@@ -35,7 +35,7 @@ public class lIndexModel : PageModel
     /// <summary>
     /// Allows for password to be hashed via SHA256
     /// </summary>
-    private PasswordHasher _passwordHasher = new PasswordHasher(); 
+    private PasswordHasher _passwordHasher = new PasswordHasher();
 
     /// <summary>
     /// Pulling stored data for Customer object
@@ -154,4 +154,3 @@ public class lIndexModel : PageModel
         };
     }
 }
-

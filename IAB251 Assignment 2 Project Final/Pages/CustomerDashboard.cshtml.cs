@@ -61,6 +61,13 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             return RedirectToPage("/QuotationRequest");
         }
 
+        public IActionResult OnPostLogout()
+        {
+            // Return to the homepage
+            
+            return RedirectToPage("/Index");
+
+        }
 
         /// <summary>
         /// Data need to process on loading the page

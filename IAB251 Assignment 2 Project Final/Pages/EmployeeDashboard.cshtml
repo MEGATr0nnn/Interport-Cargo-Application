@@ -1,13 +1,54 @@
 ﻿@page
 @model IAB251_Assignment_2_Project_Final.Pages.EmployeeDashboardModel
 @{
+    ViewData["Title"] = "Employee Dashboard";
 }
 
-<h1 style="text-align: center">
-    Welcome @Model.employee.getFirstName() to Your Quotation Management Dashboard
-</h1>
+<link rel="stylesheet" href="~/css/styles.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-<div>
+<div class="header-container">
+    <form method="post" asp-page-handler="Back">
+        <button type="submit" class="btn btn-secondary">Back</button>
+    </form>
+
+
+<form method="post" asp-page-handler="Logout">
+    <button type="Logout" class="btn btn-primary">Logout</button>
+</form>
+    </div>
+<br />
+
+<div class="welcome-and-chart-container">
+    <h1 class="pill-box">
+        Welcome @Model.employee.getFirstName() to Your Quotation Management Dashboard
+    </h1>
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>var xValues = ["Pending", "Accepted", "Denied"];
+    var yValues = [8, 12, 5, 0];
+    var barColors = ["red", "green", "blue"];
+
+    new Chart("myChart", {
+        type: "bar",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                text: "Quotation status"
+            }
+        }
+    });</script>
+
+<div class="pill-box-full">
     @if (Model.allQuotations != null && Model.allQuotations.Any())
     {
         <table class="table">
@@ -28,21 +69,22 @@
                 @foreach (var quote in Model.allQuotations)
                 {
                     <tr>
-                        <td>@quote.getCustomerId();</td>
-                        <td>@quote.getCustomerInformation();</td>
-                        <td>@quote.getSource();</td>
-                        <td>@quote.getDestination();</td>
-                        <td>@quote.getNumOfContainers();</td>
-                        <td>@quote.getNatureOfPackage();</td>
-                        <td>@quote.getImport();</td>
-                        <td>@quote.getPacking();</td>
-                        <td>@quote.getQuarantineRequirements();</td>
+                        <td>@quote.getCustomerId()</td>
+                        <td>@quote.getCustomerInformation()</td>
+                        <td>@quote.getSource()</td>
+                        <td>@quote.getDestination()</td>
+                        <td>@quote.getNumOfContainers()</td>
+                        <td>@quote.getNatureOfPackage()</td>
+                        <td>@quote.getImport()</td>
+                        <td>@quote.getPacking()</td>
+                        <td>@quote.getQuarantineRequirements()</td>
                     </tr>
                 }
-
             </tbody>
-
         </table>
     }
+</div>
 
+<div class="footer">
+    <h2>Footer Content</h2>
 </div>

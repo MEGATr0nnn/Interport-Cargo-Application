@@ -7,10 +7,17 @@
 <h1 style="text-align: center">
     Quotation Request
 </h1>
+<div class="header-container">
+    <form method="post" asp-page-handler="Back">
+        <button type="submit" class="btn btn-secondary">Back</button>
+    </form>
+
+
 
 <form method="post" asp-page-handler="Logout">
     <button type="Logout" class="btn btn-primary">Logout</button>
 </form>
+    </div>
 
 <div>
     <label for="requestID">Request ID: @Model.requestID</label>
@@ -50,11 +57,11 @@
             <label for="isImport" style="text-align: center">Import or Export:</label>
             <br />
             <div>
-                <input type="radio" asp-for="isImport" id="importing" value="True"/>
+                <input type="radio" asp-for="isImport" id="importing" value="True" />
                 <label for="importing"> Import</label><br />
             </div>
             <div>
-                <input type="radio" asp-for="isImport" id="exporting" value="False"/>
+                <input type="radio" asp-for="isImport" id="exporting" value="False" />
                 <label for="importing"> Export</label>
             </div>
         </div>
@@ -65,11 +72,11 @@
             <label for="isPacking" style="text-align: center">Packing or Unpacking:</label>
             <br />
             <div>
-                <input type="radio" asp-for="isPacking" id="packing" value="True"/>
+                <input type="radio" asp-for="isPacking" id="packing" value="True" />
                 <label for="packing"> Pack</label><br />
             </div>
             <div>
-                <input type="radio" asp-for="isPacking" id="unpacking" value="False"/>
+                <input type="radio" asp-for="isPacking" id="unpacking" value="False" />
                 <label for="unpacking"> Unpack</label>
             </div>
         </div>
