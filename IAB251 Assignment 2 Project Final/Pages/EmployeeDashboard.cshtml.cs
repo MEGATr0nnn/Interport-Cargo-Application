@@ -47,7 +47,5 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             firstName = _userSessionControl.currentEmployeeUser.getFirstName();
             allQuotations = _quotationDAO.getAllQuotations();
         }
-
-
     }
 }
