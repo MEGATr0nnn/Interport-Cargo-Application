@@ -31,18 +31,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
             _connect.executeQuery(createTableQuery);
         }
 
-        /*
-        public void delete(Customer customer)
-        {
-            string deleteQuery = "DELETE * FROM customer WHERE id = @id";
-            SQLiteParameter[] parameters = new SQLiteParameter[] 
-            { 
-                new SQLiteParameter("@id", customer.getId())
-            };
-            _connect.executeQuery(deleteQuery, parameters);
-        }
-        */
-
         /// <summary>
         /// Delete cascade query, SQLite DB hasnt had PRAGMA = ON yet so this is a temp fix for cascading quotation deletions.
         /// </summary>
