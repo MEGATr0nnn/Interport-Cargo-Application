@@ -74,6 +74,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <returns>Redirects to Dashboard Upon Successful Quotation Creation</returns>
         public IActionResult OnPost()
         {
+            status = "Pending";
             Quotation quotation = new Quotation(customerInfo, source, destination, numContainers, sizeContainer, packageNature, isImport, isPacking, quarantineReq, isFumigation, isCrane, status);
 
             _quotation.insertNew(quotation, _userSessionService.currentCustomerUser);
