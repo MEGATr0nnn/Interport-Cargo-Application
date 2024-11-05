@@ -35,9 +35,16 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         public Quotation quotation { get; set; }
 
+        /// <summary>
+        /// Name of the customer for dashboard display
+        /// </summary>
         [BindProperty]
         public string customerName { get; set; }
 
+        /// <summary>
+        /// Creating a list of all quotations that have been created by this customer
+        /// </summary>
+        public List<Quotation> Quotations { get; set; }
 
         /// <summary>
         /// Constructor to intitialise customer, quotation and user session
@@ -50,9 +57,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             _quotationDAO = new QuotationDAO();
         }
 
-        public List<Quotation> Quotations { get; set; }
-
-
         /// <summary>
         /// Once user clicks quotation request button direct to Quotation Request Form
         /// </summary>
@@ -61,7 +65,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         {
             return RedirectToPage("/QuotationRequest");
         }
-
 
         /// <summary>
         /// Data need to process on loading the page
