@@ -43,12 +43,12 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                 source = reader.GetString(reader.GetOrdinal("source")),
                                 destination = reader.GetString(reader.GetOrdinal("destination")),
                                 natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                quarantineReq = reader.GetString(reader.GetOrdinal("quarantineReq")),
                                 status = reader.GetString(reader.GetOrdinal("status"));
 
                             bool isImport = reader.GetBoolean(reader.GetOrdinal("isImport")),
                                 isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking")),
                                 fumigation = reader.GetBoolean(reader.GetOrdinal("fumigation")),
+                                quarantineReq = reader.GetBoolean(reader.GetOrdinal("quarantineReq")),
                                 crane = reader.GetBoolean(reader.GetOrdinal("crane"));
 
 
@@ -105,12 +105,12 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                 source = reader.GetString(reader.GetOrdinal("source")),
                                 destination = reader.GetString(reader.GetOrdinal("destination")),
                                 natureOfPackage = reader.GetString(reader.GetOrdinal("natureOfPackage")),
-                                quarantineReq = reader.GetString(reader.GetOrdinal("quarantineReq")),
                                 status = reader.GetString(reader.GetOrdinal("status"));
 
                             bool isImport = reader.GetBoolean(reader.GetOrdinal("isImport")),
                                 isPacking = reader.GetBoolean(reader.GetOrdinal("isPacking")),
                                 fumigation = reader.GetBoolean(reader.GetOrdinal("fumigation")),
+                                quarantineReq = reader.GetBoolean(reader.GetOrdinal("quarantineReq")),
                                 crane = reader.GetBoolean(reader.GetOrdinal("crane"));
 
                             quotation = new Quotation(customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status); //create new instance to be returned to the user
