@@ -9,10 +9,16 @@ namespace IAB251_Assignment_2_Project_Final.Pages
     /// </summary>
     public class EmployeeDashboardModel : PageModel
     {
+        [BindProperty]
+        public string firstName { get; set; }
+
+
+
         /// <summary>
         /// Instance of Quotation Database
         /// </summary>
         private readonly QuotationDAO _quotationDAO;
+        private readonly IUserSessionControl _userSessionControl;
 
         /// <summary>
         /// Creating a new Quotation model
@@ -27,8 +33,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <summary>
         /// Constructor to intialise the employee database and the quotationDAO
         /// </summary>
-        public EmployeeDashboardModel()
+        public EmployeeDashboardModel(IUserSessionControl userSessionControl)
         {
+            _userSessionControl = userSessionControl;
             _quotationDAO = new QuotationDAO();
         }
 
@@ -37,6 +44,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         public void OnGet()
         {
+            firstName = _userSessionControl.currentEmployeeUser.getFirstName();
             allQuotations = _quotationDAO.getAllQuotations();
         }
     }

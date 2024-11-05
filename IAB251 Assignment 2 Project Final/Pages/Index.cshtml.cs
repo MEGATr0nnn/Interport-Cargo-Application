@@ -8,7 +8,7 @@ using System.Security.Policy;
 
 namespace IAB251_Assignment_2_Project_Final.Pages;
 
-public class lIndexModel : PageModel
+public class IndexModel : PageModel
 {
     public string accountExists { get; set; }
     /// <summary>
@@ -52,7 +52,7 @@ public class lIndexModel : PageModel
     /// <summary>
     /// Constructor initialising a new Customer Data Access Object
     /// </summary>
-    public lIndexModel(IUserSessionControl userSessionControl)
+    public IndexModel(IUserSessionControl userSessionControl)
     {
         _customerDAO = new CustomerDAO();
         _employeeDAO = new EmployeeDAO();

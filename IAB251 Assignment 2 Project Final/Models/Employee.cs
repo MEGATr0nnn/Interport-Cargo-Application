@@ -56,8 +56,6 @@
             return getJoinDate();
         }
 
-
-
         /// <summary>
         /// Test to determine valid email
         /// </summary>
