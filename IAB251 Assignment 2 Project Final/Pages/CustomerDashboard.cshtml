@@ -4,15 +4,12 @@
 }
 
 <div class="header-container">
-    <form method="post" asp-page-handler="Back">
-        <button type="submit" class="btn btn-secondary">Back</button>
+
+    
+    <form method="post">
+        <button type="submit" value="Logout" name="Logout" class="btn btn-primary">Logout</button>
     </form>
-
-
-<form method="post" asp-page-handler="Logout">
-    <button type="Logout" class="btn btn-primary">Logout</button>
-</form>
-    </div>
+</div>
 
 <br />
 
@@ -27,6 +24,7 @@
         Current Quotations
     </h3>
 
+@* If quotations is not null iterates through and populates a table with the relevant details  *@
     <div>
         @if (Model.Quotations != null && Model.Quotations.Any())
         {
@@ -40,7 +38,7 @@
                         <th>Number of Containers</th>
                         <th>Size of Containers</th>
                         <th>Nature of Package</th>
-                        <th>Import</th>
+                        <th>Import</th> 
                         <th>Packing</th>
                         <th>Quarantine Requirements</th>
                         <th>Fumigation</th>

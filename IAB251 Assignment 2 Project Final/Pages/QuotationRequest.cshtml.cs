@@ -70,29 +70,34 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Logic for adding a new quotation to the database
         /// </summary>
         /// <returns>Redirects to Dashboard Upon Successful Quotation Creation</returns>
-        public IActionResult OnPost(string Back, string Logout)
+        public IActionResult OnPost(string Logout, string Back)
         {
+
             if (Logout == "Logout")
             {
                 _userSessionService.currentEmployeeUser = null;
                 _userSessionService.currentCustomerUser = null;
                 return RedirectToPage("/Index");
             }
-            else if(Back == "Back")
+
+            if(Back == "Back")
             {
                 return RedirectToPage("/CustomerDashboard");
             }
-            else
-            {
-                Quotation quotation = new Quotation(customerInfo, source, destination, numContainers, sizeContainer, packageNature, isImport, isPacking, quarantineReq, isFumigation, isCrane, "Pending");
 
-                _quotation.insertNew(quotation, _userSessionService.currentCustomerUser);
 
-                return RedirectToPage("/CustomerDashboard");
-            }            
+
+            Quotation quotation = new Quotation(customerInfo, source, destination, numContainers, sizeContainer, packageNature, isImport, isPacking, quarantineReq, isFumigation, isCrane, "Pending");
+
+            _quotation.insertNew(quotation, _userSessionService.currentCustomerUser);
+
+
+            return RedirectToPage("/CustomerDashboard");
+
+            
         }
 
-
+     
 
         public void OnGet()
         {

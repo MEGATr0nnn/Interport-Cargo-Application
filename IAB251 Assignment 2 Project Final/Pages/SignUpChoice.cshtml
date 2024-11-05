@@ -15,20 +15,21 @@
 <body>
     <div class="hero-image3">
         <div class="header-container">
-            <form method="post" asp-page-handler="Back">
-                <button type="submit" class="btn btn-secondary">Back</button>
+            <form method="post">
+                <button type="submit" value="Back" name="Back" class="btn btn-secondary">Back</button>
             </form>
+
         </div>
 
         <div class="center-container">
             <div class="signup-container pill-box">
                 <h1>Sign In Portal</h1>
                 <div class="button-group">
-                    <form method="get" asp-page="/CustomerSignIn">
-                        <button type="submit" class="btn btn-primary">Sign In as a Customer</button>
+                    <form method="get" asp-page="/SignUp">
+                        <button type="submit" class="btn btn-primary">Sign up as a Customer</button>
                     </form>
-                    <form method="get" asp-page="/EmployeeSignIn">
-                        <button type="submit" class="btn btn-primary">Sign In as an Employee</button>
+                    <form method="get" asp-page="/SignUpEmployee">
+                        <button type="submit" class="btn btn-primary">Sign up as an Employee</button>
                     </form>
                 </div>
             </div>

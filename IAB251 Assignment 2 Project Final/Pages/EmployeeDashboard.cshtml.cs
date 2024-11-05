@@ -33,11 +33,14 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <summary>
         /// Constructor to intialise the employee database and the quotationDAO
         /// </summary>
+        ///
+
         public EmployeeDashboardModel(IUserSessionControl userSessionControl)
         {
             _userSessionControl = userSessionControl;
             _quotationDAO = new QuotationDAO();
         }
+
 
         /// <summary>
         /// Getting current user and all quotations stored in QuotationDAO
@@ -50,4 +53,5 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
 
     }
+
 }

@@ -128,16 +128,16 @@ public class IndexModel : PageModel
         //}
         */
 
-        //Logic for new customer signup
+        //Logic for customer sign in
         else if (action == "customer")
         {
-            return RedirectToPage("/SignUp");
+            return RedirectToPage("/CustomerSignIn");
         }
 
-        //Logic for new employee signup
+        //Logic for employee sign in
         else if (action == "employee")
         {
-            return RedirectToPage("/SignUpEmployee");
+            return RedirectToPage("/employeeSignin");
         }
 
         return Page();
