@@ -11,12 +11,15 @@
         private string _source;
         private string _destination;
         private int _numOfContainers;
+        private int _sizeOfContainers;
         private string _natureOfPackage;
-        private bool _import;
+        private bool _importExport;
         private bool _packing;
         private string _quarantineReq;
-        //private string _natureOfJob;
+        private bool _fumigation;
+        private bool _crane;
         private int _customerId;
+        private string _status;
 
         /// <summary>
         /// Quotation class constructior. Used to instantise the Quotation Object
@@ -27,43 +30,43 @@
         /// <param name="numOfContainers">Number of containers that need to be shipped.</param>
         /// <param name="natureOfPackage">Whats in the package (ie auto parts).</param>
         /// <param name="natureOfJob">The details of the job (ie import/export, fumigation, packing/unpacking and quarantine requirements).</param>
-        public Quotation(string customerInformation, string source, string destination, int numOfContainers, string natureOfPackage, bool import, bool packing, string quarantineReq)
+        public Quotation(string customerInformation, string source, string destination, int numOfContainers, int sizeOfContainers, string natureOfPackage, bool importExport, bool packing, string quarantineReq, bool fumigation, bool crane, string status)
         {
             _customerInformation = customerInformation;
             _source = source;
             _destination = destination;
             _numOfContainers = numOfContainers;
+            _sizeOfContainers = sizeOfContainers;
             _natureOfPackage = natureOfPackage;
-            _import = import;
+            _importExport = importExport;
             _packing = packing;
             _quarantineReq = quarantineReq;
-            //_natureOfJob = natureOfJob;
-            _import = import;
-            _packing = packing;
-            _quarantineReq = quarantineReq;
+            _fumigation = fumigation;
+            _crane = crane;
+            _status = status;
         }
 
         //Getters and setters
         public int getId() { return _id; }
         public void setId(int id) { _id = id; }
 
-        public string getCustomerInformation() { return _customerInformation;}
+        public string getCustomerInformation() { return _customerInformation; }
         public void setCustomerInformation(string customerInformation) { _customerInformation = customerInformation; }
 
         public string getSource() { return _source; }
         public void setSource(string source) { _source = source; }
 
-        public string getDestination() { return _destination;}
+        public string getDestination() { return _destination; }
         public void setDestination(string destination) { _destination = destination; }
 
-        public int getNumOfContainers() { return _numOfContainers;}
+        public int getNumOfContainers() { return _numOfContainers; }
         public void setNumOfContainers(int numOfOContainers) { _numOfContainers = numOfOContainers; }
 
-        public string getNatureOfPackage() {  return _natureOfPackage; }
-        public void setNatureOfPackage(string natureOfPackage) { _natureOfPackage= natureOfPackage; }
+        public string getNatureOfPackage() { return _natureOfPackage; }
+        public void setNatureOfPackage(string natureOfPackage) { _natureOfPackage = natureOfPackage; }
 
-        public bool getImport() { return _import; }
-        public void setImport(bool import) { _import = import; }
+        public bool getImport() { return _importExport; }
+        public void setImport(bool importExport) { _importExport = importExport; }
 
         public bool getPacking() { return _packing; }
         public void setPacking(bool packing) { _packing = packing; }
@@ -71,9 +74,17 @@
         public string getQuarantineRequirements() { return _quarantineReq; }
         public void setQuarantineRequirements(string quarantineReq) { _quarantineReq = quarantineReq; }
 
+        public int getsizeOfContainers() { return _sizeOfContainers; }
+        public void setContainerSize(int size) { _sizeOfContainers = size; }
 
-        //public string getNatureOfJob() {  return _natureOfJob; }
-        //public void setNatureOfJob(string natureOfJob) { _natureOfJob= natureOfJob; }
+        public bool getFumigation() { return _fumigation; }
+        public void setFumigation(bool fumigation) { _fumigation = fumigation; }
+
+        public bool getCrane() { return _crane; }
+        public void setCrane(bool crane) { _crane = crane; }
+
+        public string getStatus() { return _status; }
+        public void setStatus(string status) { _status = status; }
 
         public int getCustomerId() { return _customerId; }
         public void setCustomerId(int  customerId) { _customerId = customerId;}
