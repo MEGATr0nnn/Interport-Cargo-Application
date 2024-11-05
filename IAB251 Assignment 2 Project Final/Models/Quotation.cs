@@ -99,15 +99,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
         {
             if (getNumOfContainers() > 5 && (getQuarantineRequirements() || getFumigation()))
             {
-                return 0.025;
+                return 1.025;
             }
             if (getNumOfContainers() > 5 && (getQuarantineRequirements() && getFumigation()))
             {
-                return 0.05;
+                return 1.05;
             }
             if (getNumOfContainers() > 10 && (getQuarantineRequirements() && getFumigation()))
             {
-                return 0.1;
+                return 1.1;
             }
             return 0;
         }
@@ -124,15 +124,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
             {
                 if (getFumigation() && getCrane()) //if both
                 {
-                    return calculate(60, 80, 220, 400, 120, 240, 70, 60, 0.1, discount);
+                    return calculate(60, 80, 220, 400, 120, 240, 70, 60, 1.1, discount);
                 }
                 else if (getFumigation()) //if one
                 {
-                    return calculate(60, 0, 220, 400, 120, 240, 70, 60, 0.1, discount);
+                    return calculate(60, 0, 220, 400, 120, 240, 70, 60, 1.1, discount);
                 }
                 else if (getCrane()) //if one
                 {
-                    return calculate(60, 80, 0, 400, 120, 240, 70, 60, 0.1, discount);
+                    return calculate(60, 80, 0, 400, 120, 240, 70, 60, 1.1, discount);
                 }
                 else //if none
                 {
@@ -143,15 +143,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
             {
                 if (getFumigation() && getCrane()) //if both
                 {
-                    return calculate(70, 120, 280, 500, 160, 300, 100, 90, 0.1, discount);
+                    return calculate(70, 120, 280, 500, 160, 300, 100, 90, 1.1, discount);
                 }
                 else if (getFumigation()) //if one
                 {
-                    return calculate(70, 0, 280, 500, 160, 300, 100, 90, 0.1, discount);
+                    return calculate(70, 0, 280, 500, 160, 300, 100, 90, 1.1, discount);
                 }
                 else if (getCrane()) //if one
                 {
-                    return calculate(70, 120, 0, 500, 160, 300, 100, 90, 0.1, discount);
+                    return calculate(70, 120, 0, 500, 160, 300, 100, 90, 1.1, discount);
                 }
                 else //if none
                 {
@@ -189,7 +189,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 + getTailgateFee() + getStorageFee() + getFacilityFee() + getWharfInspectionFee());
             if (discount != 0)
             {
-                setTotal((subtotal * discount) * getGST());
+                setTotal((subtotal * (1 - discount)) * getGST());
             }
             else setTotal(subtotal * getGST());
             return getTotal();
