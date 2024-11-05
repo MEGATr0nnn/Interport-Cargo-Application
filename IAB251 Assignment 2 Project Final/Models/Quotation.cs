@@ -21,6 +21,12 @@
         private int _customerId;
         private string _status; //new automatically assign to pending when initally created in quotation request
 
+        //pending is autoassigned - pending 
+        //status = check
+        //if status = check{
+        //display pill box}
+
+
         //cost fields
         private int _wharfBookingFee;
         private int _craneFee;
@@ -30,7 +36,8 @@
         private int _storageFee;
         private int _facilityFee;
         private int _wharfInspection;
-        private int _GST;
+        private double _GST;
+        private double _total;
 
         /// <summary>
         /// Quotation class constructior. Used to instantise the Quotation Object
@@ -58,17 +65,81 @@
         }
 
         //methods
-        public void calculateCharges(int sizeOfContainer)
+        /// <summary>
+        /// Automatically alculates the charges via the corresponding fees and container sizes. This was made in a rush and could be better optimised with a dictonary
+        /// </summary>
+        /// <param name="sizeOfContainer">The size of the container</param>
+        /// <returns>A double</returns>
+        public double calculateCharges(int sizeOfContainer)
         {
             if (sizeOfContainer == 20)
             {
-                
+                if (_fumigation && _crane) //if both
+                {
+                    return calculate(60, 80, 220, 400, 120, 240, 70, 60, 0.1);
+                }
+                else if (_fumigation) //if one
+                {
+                   
+                    return calculate(60, 0, 220, 400, 120, 240, 70, 60, 0.1);
+                }
+                else if (_crane) //if one
+                {
+                    return calculate(60, 80, 0, 400, 120, 240, 70, 60, 0.1);
+                }
+                else //if none
+                {
+                    return 0;
+                }
             }
-
-            else
+            else 
             {
-
+                if (_fumigation && _crane) //if both
+                {
+                    return calculate(70, 120, 280, 500, 160, 300, 100, 90, 0.1);
+                }
+                else if (_fumigation) //if one
+                {
+                    return calculate(70, 0, 280, 500, 160, 300, 100, 90, 0.1);
+                }
+                else if (_crane) //if one
+                {
+                    return calculate(70, 120, 0, 500, 160, 300, 100, 90, 0.1);
+                }
+                else //if none
+                {
+                    return 0;
+                }
             }
+        }
+
+        /// <summary>
+        /// Rudimentary method made in a rush that both sets and calculates the values
+        /// </summary>
+        /// <param name="wharfFee">Wharf Fee</param>
+        /// <param name="craneFee">Crane Fee</param>
+        /// <param name="fumigationFee">Fumigation Fee</param>
+        /// <param name="LCL">LCL Fee</param>
+        /// <param name="tailgateFee">Tailgate Fee</param>
+        /// <param name="storageFee">Storage Fee</param>
+        /// <param name="facilityFee">Facility Fee</param>
+        /// <param name="wharfInspection">Wharf Inspection Fee</param>
+        /// <param name="GST">GST</param>
+        /// <returns>A double, Total</returns>
+        public double calculate(int wharfFee, int craneFee, int fumigationFee, int LCL, int tailgateFee, int storageFee, int facilityFee, int wharfInspection, double GST)
+        {
+            setWharfFee(wharfFee);
+            setCraneFee(craneFee);
+            setFumigationFee(fumigationFee);
+            setLCLFee(LCL);
+            setTailgateFee(tailgateFee);
+            setStorageFee(storageFee);
+            setFacilityFee(facilityFee);
+            setWharfInspectionFee(wharfInspection);
+            setGST(GST);
+            setTotal(getWharfFee() + getCraneFee() + getFumigationFee() + getLCLFee() 
+                + getTailgateFee() + getStorageFee() + getFacilityFee() + getWharfInspectionFee() + getGST());
+            return getTotal();
         }
 
 
@@ -116,6 +187,36 @@
         public int getCustomerId() { return _customerId; }
         public void setCustomerId(int  customerId) { _customerId = customerId;}
 
+        //cost getters and setters
+        public int getWharfFee() { return _wharfBookingFee; }
+        public void setWharfFee(int fee) { _wharfBookingFee = fee; }
+
+        public int getCraneFee() { return _craneFee; }
+        public void setCraneFee(int fee) { _craneFee = fee;}
+
+        public int getFumigationFee() { return _fumigationFee; }
+        public void setFumigationFee(int fee) { _fumigationFee = fee; }
+
+        public int getLCLFee() { return _LCLDeliveryDepot; }
+        public void setLCLFee(int fee) { _LCLDeliveryDepot = fee; }
+
+        public int getTailgateFee() { return _tailgateInspection; }
+        public void setTailgateFee(int fee) { _tailgateInspection = fee;}
+
+        public int getStorageFee() { return _storageFee; }
+        public void setStorageFee(int fee) { _storageFee = fee;}
+
+        public int getFacilityFee() { return _facilityFee; }
+        public void setFacilityFee(int fee) { _facilityFee = fee;}
+
+        public int getWharfInspectionFee() { return _wharfInspection; }
+        public void setWharfInspectionFee(int fee) { _wharfInspection = fee;}
+
+        public double getGST() { return _GST; }
+        public void setGST(double gst) { _GST = gst; }
+
+        public double getTotal() { return _total; }
+        public void setTotal(double total) { _total = total; }
 
 
     }
