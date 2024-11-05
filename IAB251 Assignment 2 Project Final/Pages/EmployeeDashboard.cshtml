@@ -105,9 +105,10 @@
                             <td>
                                 @if (quote.calculateDiscount() > 0)
                                 {
-                                    <div>
-                                        <button type="submit" value="Discount" name="action">Apply Discount</button>
-                                    </div>
+                                    <form method="post">
+                                        <input type="hidden" name="Add Discount" value="@quote.getId()" />
+                                        <button type="submit" name="action" value="accept">Accept</button>
+                                    </form>
                                 }
                                 else
                                 {
@@ -125,13 +126,17 @@
                                 }
                             </td>
                             <td>
+                                <form method="post">
                                 <input type="hidden" name="quoteIDAccept" value="@quote.getId()" />
                                 <button type="submit" name="action" value="accept">Accept</button>
+                                </form>
                             </td>
 
                             <td>
+                                <form method="post">
                                 <input type="hidden" name="quoteIDReject" value="@quote.getId()" />
                                 <button type="submit" name="action" value="reject">Reject</button>
+                                </form>
                             </td>
                         </tr>
                     }

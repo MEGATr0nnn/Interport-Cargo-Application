@@ -11,9 +11,11 @@ namespace IAB251_Assignment_2_Project_Final.Pages
     {
         [BindProperty]
         public string firstName { get; set; }
+        [BindProperty]
+        public bool Discount { get; set; }
 
         [BindProperty]
-        public bool Discount { get; set; } = false;
+        public double total { get; set; }
 
         /// <summary>
         /// Instance of Quotation Database
@@ -24,11 +26,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// <summary>
         /// Creating a new Quotation model
         /// </summary>
-        private Quotation Quotation { get; set; }
-
-        private CustomerDAO customerDAO { get; set; }
-
-        private Customer customer { get; set; }
+        private Quotation _quotation { get; set; }
 
         /// <summary>
         /// Creating a list of all quotations to showcase to the employee dashboard
@@ -61,31 +59,23 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         {
             if (action == "Discount")
             {
-                Console.WriteLine("Button has been pressed");
-                Console.WriteLine("Discount value: " + Discount);
-                Discount = true;
-                Console.WriteLine("Discount after:" + Discount);
+                _quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
+                total = _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
 
             }
 
             if (action == "accept")
             {
-                Console.WriteLine("Button Accept has been pressed");
-                Console.WriteLine(quoteIDAccept + "ID ACCEPTED!");
-                Quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
-                Console.WriteLine(_quotationDAO.getSpecificQuotation(quoteIDAccept).getStatus() + "Status update");
-                Quotation.setStatus("Accepted");
-                _quotationDAO.update(Quotation, Quotation.getCustomerId());
+                _quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
+                _quotation.setStatus("sentForApproval");
+                _quotationDAO.update(_quotation, _quotation.getCustomerId());
             }
 
             if (action == "reject")
             {
-                Console.WriteLine("Button REJECT has been pressed");
-                Console.WriteLine(quoteIDAccept + "ID REJECTED!");
-                Quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
-                Console.WriteLine(_quotationDAO.getSpecificQuotation(quoteIDAccept).getStatus() + " Status update");
-                Quotation.setStatus("Rejected");
-                _quotationDAO.update(Quotation, Quotation.getCustomerId());
+                _quotation = _quotationDAO.getSpecificQuotation(quoteIDReject);
+                _quotation.setStatus("Rejected");
+                _quotationDAO.update(_quotation, _quotation.getCustomerId());
             }
             return RedirectToPage("/EmployeeDashboard");
         }
