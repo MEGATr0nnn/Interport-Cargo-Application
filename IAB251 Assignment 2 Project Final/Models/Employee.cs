@@ -56,6 +56,84 @@
             return getJoinDate();
         }
 
+
+
+        /// <summary>
+        /// Test to determine valid email
+        /// </summary>
+        /// <param name="email">Employee Email Input</param>
+        /// <returns>Boolean for valid email</returns>
+        public bool checkValidEmail(string email)
+        {
+            if (email.Contains('@'))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Test to determine valid phone number
+        /// </summary>
+        /// <param name="number">Employee Email Input</param>
+        /// <returns>Boolean for Valid Phone Number</returns>
+        public bool checkValidNumber(string number)
+        {
+            if (number.Length == 10)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Test to determine that all characters are digits in provided phone number
+        /// </summary>
+        /// <param name="phoneNumber">Employee Phone Number Input</param>
+        /// <returns>Boolean for Valid Format</returns>
+        public bool checkPhoneNumbersOnly(string phoneNumber)
+        {
+            for (int i = 0; i < phoneNumber.Length; i++)
+            {
+                if (!Char.IsDigit(phoneNumber[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Test to determine valid employee type
+        /// </summary>
+        /// <param name="employeeType">The type of employee from user input</param>
+        /// <returns>Boolean for valid employee type</returns>
+        public bool checkVaildEmployeeType(string employeeType)
+        {
+            foreach (string type in EmployeeTypes)
+            {
+                if (employeeType.Equals(type))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool checkDuplicateEmail(string email1, string email2)
+        {
+            if (email1.Equals(email2))
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+
+
+
         //getters and setters
         public string getEmail()
         {
@@ -124,78 +202,7 @@
 
         public void setType(string type)
         {
-            this._type=type;
-        }
-
-        /// <summary>
-        /// Test to determine valid email
-        /// </summary>
-        /// <param name="email">Employee Email Input</param>
-        /// <returns>Boolean for valid email</returns>
-        public bool testValidEmail(string email)
-        {
-            if (email.Contains('@'))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Test to determine valid phone number
-        /// </summary>
-        /// <param name="number">Employee Email Input</param>
-        /// <returns>Boolean for Valid Phone Number</returns>
-        public bool testValidNumber(string number)
-        {
-            if (number.Length == 10)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Test to determine that all characters are digits in provided phone number
-        /// </summary>
-        /// <param name="phoneNumber">Employee Phone Number Input</param>
-        /// <returns>Boolean for Valid Format</returns>
-        public bool testPhoneNumbersOnly(string phoneNumber)
-        {
-            for (int i = 0; i < phoneNumber.Length; i++)
-            {
-                if (!Char.IsDigit(phoneNumber[i])){
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// Test to determine valid employee type
-        /// </summary>
-        /// <param name="employeeType">The type of employee from user input</param>
-        /// <returns>Boolean for valid employee type</returns>
-        public bool testVaildEmployeeType(string employeeType)
-        {
-            foreach (string type in EmployeeTypes)
-            {
-                if (employeeType.Equals(type))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool testDuplicateEmail(string email1, string email2)
-        {
-            if (email1.Equals(email2))
-            {
-                return true;
-            }
-            return false;
+            this._type = type;
         }
     }
 }
