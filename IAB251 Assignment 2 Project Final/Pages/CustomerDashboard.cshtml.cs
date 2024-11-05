@@ -42,7 +42,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// Once user clicks quotation request button direct to Quotation Request Form
         /// </summary>
         /// <returns>Returns a redirect to next page</returns>
-        public IActionResult OnPost(string Logout,string Back)
+        public IActionResult OnPost(string Logout,string Back, int quoteIDAccept, int quoteIDReject, string action)
         {
             if (Logout == "Logout")
             {
@@ -50,11 +50,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 _userSessionService.currentCustomerUser = null;
                 return RedirectToPage("/Index");
             }
-
-           
-
-            return RedirectToPage("/QuotationRequest");
-        }
 
             if (action == "accept")
             {
@@ -75,8 +70,13 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 quotation.setStatus("Rejected");
                 _quotationDAO.update(quotation, quotation.getCustomerId());
             }
-            return RedirectToPage("/CustomerDashboard");
 
+            if (action == "quotation")
+            {
+                return RedirectToPage("/QuotationRequest");
+            }
+
+            return RedirectToPage("/CustomerDashboard");
         }
 
         /// <summary>
