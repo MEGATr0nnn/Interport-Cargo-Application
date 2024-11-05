@@ -61,6 +61,11 @@ html, body {
     padding: 20px;
 }
 
+.container, .container-fluid {
+    max-width: 100%; /* Ensures the container does not exceed the viewport width */
+    padding: 20px 15px; /* Optional: add some padding for aesthetics */
+}
+
 /* Full-page center container */
 .center-container {
     display: flex;
@@ -201,7 +206,7 @@ html, body {
     color: white;
     text-align: center;
     font-size: 1em;
-    position: fixed;
+    position: relative;
     bottom: 0;
 }
 
