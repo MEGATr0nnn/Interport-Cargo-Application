@@ -46,9 +46,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public bool isCrane { get; set; }
 
-        [BindProperty]
-        public string status { get; set; }
-
+        
 
         private readonly QuotationDAO _quotation;
 
@@ -66,22 +64,37 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// set user session service to null
         /// </summary>
         /// <returns></returns>
-        public IActionResult OnPostLogout()
-        {
-            return RedirectToPage("/Index");
-        }
+       
 
         /// <summary>
         /// Logic for adding a new quotation to the database
         /// </summary>
         /// <returns>Redirects to Dashboard Upon Successful Quotation Creation</returns>
-        public IActionResult OnPost()
+        public IActionResult OnPost(string Action)
         {
-            Quotation quotation = new Quotation(customerInfo, source, destination, numContainers, sizeContainer, packageNature, isImport, isPacking, quarantineReq, isFumigation, isCrane, status);
+            Quotation quotation = new Quotation(customerInfo, source, destination, numContainers, sizeContainer, packageNature, isImport, isPacking, quarantineReq, isFumigation, isCrane, "Pending");
 
             _quotation.insertNew(quotation, _userSessionService.currentCustomerUser);
 
+
+            if (Action == "Logout")
+            {
+                _userSessionService.currentEmployeeUser = null;
+                _userSessionService.currentCustomerUser = null;
+                return RedirectToPage("/Index");
+            }
+
+            if(Action == "Back")
+            {
+                return RedirectToPage("/CustomerDashboard");
+            }
+            
+ 
+            
+
             return RedirectToPage("/CustomerDashboard");
+
+            
         }
 
 

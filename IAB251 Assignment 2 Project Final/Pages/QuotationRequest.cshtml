@@ -8,13 +8,13 @@
     Quotation Request
 </h1>
 <div class="header-container">
-    <form method="post" asp-page-handler="Back">
-        <button type="submit" class="btn btn-secondary">Back</button>
+    <form method="post">
+        <button type="submit" value="Back" name="Back" class="btn btn-secondary">Back</button>
     </form>
 
 
-<form method="post" asp-page-handler="Logout">
-    <button type="Logout" class="btn btn-primary">Logout</button>
+<form method="post">
+    <button type="submit" value="Logout" name="Logout" class="btn btn-primary">Logout</button>
 </form>
     </div>
 
@@ -125,12 +125,6 @@
                 <input type="radio" asp-for="isCrane" id="No" value="False" />
                 <label for="crane"> No </label>
             </div>
-        </div>
-
-        <!--This needs to be a dropdown with 4 values, talk to harry about the values-->
-        <div>
-            <label for="quotationStatus">Quotation Status:</label>
-            <input type="text" asp-for="status" class="form-control" />
         </div>
 
         <br />
