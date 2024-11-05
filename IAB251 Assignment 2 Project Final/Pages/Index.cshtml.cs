@@ -131,13 +131,13 @@ public class IndexModel : PageModel
         //Logic for new customer signup
         else if (action == "customer")
         {
-            return RedirectToPage("/SignUp");
+            return RedirectToPage("/CustomerSignIn");
         }
 
         //Logic for new employee signup
         else if (action == "employee")
         {
-            return RedirectToPage("/SignUpEmployee");
+            return RedirectToPage("/EmployeeSignIn");
         }
 
         return Page();
