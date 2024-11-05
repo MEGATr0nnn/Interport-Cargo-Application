@@ -13,6 +13,8 @@
         private string _phoneNumber;
         private string _password;
         private string _type;
+        private string _address;
+        private string _joined;
 
         /// <summary>
         /// Constructor responsible for creating Employees.
@@ -22,7 +24,7 @@
         /// <param name="email">The Employees email</param>
         /// <param name="phoneNumber">The Employees phoneNumber</param>
         /// <param name="password">The Employees password</param>
-        public Employee(string firstName, string lastName, string email, string phoneNumber, string password, string type)
+        public Employee(string firstName, string lastName, string email, string phoneNumber, string password, string type, string address, string joined)
         {
             this._firstName = firstName;
             this._lastName = lastName;
@@ -30,6 +32,19 @@
             this._phoneNumber = phoneNumber;
             this._password = password;
             this._type = type;
+            this._address = address;
+            this._joined = joined;
+        }
+
+        /// <summary>
+        /// Sets the join date for the employee automatically
+        /// </summary>
+        /// <returns>The date the employees account was created.</returns>
+        public string joiningTiming()
+        {
+            string joinDate = DateTime.Now.ToString("yyyy-MM-dd");
+            setJoinDate(joinDate);
+            return getJoinDate();
         }
 
         //getters and setters
@@ -102,5 +117,11 @@
         {
             this._type=type;
         }
+
+        public void setAddress(string address) { this._address = address; }
+        public string getAddress() { return _address; }
+
+        public void setJoinDate(string joinDate) { this._joined = joinDate; }
+        public string getJoinDate() { return _joined; }
     }
 }

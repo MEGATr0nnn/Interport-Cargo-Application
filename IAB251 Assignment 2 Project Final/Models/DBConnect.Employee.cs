@@ -40,9 +40,12 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                 email = reader.GetString(reader.GetOrdinal("email")),
                                 password = reader.GetString(reader.GetOrdinal("password")),
                                 phoneNumber = reader.GetString(reader.GetOrdinal("phoneNumber")),
-                                type = reader.GetString(reader.GetOrdinal("type"));
+                                type = reader.GetString(reader.GetOrdinal("type")),
+                                address = reader.GetString(reader.GetOrdinal("address")),
+                                joinDate = reader.GetString(reader.GetOrdinal("dateJoined"));
 
-                            employee = new Employee(firstName, lastName, email, phoneNumber, password, type);
+
+                            employee = new Employee(firstName, lastName, email, phoneNumber, password, type, address, joinDate);
                             employee.setId(id);
                         }
                     }

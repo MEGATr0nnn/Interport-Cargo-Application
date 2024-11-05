@@ -25,7 +25,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             email VARCHAR NOT NULL,
                             phoneNumber VARCHAR NOT NULL,
                             password VARCHAR NOT NULL,
-                            type VARCHAR NOT NULL
+                            type VARCHAR NOT NULL,
+                            address STRING NOT NULL,
+                            dateJoined STRING NOT NULL
                         )";
             _connect.executeQuery(creatTableQuery);
         }
@@ -54,8 +56,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void insertNew(Employee employee)
         {
             string insertUserQuery = @"
-                    INSERT INTO employee (firstName, lastName, email, phoneNumber, password, type)
-                    VALUES (@firstName, @lastName, @email, @phoneNumber, @password, @type)
+                    INSERT INTO employee (firstName, lastName, email, phoneNumber, password, type, address, dateJoined)
+                    VALUES (@firstName, @lastName, @email, @phoneNumber, @password, @type, @address, @dateJoined)
                     RETURNING id";
 
             SqliteParameter[] parameters = new SqliteParameter[]
@@ -65,7 +67,9 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 new SqliteParameter("@email", employee.getEmail()),
                 new SqliteParameter("@phoneNumber", employee.getPhoneNumber()),
                 new SqliteParameter("@password", employee.getPassword()),
-                new SqliteParameter("@type", employee.getType())
+                new SqliteParameter("@type", employee.getType()),
+                new SqliteParameter("@address", employee.getAddress()),
+                new SqliteParameter("@dateJoined", employee.joiningTiming())
             };
             employee.setId(_connect.executeScalarQuery(insertUserQuery, parameters));
         }
