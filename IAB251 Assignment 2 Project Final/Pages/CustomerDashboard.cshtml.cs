@@ -10,6 +10,10 @@ namespace IAB251_Assignment_2_Project_Final.Pages
     /// </summary>
     public class CustomerDashboardModel : PageModel
     {
+
+        [BindProperty]
+        public string firstName { get; set; }
+
         /// <summary>
         /// Instance of the customerDAO to access customer information
         /// </summary>
@@ -26,20 +30,9 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         private readonly IUserSessionControl _userSessionService;
 
         /// <summary>
-        /// Customer instance
-        /// </summary>
-        public Customer customer { get; set; }
-
-        /// <summary>
         /// Quotation Instance
         /// </summary>
         public Quotation quotation { get; set; }
-
-        /// <summary>
-        /// Name of the customer for dashboard display
-        /// </summary>
-        [BindProperty]
-        public string customerName { get; set; }
 
         /// <summary>
         /// Creating a list of all quotations that have been created by this customer
@@ -71,7 +64,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         /// </summary>
         public void OnGet()
         {
-            customer = _userSessionService.currentCustomerUser;
+            firstName = _userSessionService.currentCustomerUser.getFirstName();
             Quotations = _quotationDAO.getAllFromCustomerId(_userSessionService.currentCustomerUser.getId());
         }
     }
