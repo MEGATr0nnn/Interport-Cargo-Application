@@ -1,24 +1,26 @@
 ﻿html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
+
 body {
-  margin-bottom: 60px;
+   
+    margin-bottom: 60px;
 }
 /* Basic reset */
 * {
@@ -59,19 +61,17 @@ html, body {
     padding: 20px;
 }
 
-/* Pill box styling */
-.pill-box {
-    width: 90%;
-    max-width: 500px;
-    background-color: white;
-    padding: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: left;
+/* Full-page center container */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Full viewport height */
+    text-align: center;
 }
 
-/* Basic styling for pill-box elements */
+/* Pill-box styling */
 .pill-box {
     width: 90%;
     max-width: 500px;
@@ -79,9 +79,9 @@ html, body {
     padding: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: left;
+    margin-bottom: 20px; /* Space between stacked boxes */
 }
+
 
 /* Centering the signup container */
 .signup-container {
@@ -92,6 +92,106 @@ html, body {
     text-align: center;
 }
 
+/* Extended pill-box for full content coverage */
+.pill-box-full {
+    width: 100%; /* Full width */
+    max-width: none; /* Remove width limitation */
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Prevents overflow issues */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+/* Container to align the welcome message and chart side by side */
+.welcome-and-chart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+    /* Styling for the welcome message and chart */
+    .welcome-and-chart-container h1 {
+        flex: 1;
+        margin-right: 20px; /* Add space between the h1 and the chart */
+    }
+
+    .welcome-and-chart-container canvas {
+        flex: 1;
+        max-width: 600px; /* Control the maximum width of the chart */
+    }
+
+
+/* Center layout */
+html, body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+/* Form container styling */
+.signin-form-container {
+    width: 90%;
+    max-width: 400px;
+    background-color: white;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto; /* Centers the container itself */
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    margin: 0 auto; /* Centers the container itself */
+    text-align: center;
+}
+
+    .signin-form-container h1 {
+        margin-bottom: 20px;
+        font-size: 1.8em;
+        color: #333;
+       
+    }
+
+    /* Input field styling */
+    .signin-form-container input[type="email"],
+    .signin-form-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    /* Submit button styling */
+    .signin-form-container button {
+        width: 100%;
+        padding: 12px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.1em;
+    }
+
+        .signin-form-container button:hover {
+            background-color: #0056b3;
+        }
 
 /* Footer styling */
 .footer {
@@ -102,10 +202,178 @@ html, body {
     text-align: center;
     font-size: 1em;
     position: fixed;
-    bottom:0;
+    bottom: 0;
 }
 
     .footer h2 {
         margin: 0;
         font-size: 1.2em;
     }
+
+
+/* Basic reset for full-screen setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Centering layout setup */
+html, body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4; /* Light background for the page */
+    font-family: Arial, sans-serif;
+}
+
+/* Container for the buttons */
+.signup-container {
+    text-align: center;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+    .signup-container h1 {
+        margin-bottom: 20px;
+        font-size: 2em;
+        color: #333;
+    }
+
+    /* Button styling */
+    .signup-container button {
+        border: none;
+        outline: none;
+        padding: 15px 30px;
+        margin: 10px;
+        color: white;
+        background-color: #2CA8E2;
+        text-align: center;
+        cursor: pointer;
+        font-size: 1.1em;
+        border-radius: 5px;
+        width: 250px;
+    }
+
+        .signup-container button:hover {
+            background-color: #0C6B97;
+        }
+
+/* Header container to hold back and logout buttons */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent; /* Optional: Background color for visibility */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Styling for the back button */
+.back-button {
+    margin-left: 10px;
+}
+
+/* Styling for the logout button */
+.logout-button {
+    margin-right: 10px;
+}
+
+<style >
+/* Basic reset and full viewport setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+/* Main content area */
+.main-content {
+    flex: 1; /* Allows the main content to expand */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Hero image section */
+.hero-image1 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/ship.jpg');
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.hero-image2 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/containers.jpg');
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.hero-image3 {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/crane.jpg');
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+    .hero-text button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 10px 25px;
+        color: black;
+        background-color: #ddd;
+        text-align: center;
+        cursor: pointer;
+        margin: 10px 0;
+    }
+
+        .hero-text button:hover {
+            background-color: #555;
+            color: white;
+        }
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow for a lifted effect */
+}
