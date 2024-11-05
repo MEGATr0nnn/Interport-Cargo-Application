@@ -26,7 +26,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             email VARCHAR NOT NULL,
                             phoneNumber VARCHAR NOT NULL,
                             password VARCHAR NOT NULL,
-                            company VARCHAR NOT NULL
+                            company VARCHAR
                         )";
             _connect.executeQuery(createTableQuery);
         }
