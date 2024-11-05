@@ -133,7 +133,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
         public void update(Quotation quotation, int customerID)
         {
             string updateQuery = @"
-                    UPDATE quotation customerInformation = @customerInformation, source = @source, destination = @destination, numOfContainers = @numOfContainers, sizeOfContainers = @sizeOfContainers, natureOfPackage = @natureOfPackage, isImport =  @isImport, isPacking = @isPacking, quarantineReq = @quarantineReq, fumigation = @fumigation, crane = @crane, status = @status, customerId = @customerId
+                    UPDATE quotation SET customerInformation = @customerInformation, source = @source, destination = @destination, numOfContainers = @numOfContainers, sizeOfContainers = @sizeOfContainers, natureOfPackage = @natureOfPackage, isImport =  @isImport, isPacking = @isPacking, quarantineReq = @quarantineReq, fumigation = @fumigation, crane = @crane, status = @status, customerId = @customerId
                     WHERE id = @id"; 
             SqliteParameter[] parameters = new SqliteParameter[]
             {

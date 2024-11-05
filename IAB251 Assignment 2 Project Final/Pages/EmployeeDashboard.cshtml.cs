@@ -87,7 +87,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 Quotation.setStatus("Rejected");
                 _quotationDAO.update(Quotation, Quotation.getCustomerId());
             }
-            return Page();
+            return RedirectToPage("/EmployeeDashboard");
         }
     }
 }
