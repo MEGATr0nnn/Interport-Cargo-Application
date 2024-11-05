@@ -21,6 +21,10 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [DataType(DataType.Password)]
         public string password { get; set; }
 
+        [BindProperty]
+        public bool SignIn { get; set; } = true;
+
+
         private readonly EmployeeDAO _employeeDAO;
 
         private PasswordHasher _passwordHasher = new PasswordHasher();
@@ -49,19 +53,20 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
                     if (_employeeDAO.isExist(email, hashed))
                     {
+                        SignIn = true;
                         Employee employee = _employeeDAO.getFromEmailPword(email, hashed);
                         Console.WriteLine($"{employee.getEmail()}");
                         Console.WriteLine("Password Value: " + employee.getPassword());
 
                         _userSessionService.currentEmployeeUser = employee;
-                        Console.WriteLine($"{_userSessionService.currentEmployeeUser.getFirstName()} + testing user session service "); 
+                        Console.WriteLine($"{_userSessionService.currentEmployeeUser.getFirstName()} + testing user session service ");
 
                         return RedirectToPage("/EmployeeDashboard");
                     }
                 }
                 catch (Exception ex)
                 {
-
+                    SignIn = false;
                     ModelState.AddModelError(string.Empty, ex.Message);
                     return Page(); // Return to the same page to show the error message
                 }

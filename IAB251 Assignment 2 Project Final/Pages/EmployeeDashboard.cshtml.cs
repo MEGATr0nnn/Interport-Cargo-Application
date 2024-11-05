@@ -35,9 +35,15 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(string action)
         {
-            return RedirectToPage("/QuotationManagement");
+            if (action == "rates")
+            {
+                return RedirectToPage("/RatesSchedule");
+            }
+
+            return Page();
+            //return RedirectToPage("/QuotationManagement");
         }
 
 
