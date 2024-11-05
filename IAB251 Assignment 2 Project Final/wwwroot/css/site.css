@@ -49,17 +49,6 @@ html, body {
     position: relative;
 }
 
-/* Main content area EVERYTHING SITS INSIDE THIS */
-.main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    padding: 5px;
-}
-
 .container, .container-fluid {
     max-width: 100%; /* Ensures the container does not exceed the viewport width */
 }
@@ -110,8 +99,6 @@ html, body {
     margin: 0 auto; /* Centers the container itself */
     text-align: center;
 }
-
-
 
 /* Container to align the welcome message and chart side by side */
 .welcome-and-chart-container {
