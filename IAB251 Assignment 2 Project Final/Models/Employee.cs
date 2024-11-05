@@ -204,5 +204,11 @@
         {
             this._type = type;
         }
+
+        public string getAddress() { return _address; }
+        public void setAddress(string address) { this._address = address; }
+
+        public string getJoinDate() { return _joined; }
+        public void setJoinDate(string joined) { this._joined = joined;}
     }
 }
