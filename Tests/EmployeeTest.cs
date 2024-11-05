@@ -48,7 +48,7 @@ namespace Tests
         [TestMethod]
         public void TestPhoneNumber()
         {
-            Assert.IsTrue(_employee.checkValidNumber(_employee.getPhoneNumber()), "Employee must have a valid phone number");
+            Assert.IsTrue(_employee.checkValidPhoneNumber(_employee.getPhoneNumber()), "Employee must have a valid phone number");
         }
 
         //****** LOGIC FOR THIS DOESNT WORK YET ********

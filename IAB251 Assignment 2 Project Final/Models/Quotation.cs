@@ -51,14 +51,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
             "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan",
             "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"};
 
-
-
-        //pending is autoassigned - pending 
-        //status = check
-        //if status = check{
-        //display pill box}
-
-
         //cost fields
         private int _wharfBookingFee;
         private int _craneFee;
@@ -203,11 +195,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
             return getTotal();
         }
 
-        /// <summary>
-        /// Test to determine whether email format is valid
-        /// </summary>
-        /// <param name="email">The user input for email address</param>
-        /// <returns>True if format is correct</returns>
         public bool checkValidEmail(string email)
         {
             if (email.Contains('@'))
@@ -217,11 +204,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
             return false;
         }
 
-        /// <summary>
-        /// Test to determine if the country inputted is a valid country
-        /// </summary>
-        /// <param name="country">The user input for source/destination</param>
-        /// <returns>True if input is a country</returns>
         public bool checkValidCountry(string country)
         {
             foreach (string c in Countries)

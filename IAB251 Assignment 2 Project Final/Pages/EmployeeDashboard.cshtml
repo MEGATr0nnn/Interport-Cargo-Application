@@ -64,6 +64,7 @@
                     <th>Packing</th>
                     <th>Quarantine Requirements</th>
                     <th>Status</th>
+                    <th>Discount</th>
                     <th>Total Cost</th>
                     <th>Accept</th>
                     <th>Reject</th>
@@ -83,8 +84,36 @@
                         <td>@quote.getImport();</td>
                         <td>@quote.getPacking();</td>
                         <td>@quote.getQuarantineRequirements();</td>
-                        <td>STATUS (DONE BY HARRY)</td>
-                        <td>TOTAL COST (DONE BY HARRY)</td>
+                        <td>
+                            @if (quote.getStatus() == "quoteSent")
+                            {
+                            <span>Pending</span>
+                            }
+                            else
+                            {
+                            <span>@quote.getStatus()</span>
+                            }
+                        </td>
+                        <td>
+                            @if(quote.calculateDiscount() > 0)
+                            {
+                            <span><button value="Discount">Apply Discount</button></span>
+                            }
+                            else
+                            {
+                            <span>No Discount to Apply</span>
+                            }
+                        </td>
+                        <td>
+                            @if(Model.Discount)
+                            {
+                                <span>@quote.calculateCharges(quote.getsizeOfContainers(), quote.calculateDiscount());</span>
+                            }
+                            else
+                            {
+                                <span>@quote.calculateCharges(quote.getsizeOfContainers(), 0);</span>
+                            }
+                        </td>
                         <td><button value="accept">Accept</button></td>
                         <td><button value="reject">Reject</button></td>
                     </tr>

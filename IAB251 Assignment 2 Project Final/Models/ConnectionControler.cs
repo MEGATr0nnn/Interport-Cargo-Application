@@ -16,18 +16,21 @@ namespace IAB251_Assignment_2_Project_Final.Models
         //private static string _dbName = "testDB.db";
         //private static string _connectionString = $"Data Source=testDB.db";
 
+        /// <summary>
+        /// Constructor that initalises the DB connection, creates the DB table if it doesnt exist
+        /// </summary>
         public ConnectionControler()
         {
-            if (File.Exists(_dbName))
+            if (File.Exists(getDBname()))
             {
                 setConState(true);
-                Console.WriteLine($"File: {_dbName} exists in your repository");
+                Console.WriteLine($"File: {getDBname()} exists in your repository");
             }
             else
             {
                 try
                 {
-                    Console.WriteLine($"File: {_dbName} does not exist in your repository, attempting to generate it now.");
+                    Console.WriteLine($"File: {getDBname()} does not exist in your repository, attempting to generate it now.");
                     initaliseBlankDB();
                 }
                 catch(Exception ex)
@@ -38,6 +41,11 @@ namespace IAB251_Assignment_2_Project_Final.Models
             }
 
         }
+
+        /// <summary>
+        /// Initalises a Blank DB
+        /// </summary>
+        /// <exception cref="Exception">Throws an exception if there is any SQL connection problems</exception>
         private void initaliseBlankDB()
         {
             using (var connection = new SqliteConnection(_connectionString))
@@ -62,6 +70,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
             }
         }
 
+        //getters and setters
         public static string getConnectionString() { return _connectionString; }
 
         public static void setConnectionString(string conn) { _connectionString = conn; }
@@ -69,6 +78,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
         private void setConState(bool conState) { _conState =  conState; }
 
         public bool checkConState() { return _conState; }
+
+        public string getDBname() { return _dbName; }
 
     }
 }

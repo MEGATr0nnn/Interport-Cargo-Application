@@ -17,7 +17,6 @@ namespace IAB251_Assignment_2_Project_Final.Models
         /// <param name="parameters">The constraints/parameters you want to execute your query by</param>
         /// <returns>An instance of Employee</returns>
         /// <exception cref="InvalidOperationException">Thrown when the query or parameters inputted is invalid</exception>
-        /// <exception cref="SQLiteException">Thrown when there is an issue with the SQL connection to the DB, this should be rarely executed as the Connection Controler should ensure that this doesnt happen</exception>
         public Employee employeeExecuteFetch(string query, SqliteParameter[] parameters)
         {
             Employee employee = null;
