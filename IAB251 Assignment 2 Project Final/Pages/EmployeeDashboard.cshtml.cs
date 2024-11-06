@@ -64,8 +64,14 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             {
                 Console.WriteLine("discount added");
                 Discount = true;
+                Console.WriteLine($"{total}");
                 _quotation = _quotationDAO.getSpecificQuotation(discountID);
-                _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
+                double subtotal = _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
+                if(_quotation.getTotal() != subtotal)
+                {
+                    total = subtotal;
+                    _quotation.setTotal(subtotal);
+                }
                 _quotationDAO.update(_quotation, _quotation.getCustomerId());
             }
 
@@ -73,6 +79,12 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             {
                 _quotation = _quotationDAO.getSpecificQuotation(quoteIDAccept);
                 _quotation.setStatus("sentForApproval");
+                double subtotal = _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
+                if (_quotation.getTotal() != subtotal)
+                {
+                    total = subtotal;
+                    _quotation.setTotal(subtotal);
+                }
                 _quotationDAO.update(_quotation, _quotation.getCustomerId());
             }
 
@@ -85,5 +97,4 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             return RedirectToPage("/EmployeeDashboard");
         }
     }
-
 }

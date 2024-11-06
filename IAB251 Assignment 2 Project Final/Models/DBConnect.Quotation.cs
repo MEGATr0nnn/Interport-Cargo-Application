@@ -37,7 +37,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             int id = reader.GetInt32(reader.GetOrdinal("id")),
                                 numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
                                 sizeOfContainers = reader.GetInt32(reader.GetOrdinal("sizeOfContainers")),
-                                customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
+                                customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
+                                total = reader.GetInt32(reader.GetOrdinal("totalCost"));
 
                             string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
                                 source = reader.GetString(reader.GetOrdinal("source")),
@@ -53,6 +54,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
 
 
                             var quotation = new Quotation(customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status); //create new instance to be added, then loops
+                            quotation.setTotal(total);
                             quotation.setId(id);
                             quotation.setCustomerId(customerId);
 
@@ -99,7 +101,8 @@ namespace IAB251_Assignment_2_Project_Final.Models
                             int id = reader.GetInt32(reader.GetOrdinal("id")),
                                 numOfContainers = reader.GetInt32(reader.GetOrdinal("numOfContainers")),
                                 sizeOfContainers = reader.GetInt32(reader.GetOrdinal("sizeOfContainers")),
-                                customerId = reader.GetInt32(reader.GetOrdinal("customerId"));
+                                customerId = reader.GetInt32(reader.GetOrdinal("customerId")),
+                                total = reader.GetInt32(reader.GetOrdinal("totalCost"));
 
                             string customerInformation = reader.GetString(reader.GetOrdinal("customerInformation")),
                                 source = reader.GetString(reader.GetOrdinal("source")),
@@ -114,6 +117,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                                 crane = reader.GetBoolean(reader.GetOrdinal("crane"));
 
                             quotation = new Quotation(customerInformation, source, destination, numOfContainers, sizeOfContainers, natureOfPackage, isImport, isPacking, quarantineReq, fumigation, crane, status); //create new instance to be returned to the user
+                            quotation.setTotal(total);
                             quotation.setId(id);
                             quotation.setCustomerId(customerId);
                         }

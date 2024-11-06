@@ -99,15 +99,15 @@ namespace IAB251_Assignment_2_Project_Final.Models
         {
             if (getNumOfContainers() > 5 && (getQuarantineRequirements() || getFumigation()))
             {
-                return 1.025;
+                return 0.975;
             }
             if (getNumOfContainers() > 5 && (getQuarantineRequirements() && getFumigation()))
             {
-                return 1.05;
+                return 0.95;
             }
             if (getNumOfContainers() > 10 && (getQuarantineRequirements() && getFumigation()))
             {
-                return 1.1;
+                return 0.9;
             }
             return 0;
         }
@@ -189,7 +189,7 @@ namespace IAB251_Assignment_2_Project_Final.Models
                 + getTailgateFee() + getStorageFee() + getFacilityFee() + getWharfInspectionFee());
             if (discount != 0)
             {
-                setTotal((subtotal * (1 - discount)) * getGST());
+                setTotal((subtotal * discount) * getGST());
             }
             else setTotal(subtotal * getGST());
             return getTotal();

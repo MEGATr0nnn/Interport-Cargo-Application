@@ -112,13 +112,15 @@
                                 }
                             </td>
                             <td>
-                                @if (Model.Discount == true)
+                                @if(Model.total == 0)
                                 {
-                                    <span>$@quote.calculateCharges(quote.getsizeOfContainers(), quote.calculateDiscount())</span>
+                                    <span>
+                                        @quote.calculateCharges(quote.getsizeOfContainers(),0)
+                                    </span>
                                 }
                                 else
                                 {
-                                    <span>$@quote.calculateCharges(quote.getsizeOfContainers(), 0)</span>
+                                    <span>@quote.getTotal()</span>
                                 }
                             </td>
                             <td>
