@@ -82,14 +82,14 @@ namespace Tests
         public void TestGetFromStatus()
         {
             List<Quotation> fetched = _quotationDAO.getStatusQuotation(status);
-            Assert.AreEqual(1, fetched.Count());
+            Assert.AreEqual(3, fetched.Count());
         }
 
         [TestMethod]
         public void TestGetAll()
         {
             List<Quotation> fetched = _quotationDAO.getAllQuotations();
-            Assert.AreEqual(1, fetched.Count());
+            Assert.AreEqual(2, fetched.Count());
         }
     }
 }

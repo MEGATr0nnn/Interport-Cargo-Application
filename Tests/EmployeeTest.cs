@@ -13,12 +13,13 @@ namespace Tests
         private Employee _employee;
         private Employee _employee2;
 
-
         [TestInitialize]
         public void Setup()
         {
-            _employee = new Employee("Benjamin", "Mattes", "ben.mattes@gmail.com", "0450603201", "password", "Admin", "myhouse", _employee.joiningTiming());
-            _employee2 = new Employee("Phillip", "Huges", "ben.mattes@gmail.com", "040000000000", "secretkey", "CIO", "myhouse", _employee.joiningTiming());
+            _employee = new Employee("Benjamin", "Mattes", "ben.mattes@gmail.com", "0450603201", "password", "Admin", "myhouse", "temp");
+            _employee.setJoinDate(_employee.joiningTiming());
+            _employee2 = new Employee("Phillip", "Huges", "ben.mattes@gmail.com", "040000000000", "secretkey", "CIO", "myhouse", "temp");
+            _employee2.setJoinDate(_employee2.joiningTiming());
         }
 
         [TestMethod]
@@ -47,7 +48,7 @@ namespace Tests
         [TestMethod]
         public void TestPhoneNumbersOnly()
         {
-            Assert.IsTrue(_employee.checkValidEmail(_employee.getPhoneNumber()), "Phone number must only contain digits");            
+            Assert.IsTrue(_employee.checkValidPhoneNumber(_employee.getPhoneNumber()), "Phone number must only contain digits");            
         }
 
         [TestMethod]
