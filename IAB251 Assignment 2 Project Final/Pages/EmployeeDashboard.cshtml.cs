@@ -29,15 +29,24 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         private Quotation _quotation { get; set; }
 
         /// <summary>
-        /// Creating a list of all quotations to showcase to the employee dashboard
+        /// Creating a list of all necessary status quotations to showcase to the employee dashboard
+        /// Pending, Accepted and Rejected are all apart of the graph.
         /// </summary>
         public List<Quotation> allQuotations { get; set; }
+
+        public List<Quotation> allPendingQuotations { get; set; }
+
+        public List<Quotation> allAcceptedQuotations { get; set; }
+
+        public List<Quotation> allRejectedQuotations { get; set; }
+
+        public List<Quotation> allSentToCustomer { get; set; }
+
+
 
         /// <summary>
         /// Constructor to intialise the employee database and the quotationDAO
         /// </summary>
-        ///
-
         public EmployeeDashboardModel(IUserSessionControl userSessionControl)
         {
             _userSessionControl = userSessionControl;
@@ -52,6 +61,10 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         {
             firstName = _userSessionControl.currentEmployeeUser.getFirstName();
             allQuotations = _quotationDAO.getAllQuotations();
+            allPendingQuotations = _quotationDAO.getStatusQuotation("Pending");
+            allAcceptedQuotations = _quotationDAO.getStatusQuotation("Accepted");
+            allRejectedQuotations = _quotationDAO.getStatusQuotation("Rejected");
+            allSentToCustomer = _quotationDAO.getStatusQuotation("sentForApproval");
         }
 
         /// <summary>
@@ -82,6 +95,14 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 _quotation.setStatus("Rejected");
                 _quotationDAO.update(_quotation, _quotation.getCustomerId());
             }
+
+            if (action == "Logout")
+            {
+                _userSessionControl.currentCustomerUser = null;
+                _userSessionControl.currentEmployeeUser = null;
+                return RedirectToPage("/Index");
+            }
+
             return RedirectToPage("/EmployeeDashboard");
         }
     }

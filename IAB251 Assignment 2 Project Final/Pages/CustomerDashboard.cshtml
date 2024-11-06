@@ -32,7 +32,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Customer ID</th>
                         <th>Customer Information</th>
                         <th>Source</th>
                         <th>Destination</th>
@@ -54,7 +53,6 @@
                     @foreach (var quote in Model.Quotations)
                     {
                         <tr>
-                            <td>@quote.getCustomerId()</td>
                             <td>@quote.getCustomerInformation()</td>
                             <td>@quote.getSource()</td>
                             <td>@quote.getDestination()</td>
@@ -81,6 +79,7 @@
                                         <button type="submit" name="action" value="reject">Reject</button>
                                     </td>
                                 }
+
                         </tr>
                     }
 

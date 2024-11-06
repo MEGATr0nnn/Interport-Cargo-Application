@@ -100,6 +100,21 @@ namespace IAB251_Assignment_2_Project_Final.Models
         }
 
         /// <summary>
+        /// Gets all quotation from the DB based on the status attatched to the quotation
+        /// </summary>
+        /// <param name="status">The status of the quotation</param>
+        /// <returns>Returns all instances of the quotation</returns>
+        public List<Quotation> getStatusQuotation(string status)
+        {
+            string query = @"SELECT * FROM quotation WHERE status = @status";
+            SqliteParameter[] parameters = new SqliteParameter[]
+            {
+                new SqliteParameter("@status", status)
+            };
+            return _connect.quotationExecuteFetchAll(query, parameters);
+        }
+
+        /// <summary>
         /// Inserts new quotations into the DB using the current users Id as a foreign key.
         /// </summary>
         /// <param name="quotation">Instance of Quotation</param>
