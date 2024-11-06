@@ -15,21 +15,9 @@ namespace Tests
         [TestInitialize]
         public void Setup()
         {
-            _quotation = new Quotation("Billy, billy@gmail.com", "Morocco", "Spain", 3, "Rare Vehicle, 4995 x 1951mm", true, true, "no quarantine");
+            _quotation = new Quotation("Billy", "Morocco", "Spain", 3, 20, "Rare Vehicle", true, true, false, true, true, "Pending");
         }
 
-        /// <summary>
-        /// Method testing whether the email is of a valid format
-        /// </summary>
-        [TestMethod]
-        public void testValidEmail()
-        {
-            Assert.IsTrue(_quotation.checkValidEmail(_quotation.getCustomerInformation()), "Email must have @ symbol");
-        }
-
-        /// <summary>
-        /// Method testing whether the source is a valid country
-        /// </summary>
         [TestMethod]
         public void testValidCountrySource()
         {
@@ -37,22 +25,71 @@ namespace Tests
         }
 
 
-        /// <summary>
-        /// Method testing whether the destination is a valid country
-        /// </summary>
         [TestMethod]
         public void testValidCountryDestination()
         {
             Assert.IsTrue(_quotation.checkValidCountry(_quotation.getDestination()), "Destination country is not valid");
         }
 
-        /// <summary>
-        /// Method testing whether the number of containers is valid (Greater than 0)
-        /// </summary>
         [TestMethod]
         public void testValidContainers()
         {
             Assert.IsTrue(_quotation.checkNumberContainers(_quotation.getNumOfContainers()), "Containers must be of a whole number");
+        }
+    }
+
+    [TestClass]
+    public class QuotationDAOTests
+    {
+        private Quotation _quotation;
+        private Customer _customer;
+        private QuotationDAO _quotationDAO;
+        private string status = "Pending";
+
+        [TestInitialize]
+        public void Setup()
+        {
+            _quotation = new Quotation("Billy", "Morocco", "Spain", 3, 20, "Rare Vehicle", true, true, false, true, true, "Pending");
+            _quotationDAO = new QuotationDAO();
+            _customer = new Customer("harry", "mega", "harry.mega@mega.com", "0491006868", "password", "mycompany");
+            _quotationDAO.insertNew(_quotation, _customer);
+        }
+
+        [TestMethod]
+        public void TestUpdate()
+        {
+            _quotation.setCustomerInformation("Bob");
+            _quotationDAO.update(_quotation, _quotation.getCustomerId());
+            Quotation fetched = _quotationDAO.getSpecificQuotation(_quotation.getId());
+            Assert.AreEqual("Bob", fetched.getCustomerInformation());
+        }
+
+        [TestMethod]
+        public void TestValidEmail()
+        {
+            Assert.IsTrue(_quotation.checkValidEmail(_customer.getEmail()));
+
+        }
+
+        [TestMethod]
+        public void TestGetSpecific()
+        {
+            Quotation fetched = _quotationDAO.getSpecificQuotation(_quotation.getId());
+            Assert.AreEqual(_quotation.getId(), fetched.getId());
+        }
+
+        [TestMethod]
+        public void TestGetFromStatus()
+        {
+            List<Quotation> fetched = _quotationDAO.getStatusQuotation(status);
+            Assert.AreEqual(1, fetched.Count());
+        }
+
+        [TestMethod]
+        public void TestGetAll()
+        {
+            List<Quotation> fetched = _quotationDAO.getAllQuotations();
+            Assert.AreEqual(1, fetched.Count());
         }
     }
 }

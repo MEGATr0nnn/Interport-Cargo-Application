@@ -11,16 +11,15 @@ namespace Tests
     public class EmployeeTest
     {
         private Employee _employee;
-        private Employee _employeeDuplicate;
+        private Employee _employee2;
 
 
         [TestInitialize]
         public void Setup()
         {
-            _employee = new Employee("Benjamin", "Mattes", "ben.mattes@gmail.com", "0450603201", "password", "Admin");
-            _employeeDuplicate = new Employee("Phillip", "Huges", "ben.mattes@gmail.com", "040000000000", "secretkey", "CIO");
+            _employee = new Employee("Benjamin", "Mattes", "ben.mattes@gmail.com", "0450603201", "password", "Admin", "myhouse", _employee.joiningTiming());
+            _employee2 = new Employee("Phillip", "Huges", "ben.mattes@gmail.com", "040000000000", "secretkey", "CIO", "myhouse", _employee.joiningTiming());
         }
-        //MAYBE ALSO TEST FOR NULL VALUES
 
         [TestMethod]
         public void TestSetup()
@@ -33,50 +32,34 @@ namespace Tests
             Assert.AreEqual("Admin", _employee.getType());
         }
 
-        /// <summary>
-        /// Test to determine if email is valid
-        /// </summary>
         [TestMethod]
-        public void TestEmail()
+        public void TestValidEmail()
         {
             Assert.IsTrue(_employee.checkValidEmail(_employee.getEmail()), "Employee must have valid email.");
         }
 
-        /// <summary>
-        /// Test to determine if phone number is correct format
-        /// </summary>
         [TestMethod]
-        public void TestPhoneNumber()
+        public void TestValidPhoneNumber()
         {
             Assert.IsTrue(_employee.checkValidPhoneNumber(_employee.getPhoneNumber()), "Employee must have a valid phone number");
         }
 
-        //****** LOGIC FOR THIS DOESNT WORK YET ********
-        /// <summary>
-        /// Test to determine if phone number contains digits only
-        /// </summary>
         [TestMethod]
         public void TestPhoneNumbersOnly()
         {
             Assert.IsTrue(_employee.checkValidEmail(_employee.getPhoneNumber()), "Phone number must only contain digits");            
         }
 
-        /// <summary>
-        /// Test to determine if employee type is correct from given list
-        /// </summary>
         [TestMethod]
         public void TestEmployeeType()
         {
             Assert.IsTrue(_employee.checkVaildEmployeeType(_employee.getType()), "Employee must have a valid Employee Type");
         }
 
-        /// <summary>
-        /// Test to determine if there is an existing account associated with email
-        /// </summary>
         [TestMethod]
         public void TestDuplicateEmail()
         {
-            Assert.IsTrue(_employee.checkDuplicateEmail(_employee.getEmail(), _employeeDuplicate.getEmail()), "There is already an account associated with this email address");
+            Assert.IsTrue(_employee.checkDuplicateEmail(_employee.getEmail(), _employee2.getEmail()), "There is already an account associated with this email address");
         }
     }
 }
