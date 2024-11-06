@@ -114,7 +114,7 @@
                                 @if(quote.getTotal() == 0)
                                 {
                                     <span>
-                                        @quote.calculateCharges(quote.getsizeOfContainers(),0)
+                                        @Math.Floor(quote.calculateCharges(quote.getsizeOfContainers(),0))
                                     </span>
                                 }
                                 else
