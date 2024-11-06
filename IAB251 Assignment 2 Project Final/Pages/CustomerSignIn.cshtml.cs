@@ -69,40 +69,36 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         public IActionResult OnPost(string action, string Back)
         {
 
-            if (action == "signin")
+            if (Back == "Back")
             {
-            
+                return RedirectToPage("/SignUpChoice");
+            }
 
-                if (Back == "Back")
+            Console.WriteLine("input: " + action);
+            try
+            {
+                SignIn = true;
+                string hashed = _passwordHasher.hashPassword(password);
+                Console.WriteLine("hashed");
+
+                if (_customerDAO.isExist(email, hashed))
                 {
-                    return RedirectToPage("/SignUpChoice");
-                }
+                    Customer customer = _customerDAO.getFromEmailPword(email, hashed);
+                    Console.WriteLine($"{customer.getFirstName()}");
 
-                Console.WriteLine("input: " + action);
-                try
-                {
-                    SignIn = true;
-                    string hashed = _passwordHasher.hashPassword(password);
-                    Console.WriteLine("hashed");
+                    _userSessionService.currentCustomerUser = customer;
+                    Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()} + testing user session service "); //checking to see if session aligned properly
 
-                    if (_customerDAO.isExist(email, hashed))
-                    {
-                        Customer customer = _customerDAO.getFromEmailPword(email, hashed);
-                        Console.WriteLine($"{customer.getFirstName()}");
-
-                        _userSessionService.currentCustomerUser = customer;
-                        Console.WriteLine($"{_userSessionService.currentCustomerUser.getFirstName()} + testing user session service "); //checking to see if session aligned properly
-
-                        return RedirectToPage("/CustomerDashboard");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    SignIn = false;
-                    ModelState.AddModelError(string.Empty, ex.Message);
-                    return Page();
+                    return RedirectToPage("/CustomerDashboard");
                 }
             }
+            catch (Exception ex)
+            {
+                SignIn = false;
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
+
             return Page();
         } 
     }
