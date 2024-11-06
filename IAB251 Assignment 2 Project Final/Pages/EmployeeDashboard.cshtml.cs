@@ -14,9 +14,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
         [BindProperty]
         public bool Discount { get; set; }
 
-        [BindProperty]
-        public double total { get; set; }
-
         /// <summary>
         /// Instance of Quotation Database
         /// </summary>
@@ -64,12 +61,10 @@ namespace IAB251_Assignment_2_Project_Final.Pages
             {
                 Console.WriteLine("discount added");
                 Discount = true;
-                Console.WriteLine($"{total}");
                 _quotation = _quotationDAO.getSpecificQuotation(discountID);
                 double subtotal = _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
                 if(_quotation.getTotal() != subtotal)
                 {
-                    total = subtotal;
                     _quotation.setTotal(subtotal);
                 }
                 _quotationDAO.update(_quotation, _quotation.getCustomerId());
@@ -82,7 +77,6 @@ namespace IAB251_Assignment_2_Project_Final.Pages
                 double subtotal = _quotation.calculateCharges(_quotation.getsizeOfContainers(), _quotation.calculateDiscount());
                 if (_quotation.getTotal() != subtotal)
                 {
-                    total = subtotal;
                     _quotation.setTotal(subtotal);
                 }
                 _quotationDAO.update(_quotation, _quotation.getCustomerId());

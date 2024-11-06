@@ -112,7 +112,7 @@
                                 }
                             </td>
                             <td>
-                                @if(Model.total == 0)
+                                @if(quote.getTotal() == 0)
                                 {
                                     <span>
                                         @quote.calculateCharges(quote.getsizeOfContainers(),0)
