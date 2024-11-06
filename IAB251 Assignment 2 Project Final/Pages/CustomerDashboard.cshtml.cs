@@ -20,7 +20,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
         private readonly IUserSessionControl _userSessionService;
 
-        private Quotation quotation { get; set; }   
+        public Quotation quotation { get; set; }   
 
         /// <summary>
         /// Creating a list of all quotations that have been created by this customer

@@ -10,7 +10,7 @@
 <div class="header-container">
 
     <form method="post">
-        <button type="submit" value="Logout" name="Logout" class="btn btn-primary">Logout</button>
+        <button type="submit" value="Logout" name="action" class="btn btn-primary">Logout</button>
     </form>
 </div>
 <br />
@@ -22,9 +22,10 @@
     <canvas id="myChart"></canvas>
 </div>
 
-<script>var xValues = ["Pending", "Accepted", "Denied"];
-    var yValues = [8, 12, 5, 0];
-    var barColors = ["yellow", "green", "red"];
+<script>
+    var xValues = ["Pending", "Accepted", "Denied", "Customer Approval"];
+    var yValues = [@Model.allPendingQuotations.Count, @Model.allAcceptedQuotations.Count, @Model.allRejectedQuotations.Count, @Model.allSentToCustomer.Count];
+    var barColors = ["yellow", "green", "red", "blue"];
 
     new Chart("myChart", {
         type: "bar",
@@ -87,7 +88,6 @@
                             <td>@quote.getQuarantineRequirements()</td>
                             <td>@quote.getFumigation()</td>
                             <td>@quote.getCrane()</td>
-                            <td>@quote.getId()</td>
                             <td>
                                 @if (quote.getStatus() == "quoteSent")
                                 {
@@ -123,19 +123,22 @@
                                     <span>@quote.getTotal()</span>
                                 }
                             </td>
-                            <td>
-                                <form method="post">
+
+                        <td>
+                            <form method="post">
                                 <input type="hidden" name="quoteIDAccept" value="@quote.getId()" />
                                 <button type="submit" name="action" value="accept">Accept</button>
-                                </form>
-                            </td>
+                            </form>
+                        </td>
 
-                            <td>
-                                <form method="post">
+                        <td>
+                            <form method="post">
                                 <input type="hidden" name="quoteIDReject" value="@quote.getId()" />
                                 <button type="submit" name="action" value="reject">Reject</button>
-                                </form>
-                            </td>
+                            </form>
+                        </td>
+
+ 
                         </tr>
                     }
                 </tbody>
