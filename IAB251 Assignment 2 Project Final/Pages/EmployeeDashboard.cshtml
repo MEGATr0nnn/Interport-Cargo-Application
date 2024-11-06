@@ -68,7 +68,6 @@
                         <th>Discount</th>
                         <th>Total Cost</th>
                         <th>Accept</th>
-                        <th>Reject</th>
                     </tr>
                 </thead>
 
@@ -124,21 +123,17 @@
                                 }
                             </td>
 
-                        <td>
-                            <form method="post">
-                                <input type="hidden" name="quoteIDAccept" value="@quote.getId()" />
-                                <button type="submit" name="action" value="accept">Accept</button>
-                            </form>
-                        </td>
 
-                        <td>
-                            <form method="post">
-                                <input type="hidden" name="quoteIDReject" value="@quote.getId()" />
-                                <button type="submit" name="action" value="reject">Reject</button>
-                            </form>
-                        </td>
+                            @if (quote.getStatus() == "Pending")
+                            {
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" name="quoteIDAccept" value="@quote.getId()" />
+                                        <button type="submit" name="action" value="accept">Accept</button>
+                                    </form>
+                                </td> 
+                            }
 
- 
                         </tr>
                     }
                 </tbody>

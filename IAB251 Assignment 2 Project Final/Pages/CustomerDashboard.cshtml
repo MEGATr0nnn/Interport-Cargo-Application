@@ -65,10 +65,13 @@
                             <td>@quote.getFumigation()</td>
                             <td>@quote.getCrane()</td>
                             <td>@quote.getStatus()</td>
+                                @if (quote.getStatus() == "sentForApproval" || quote.getStatus() == "Accepted" || quote.getStatus() == "Rejected")
+                                {
+                                    <td>@quote.getTotal()</td>
+                                }
 
                                 @if (quote.getStatus() == "sentForApproval")
                                 {
-                                    <td>@quote.getTotal()</td>
                                     <td>
                                         <input type="hidden" name="quoteIDAccept" value="@quote.getId()" />
                                         <button type="submit" name="action" value="accept">Accept</button>
@@ -79,17 +82,12 @@
                                         <button type="submit" name="action" value="reject">Reject</button>
                                     </td>
                                 }
-
                         </tr>
                     }
-
                 </tbody>
-
             </table>
         }
-        
         </form>
-
     </div>
 
     <form method="post">
