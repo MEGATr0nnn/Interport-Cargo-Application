@@ -71,7 +71,7 @@ namespace IAB251_Assignment_2_Project_Final.Pages
 
             if (Back == "Back")
             {
-                return RedirectToPage("/SignUpChoice");
+                return RedirectToPage("/Index");
             }
 
             Console.WriteLine("input: " + action);
