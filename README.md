@@ -11,6 +11,12 @@
 1. Shanthu Jayamaha (Project Manage and Full Stack Developer - Focus area: front-end integration)
 2. Harrison Mega (SCRUM Master and Full Stack Developer - Focus area: database architecture design)
 3. Vuyo Manyepe (Front End Developer - Focus area: front-end application development and artistry)
+
+
+## Individual User Story Allocation:
+1. Shanthu Jayamaha - Individual User Story 2 and Individual User Story 4 (I2 and I4)
+2. Harrison Mega - Individual User Story 5 and Individual User Story 6 (I5 and I6)
+3. Vuyo Manyepe - Individual User Story 1 and Individual User Story 3 (I1 and I3)
    
 
 # Project Overview:
