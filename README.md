@@ -2,14 +2,14 @@
 
 ## Team Members:
 1. Shanthu Jayamaha (n11579561)
-2. Vuyo Manyepe (n11342331)
-3. Harrison Mega (n11526360)
+2. Harrison Mega (n11526360)
+3. Vuyo Manyepe (n11342331)
 
 
 
 ## Team Outline:
-1. Harrison Mega (Full Stack Developer - Focus area: database architecture design)
-2. Shanthu Jayamaha (Full Stack Developer - Focus area: front-end integration)
+1. Shanthu Jayamaha (Project Manage and Full Stack Developer - Focus area: front-end integration)
+2. Harrison Mega (SCRUM Master and Full Stack Developer - Focus area: database architecture design)
 3. Vuyo Manyepe (Front End Developer - Focus area: front-end application development and artistry)
    
 
